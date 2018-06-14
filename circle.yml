@@ -1,0 +1,25 @@
+general:
+  branches:
+    only:
+     - master
+     - develop
+
+machine:
+  node:
+    version: 8.4.0
+  environment:
+    NODE_ENV: 'test'
+
+dependencies:
+  pre:
+    - sudo mkdir coverage
+    - sudo chown -R $USER:$GROUP coverage
+    - sudo chmod -R 755 coverage
+
+  override:
+    - npm install
+    - npm install -g coveralls
+
+test:
+  override:
+    - npm test
