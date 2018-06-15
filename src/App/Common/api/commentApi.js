@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from './handelError';
 
-const commentsUrl = `${process.env.API_HOST}/api/comments/`;
+const commentsUrl = `${process.env.REACT_APP_API_HOST}/api/comments/`;
 
 const instance = axios.create();
 

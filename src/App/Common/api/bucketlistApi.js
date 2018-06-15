@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from './handelError';
 
-const bucketlistUrl = `${process.env.API_HOST}/api/bucketlists/`;
+const bucketlistUrl = `${process.env.REACT_APP_API_HOST}/api/bucketlists/`;
 
 const instance = axios.create();
 

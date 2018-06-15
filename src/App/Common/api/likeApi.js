@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from './handelError';
 
-const likesUrl = `${process.env.API_HOST}/api/likes/`;
+const likesUrl = `${process.env.REACT_APP_API_HOST}/api/likes/`;
 
 const instance = axios.create();
 

@@ -11,7 +11,7 @@ import * as userAlertActions from '../App/UserAlerts/actions';
 const bucketlistActions = { ...homeActions, myListActions };
 
 export default (store) => {
-  const socket = SocketIOClient(process.env.API_HOST);
+  const socket = SocketIOClient(`${process.env.REACT_APP_API_HOST}/`);
   socket.on('messages', (data) => {
     const storeData = store.getState();
 

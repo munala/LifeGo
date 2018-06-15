@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from '../Common/api/handelError';
 
-const notificationsUrl = `${process.env.API_HOST}/api/notifications/`;
+const notificationsUrl = `${process.env.REACT_APP_API_HOST}/api/notifications/`;
 
 const instance = axios.create();
 

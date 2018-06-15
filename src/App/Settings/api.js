@@ -3,7 +3,7 @@ import axios from 'axios';
 import handleError from '../Common/api/handelError';
 import { removeEmptyFields } from '../../utils';
 
-const userUrl = `${process.env.API_HOST}/api/user/`;
+const userUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
 
 const instance = axios.create();
 
