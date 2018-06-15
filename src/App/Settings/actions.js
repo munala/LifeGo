@@ -40,6 +40,30 @@ export const deleteAccountSuccess = (message, screen) => ({
   screen,
 });
 
+export const getProfile = () => async (dispatch) => {
+  dispatch(apiCallActions.beginApiCall({ screen: 'settings' }));
+
+  const response = await userService.getProfile();
+
+  if (response.error) {
+    dispatch(apiCallActions.apiCallError({
+      screen: 'settings',
+      error: response.error,
+    }));
+
+    dispatch(apiCallActions.resetError());
+  } else {
+    dispatch(getProfileSuccess({
+      profile: response,
+      screen: 'settings',
+    }));
+
+    dispatch(apiCallActions.resetMessage());
+  }
+
+  return response;
+};
+
 export const changeEmail = user => async (dispatch) => {
   const response = await userService.changeEmail(user);
 
@@ -109,44 +133,20 @@ export const changeUsername = user => async (dispatch) => {
   return response;
 };
 
-export const getProfile = () => async (dispatch) => {
-  dispatch(apiCallActions.beginApiCall({ screen: 'profile' }));
+export const updateProfile = user => async (dispatch) => {
+  dispatch(apiCallActions.beginApiCall({ screen: 'settings' }));
 
-  const response = await userService.getProfile();
+  const response = await userService.updateProfile(user);
 
   if (response.error) {
     dispatch(apiCallActions.apiCallError({
-      screen: 'profile',
+      screen: 'settings',
       error: response.error,
     }));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(getProfileSuccess({
-      profile: response,
-      screen: 'profile',
-    }));
-
-    dispatch(apiCallActions.resetMessage());
-  }
-
-  return response;
-};
-
-export const updateProfile = (profile, screen) => async (dispatch) => {
-  dispatch(apiCallActions.beginApiCall({ screen }));
-
-  const response = await userService.updateProfile(profile);
-
-  if (response.error) {
-    dispatch(apiCallActions.apiCallError({
-      screen,
-      error: response.error,
-    }));
-
-    dispatch(apiCallActions.resetError());
-  } else {
-    dispatch(updateProfileSuccess({ profile, screen }));
+    dispatch(updateProfileSuccess({ user, screen: 'settings' }));
 
     dispatch(apiCallActions.resetMessage());
   }

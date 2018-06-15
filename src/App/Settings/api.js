@@ -4,10 +4,11 @@ import { removeEmptyFields } from '../../utils';
 
 const userUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
 
-const { updateProfile } = profileActions;
+const { updateProfile, getProfile } = profileActions;
 
 export default {
   updateProfile,
+  getProfile,
 
   changePassword: async ({ userId, username, ...user }) => sendRequest({
     method: 'post',
@@ -25,11 +26,6 @@ export default {
     method: 'post',
     url: `${userUrl}change_username`,
     data: removeEmptyFields(user),
-  }),
-
-  getProfile: async user => sendRequest({
-    method: 'get',
-    url: `${userUrl}get_profile`,
   }),
 
   deleteAccount: async user => sendRequest({

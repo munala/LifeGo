@@ -19,7 +19,7 @@ const loadMore = () => dispatch =>
     type: types.LOAD_MORE_BUCKETLISTS,
   });
 
-export const loadAllBucketlists = (
+const loadAllBucketlists = (
   offset = 0,
   limit = 10,
   search = '',
