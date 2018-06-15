@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from '../Common/api/handelError';
 
-const messageUrl = 'https://bucketlist-node.herokuapp.com/api/messages/';
+const messageUrl = `${process.env.API_HOST}/api/messages/`;
 
 const instance = axios.create();
 

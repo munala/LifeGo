@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from '../Common/api/handelError';
 
-const userAlertsUrl = 'http://localhost:3002/api/user_notifications/';
+const userAlertsUrl = `${process.env.API_HOST}/api/user_notifications/`;
 
 const instance = axios.create();
 

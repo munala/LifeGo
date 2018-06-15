@@ -1,7 +1,7 @@
 import * as types from './constants';
 import userService from './api';
 import * as apiCallActions from '../Common/actions/apiCallActions';
-import { stripHtml } from '../utils';
+import { stripHtml } from '../../utils';
 
 export const loginSuccess = ({ token, screen }) => ({
   type: types.LOGIN_SUCCESS,

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import handleError from './handelError';
 
-const bucketlistUrl = 'http://localhost:3002/api/bucketlists/';
+const bucketlistUrl = `${process.env.API_HOST}/api/bucketlists/`;
+
 const instance = axios.create();
 
 instance.defaults.headers.common['Content-Type'] = 'application/json';

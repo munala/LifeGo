@@ -1,7 +1,7 @@
 import axios from 'axios';
 import handleError from './handelError';
 
-const commentsUrl = 'http://localhost:3002/api/comments/';
+const commentsUrl = `${process.env.API_HOST}/api/comments/`;
 
 const instance = axios.create();
 

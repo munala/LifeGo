@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 import handleError from '../Common/api/handelError';
-import { removeEmptyFields } from '../utils';
+import { removeEmptyFields } from '../../utils';
 
-const userUrl = 'https://bucketlist-node.herokuapp.com/api/user/';
+const userUrl = `${process.env.API_HOST}/api/user/`;
 const instance = axios.create();
 
 instance.defaults.headers.common['Content-Type'] = 'application/json';
