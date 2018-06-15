@@ -1,29 +1,18 @@
-import axios from 'axios';
-import handleError from './handelError';
+import sendRequest from '../../../utils/api';
 
 const likesUrl = `${process.env.REACT_APP_API_HOST}/api/likes/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 export default {
-  like(bucketlist) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  like: async bucketlist => sendRequest({
+    method: 'post',
+    url: likesUrl,
+    data: {
+      bucketlistId: bucketlist.id,
+    },
+  }),
 
-    return instance
-      .post(`${likesUrl}`, { bucketlistId: bucketlist.id })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  unlike(like) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .delete(`${likesUrl}${like.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  unlike: async like => sendRequest({
+    method: 'delete',
+    url: `${likesUrl}${like.id.toString()}`,
+  }),
 };

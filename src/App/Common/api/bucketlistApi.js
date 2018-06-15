@@ -1,112 +1,56 @@
-import axios from 'axios';
-import handleError from './handelError';
+import sendRequest from '../../../utils/api';
 
 const bucketlistUrl = `${process.env.REACT_APP_API_HOST}/api/bucketlists/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 const BucketlistService = {
-  saveBucketlist(bucketlist) {
-    const { id, ...bucketList } = bucketlist;
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  saveBucketlist: async bucketlist => sendRequest({
+    method: 'post',
+    url: bucketlistUrl,
+    data: bucketlist,
+  }),
 
-    return instance
-      .post(bucketlistUrl, { ...bucketList })
-      .then((response) => {
-        if (response.data.message === `${bucketlist.name} already exists`) {
-          return handleError(response.data.message);
-        }
-        return response.data;
-      })
-      .catch(error => handleError(error));
-  },
+  addItem: async (bucketlist, item) => sendRequest({
+    method: 'post',
+    url: `${bucketlistUrl + bucketlist.id.toString()}/items/`,
+    data: {
+      name: item.name,
+    },
+  }),
 
-  addItem(bucketlist, item) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  deleteBucketlist: async bucketlist => sendRequest({
+    method: 'delete',
+    url: `${bucketlistUrl + bucketlist.id.toString()}`,
+  }),
 
-    return instance
-      .post(`${bucketlistUrl + bucketlist.id.toString()}/items/`, {
-        name: item.name,
-      })
-      .then((response) => {
-        if (response.data.message === `${item.name} already exists`) {
-          return handleError(response.data.message);
-        }
-        return response.data;
-      })
-      .catch(error => handleError(error));
-  },
-  deleteBucketlist(bucketlist) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  getBucketlists: async (offset, limit, name) => sendRequest({
+    method: 'get',
+    url: `${bucketlistUrl}?offset=${offset}&limit=${limit}&q=${name}`,
+  }),
 
-    return instance
-      .delete(`${bucketlistUrl + bucketlist.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  getAllBucketlists: async (offset, limit, name) => sendRequest({
+    method: 'get',
+    url: `${bucketlistUrl}all?offset=${offset}&limit=${limit}&q=${name}`,
+  }),
 
-  getBucketlists(offset, limit, name) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  updateBucketlist: async bucketlist => sendRequest({
+    method: 'put',
+    url: `${bucketlistUrl + bucketlist.id.toString()}`,
+    data: bucketlist,
+  }),
 
-    return instance
-      .get(`${bucketlistUrl}?offset=${offset}&limit=${limit}&q=${name}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  updateItem: async (bucketlist, item) => sendRequest({
+    method: 'put',
+    url: `${bucketlistUrl + bucketlist.id}/items/${item.id}`,
+    data: {
+      name: item.name,
+      done: item.done,
+    },
+  }),
 
-  getAllBucketlists(offset, limit, name) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .get(`${bucketlistUrl}all/?offset=${offset}&limit=${limit}&q=${name}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  updateBucketlist(bucketlist) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .put(`${bucketlistUrl + bucketlist.id.toString()}`, {
-        ...bucketlist,
-      })
-      .then((response) => {
-        if (response.data.message === `${bucketlist.name} is already in use`) {
-          return handleError(response.data.message);
-        }
-        return response.data;
-      })
-      .catch(error => handleError(error));
-  },
-
-  updateItem(bucketlist, item) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .put(`${bucketlistUrl + bucketlist.id}/items/${item.id}`, {
-        name: item.name,
-        done: item.done,
-      })
-      .then((response) => {
-        if (response.data.message === `${item.name} is already in use`) {
-          return handleError(response.data.message);
-        }
-        return response.data;
-      })
-      .catch(error => handleError(error));
-  },
-
-  deleteItem(bucketlist, item) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .delete(`${bucketlistUrl + bucketlist.id}/items/${item.id}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  deleteItem: async (bucketlist, item) => sendRequest({
+    method: 'delete',
+    url: `${bucketlistUrl + bucketlist.id}/items/${item.id}`,
+  }),
 };
 
 export default BucketlistService;

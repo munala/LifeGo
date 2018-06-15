@@ -1,47 +1,25 @@
-import axios from 'axios';
-import handleError from '../Common/api/handelError';
+import sendRequest from '../../utils/api';
 
 const userAlertsUrl = `${process.env.REACT_APP_API_HOST}/api/user_notifications/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 export default {
-  getAlerts() {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  getAlerts: async () => sendRequest({
+    method: 'post',
+    url: userAlertsUrl,
+  }),
 
-    return instance
-      .get(`${userAlertsUrl}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  updateAlert: async alert => sendRequest({
+    method: 'put',
+    url: `${userAlertsUrl}${alert.id.toString()}`,
+  }),
 
-  updateAlert(alert) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  markAsRead: async alert => sendRequest({
+    method: 'put',
+    url: `${userAlertsUrl}${alert.id.toString()}`,
+  }),
 
-    return instance
-      .put(`${userAlertsUrl}${alert.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  markAsRead(alert) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .put(`${userAlertsUrl}${alert.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  deleteAlert(alert) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .delete(`${userAlertsUrl}${alert.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  deleteAlert: async alert => sendRequest({
+    method: 'delete',
+    url: `${userAlertsUrl}${alert.id.toString()}`,
+  }),
 };

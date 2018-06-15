@@ -1,76 +1,45 @@
-import axios from 'axios';
-import handleError from '../Common/api/handelError';
+import sendRequest from '../../utils/api';
 
 const messageUrl = `${process.env.REACT_APP_API_HOST}/api/messages/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 export default {
-  async sendMessage(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  sendMessage: async message => sendRequest({
+    method: 'post',
+    url: messageUrl,
+    data: message,
+  }),
 
-    return instance
-      .post(`${messageUrl}`, { ...message })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  startConversation: async conversation => sendRequest({
+    method: 'post',
+    url: `${messageUrl}conversations`,
+    data: conversation,
+  }),
 
-  async startConversation(conversation) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  updateMessage: async message => sendRequest({
+    method: 'put',
+    url: `${messageUrl}${message.id.toString()}`,
+    data: {
+      content: message.content,
+    },
+  }),
 
-    return instance
-      .post(`${messageUrl}conversations`, { ...conversation })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  markAsRead: async message => sendRequest({
+    method: 'put',
+    url: `${messageUrl}mark_as_read/${message.id.toString()}`,
+  }),
 
-  async updateMessage(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  deleteMessage: async message => sendRequest({
+    method: 'delete',
+    url: `${messageUrl}{message.id.toString()}`,
+  }),
 
-    return instance
-      .put(`${messageUrl}${message.id.toString()}`, {
-        content: message.content,
-      })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  getConversations: async () => sendRequest({
+    method: 'get',
+    url: `${messageUrl}conversations`,
+  }),
 
-  async markAsRead(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .put(`${messageUrl}mark_as_read/${message.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async deleteMessage(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .delete(`${messageUrl}${message.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async getConversations() {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .get(`${messageUrl}conversations`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async deleteConversation(conversation) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .delete(`${messageUrl}conversations/${conversation.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  deleteConversation: async conversation => sendRequest({
+    method: 'delete',
+    url: `${messageUrl}conversations/${conversation.id.toString()}`,
+  }),
 };

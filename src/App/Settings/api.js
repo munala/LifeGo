@@ -1,71 +1,40 @@
-import axios from 'axios';
-
-import handleError from '../Common/api/handelError';
+import sendRequest from '../../utils/api';
+import profileActions from '../Profile/api';
 import { removeEmptyFields } from '../../utils';
 
 const userUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+const { updateProfile } = profileActions;
 
 export default {
-  async changePassword({ userId, username, ...user }) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  updateProfile,
 
-    return instance
-      .post(`${userUrl}change_password`, removeEmptyFields({ ...user }))
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  changePassword: async ({ userId, username, ...user }) => sendRequest({
+    method: 'post',
+    url: `${userUrl}change_password`,
+    data: removeEmptyFields(user),
+  }),
 
-  async changeEmail(user) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  changeEmail: async user => sendRequest({
+    method: 'post',
+    url: `${userUrl}change_email`,
+    data: removeEmptyFields(user),
+  }),
 
-    return instance
-      .post(`${userUrl}change_email`, removeEmptyFields({ ...user }))
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  changeUsername: async user => sendRequest({
+    method: 'post',
+    url: `${userUrl}change_username`,
+    data: removeEmptyFields(user),
+  }),
 
-  async changeUsername(user) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  getProfile: async user => sendRequest({
+    method: 'get',
+    url: `${userUrl}get_profile`,
+  }),
 
-    return instance
-      .post(`${userUrl}change_username`, removeEmptyFields({ ...user }))
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async getProfile() {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .get(`${userUrl}get_profile`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async updateProfile(prof) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    const {
-      friends, searchUsers, followers, ...profile
-    } = prof;
-
-    return instance
-      .post(`${userUrl}update_profile`, removeEmptyFields({ ...profile }))
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async deleteAccount(user) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .post(`${userUrl}delete_account`, removeEmptyFields({ ...user }))
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  deleteAccount: async user => sendRequest({
+    method: 'post',
+    url: `${userUrl}delete_account`,
+    data: removeEmptyFields(user),
+  }),
 };

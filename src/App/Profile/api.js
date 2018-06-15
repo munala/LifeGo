@@ -1,71 +1,43 @@
-import axios from 'axios';
-
-import handleError from '../Common/api/handelError';
+import sendRequest from '../../utils/api';
 import { removeEmptyFields } from '../../utils';
 
 const userUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 export default {
-  async getProfile() {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  getProfile: async () => sendRequest({
+    method: 'get',
+    url: `${userUrl}get_profile`,
+  }),
 
-    return instance
-      .get(`${userUrl}get_profile`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  getOtherProfile: async id => sendRequest({
+    method: 'get',
+    url: `${userUrl}get_other_profile/${id}`,
+  }),
 
-  async getOtherProfile(id) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  updateProfile: async ({
+    friends,
+    searchUsers,
+    followers,
+    ...profile
+  }) => sendRequest({
+    method: 'post',
+    url: `${userUrl}update_profile`,
+    data: removeEmptyFields(profile),
+  }),
 
-    return instance
-      .get(`${userUrl}get_other_profile/${id}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  searchUsers: async name => sendRequest({
+    method: 'get',
+    url: `${userUrl}users?name=${name}`,
+  }),
 
-  async updateProfile(prof) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
+  addFriend: async friend => sendRequest({
+    method: 'post',
+    url: `${userUrl}add_friend`,
+    data: friend,
+  }),
 
-    const {
-      friends, searchUsers, followers, ...profile
-    } = prof;
-
-    return instance
-      .post(`${userUrl}update_profile`, removeEmptyFields({ ...profile }))
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async searchUsers(name) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .get(`${userUrl}users?name=${name}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async addFriend(friend) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .post(`${userUrl}add_friend`, { ...friend })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  async removeFriend(friend) {
-    instance.defaults.headers.common.token = await localStorage.getItem('token');
-
-    return instance
-      .delete(`${userUrl}remove_friend/${friend.id}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  removeFriend: async friend => sendRequest({
+    method: 'delete',
+    url: `${userUrl}remove_friend/${friend.id}`,
+  }),
 };

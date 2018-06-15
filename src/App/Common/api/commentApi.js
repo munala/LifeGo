@@ -1,43 +1,27 @@
-import axios from 'axios';
-import handleError from './handelError';
+import sendRequest from '../../../utils/api';
 
 const commentsUrl = `${process.env.REACT_APP_API_HOST}/api/comments/`;
 
-const instance = axios.create();
-
-instance.defaults.headers.common['Content-Type'] = 'application/json';
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 export default {
-  addComment(bucketlist, comment) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
+  addComment: async (bucketlist, comment) => sendRequest({
+    method: 'post',
+    url: `${commentsUrl}${bucketlist.id.toString()}`,
+    data: {
+      content: comment.content,
+      bucketlistId: bucketlist.id,
+    },
+  }),
 
-    return instance
-      .post(`${commentsUrl}${bucketlist.id.toString()}`, {
-        content: comment.content,
-        bucketlistId: bucketlist.id,
-      })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  updateComment: async comment => sendRequest({
+    method: 'put',
+    url: `${commentsUrl}${comment.id.toString()}`,
+    data: {
+      content: comment.content,
+    },
+  }),
 
-  updateComment(comment) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .put(`${commentsUrl}${comment.id.toString()}`, {
-        content: comment.content,
-      })
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
-
-  deleteComment(comment) {
-    instance.defaults.headers.common.token = localStorage.getItem('token');
-
-    return instance
-      .delete(`${commentsUrl}${comment.id.toString()}`)
-      .then(response => response.data)
-      .catch(error => handleError(error));
-  },
+  deleteComment: async comment => sendRequest({
+    method: 'delete',
+    url: `${commentsUrl}${comment.id.toString()}`,
+  }),
 };
