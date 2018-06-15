@@ -10,7 +10,7 @@ export default (state = {}, action) => {
         ...action.profile,
         friends: state.friends,
         followers: state.followers,
-        searchUsers: state.searchUsers
+        searchUsers: state.searchUsers,
       };
 
     default:

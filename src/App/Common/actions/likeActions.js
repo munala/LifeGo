@@ -7,16 +7,16 @@ export const likeSuccess = (bucketlist, like) => ({
   type: types.LIKE,
   like,
   bucketlist,
-  message: ''
+  message: '',
 });
 
 export const unlikeSuccess = like => ({
   type: types.UNLIKE,
   message: '',
-  like
+  like,
 });
 
-export const like = bucketlist => async dispatch => {
+export const like = bucketlist => async (dispatch) => {
   const response = await likeService.like(bucketlist, like);
   if (response.error) {
     dispatch(apiCallActions.apiCallError(response.error));
@@ -26,7 +26,7 @@ export const like = bucketlist => async dispatch => {
   }
 };
 
-export const unlike = likes => async dispatch => {
+export const unlike = likes => async (dispatch) => {
   const response = await likeService.unlike(likes);
   if (response.error) {
     dispatch(apiCallActions.apiCallError(response.error));

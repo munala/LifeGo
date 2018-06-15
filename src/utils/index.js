@@ -1,10 +1,8 @@
 import moment from 'moment';
 
-export const setTime = item => {
+export const setTime = (item) => {
   let time = 'm';
-  const difference = moment.duration(
-    moment(Date.now()).diff(moment(item.createdAt))
-  );
+  const difference = moment.duration(moment(Date.now()).diff(moment(item.createdAt)));
 
   let createdAt = Math.floor(difference.asMinutes()) + 1;
 
@@ -33,7 +31,7 @@ export const setLikeColor = ({ likes }, { id }) => {
   let liked = false;
 
   if (likes) {
-    likes.forEach(like => {
+    likes.forEach((like) => {
       if (like.likerId === id) {
         liked = true;
       }
@@ -43,12 +41,12 @@ export const setLikeColor = ({ likes }, { id }) => {
   return liked ? '#00bcd4' : 'grey';
 };
 
-export const getTags = bucketlist => {
+export const getTags = (bucketlist) => {
   if (bucketlist.tags) {
     const tags = bucketlist.tags.split(',').map((tag, index) => ({
       key: index,
       name: tag,
-      label: tag
+      label: tag,
     }));
 
     tags.shift();
@@ -60,7 +58,7 @@ export const getTags = bucketlist => {
 };
 
 export const filterExpired = bucketlists =>
-  bucketlists.filter(bucketlist => {
+  bucketlists.filter((bucketlist) => {
     if (bucketlist.dueDate) {
       const dueDate = new Date(bucketlist.dueDate);
       const now = new Date();
@@ -78,10 +76,10 @@ export const stripHtml = text =>
     .replace('</b>', '')
     .replace('<br/>', ' ');
 
-export const removeEmptyFields = object => {
+export const removeEmptyFields = (object) => {
   const newObject = {};
 
-  Object.keys(object).forEach(key => {
+  Object.keys(object).forEach((key) => {
     const field = object[key];
     if (field || typeof field === 'boolean') {
       newObject[key] = field;

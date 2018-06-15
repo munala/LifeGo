@@ -6,89 +6,79 @@ export const getAlertsSuccess = ({ alerts, screen }) => ({
   type: types.GET_ALERTS,
   alerts,
   message: '',
-  screen
+  screen,
 });
 
 export const newAlert = ({ alert }) => ({
   type: types.NEW_ALERT,
   alert,
-  message: ''
+  message: '',
 });
 
 export const markAsReadSuccess = alert => ({
   type: types.EDIT_ALERT,
   alert,
   message: '',
-  screen: 'userAlerts'
+  screen: 'userAlerts',
 });
 
 export const deleteAlertSuccess = alert => ({
   type: types.DELETE_ALERT,
   alert,
   message: '',
-  screen: 'userAlerts'
+  screen: 'userAlerts',
 });
 
-export const getAlerts = () => async dispatch => {
+export const getAlerts = () => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'userAlerts' }));
 
   const response = await alertService.getAlerts();
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen: 'userAlerts',
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen: 'userAlerts',
+      error: response.error,
+    }));
   } else {
-    dispatch(
-      getAlertsSuccess({
-        ...response,
-        screen: 'userAlerts'
-      })
-    );
+    dispatch(getAlertsSuccess({
+      ...response,
+      screen: 'userAlerts',
+    }));
   }
 
   return response;
 };
 
-export const markAlertAsRead = alert => async dispatch => {
+export const markAlertAsRead = alert => async (dispatch) => {
   const response = await alertService.markAsRead(alert);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'userAlerts' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'userAlerts'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'userAlerts',
+    }));
   } else {
-    dispatch(
-      markAsReadSuccess({
-        ...alert,
-        ...response
-      })
-    );
+    dispatch(markAsReadSuccess({
+      ...alert,
+      ...response,
+    }));
   }
 
   return response;
 };
 
-export const deleteAlert = alert => async dispatch => {
+export const deleteAlert = alert => async (dispatch) => {
   const response = await alertService.deleteAlert(alert);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'userAlerts' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'userAlerts'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'userAlerts',
+    }));
   } else {
     dispatch(deleteAlertSuccess(alert));
   }

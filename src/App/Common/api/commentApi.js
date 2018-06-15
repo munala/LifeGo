@@ -15,7 +15,7 @@ export default {
     return instance
       .post(`${commentsUrl}${bucketlist.id.toString()}`, {
         content: comment.content,
-        bucketlistId: bucketlist.id
+        bucketlistId: bucketlist.id,
       })
       .then(response => response.data)
       .catch(error => handleError(error));
@@ -26,7 +26,7 @@ export default {
 
     return instance
       .put(`${commentsUrl}${comment.id.toString()}`, {
-        content: comment.content
+        content: comment.content,
       })
       .then(response => response.data)
       .catch(error => handleError(error));
@@ -39,5 +39,5 @@ export default {
       .delete(`${commentsUrl}${comment.id.toString()}`)
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

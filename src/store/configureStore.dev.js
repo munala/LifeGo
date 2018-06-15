@@ -8,6 +8,6 @@ export default function configureStore(initialState) {
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunk, logger, reduxImmutableStateInvariant())
+    applyMiddleware(thunk, logger, reduxImmutableStateInvariant()),
   );
 }

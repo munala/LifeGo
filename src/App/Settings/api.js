@@ -12,9 +12,7 @@ instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
   async changePassword({ userId, username, ...user }) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${userUrl}change_password`, removeEmptyFields({ ...user }))
@@ -23,9 +21,7 @@ export default {
   },
 
   async changeEmail(user) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${userUrl}change_email`, removeEmptyFields({ ...user }))
@@ -34,9 +30,7 @@ export default {
   },
 
   async changeUsername(user) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${userUrl}change_username`, removeEmptyFields({ ...user }))
@@ -45,9 +39,7 @@ export default {
   },
 
   async getProfile() {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .get(`${userUrl}get_profile`)
@@ -56,11 +48,11 @@ export default {
   },
 
   async updateProfile(prof) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
-    const { friends, searchUsers, followers, ...profile } = prof;
+    const {
+      friends, searchUsers, followers, ...profile
+    } = prof;
 
     return instance
       .post(`${userUrl}update_profile`, removeEmptyFields({ ...profile }))
@@ -69,13 +61,11 @@ export default {
   },
 
   async deleteAccount(user) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${userUrl}delete_account`, removeEmptyFields({ ...user }))
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

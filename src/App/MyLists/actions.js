@@ -6,41 +6,37 @@ import BucketlistService from './../Common/api/bucketlistApi';
 const loadBucketlistsSuccess = data => ({
   type: types.LOAD_BUCKETLISTS_SUCCESS,
   data,
-  message: ''
+  message: '',
 });
 
 const loadBucketlists = (
   offset = 0,
   limit = 10,
-  search = ''
-) => async dispatch => {
+  search = '',
+) => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
 
   const response = await BucketlistService.getBucketlists(
     offset,
     limit,
-    search
+    search,
   );
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen: 'myBucketlists',
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen: 'myBucketlists',
+      error: response.error,
+    }));
 
     dispatch(apiCallActions.resetError());
 
     return;
   }
 
-  dispatch(
-    loadBucketlistsSuccess({
-      data: response,
-      screen: 'myBucketlists'
-    })
-  );
+  dispatch(loadBucketlistsSuccess({
+    data: response,
+    screen: 'myBucketlists',
+  }));
 
   dispatch(apiCallActions.resetMessage());
 };
@@ -48,5 +44,5 @@ const loadBucketlists = (
 export default {
   ...bucketlistActions,
   loadBucketlistsSuccess,
-  loadBucketlists
+  loadBucketlists,
 };

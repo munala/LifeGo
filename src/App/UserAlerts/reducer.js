@@ -9,7 +9,7 @@ export default (state = [], action) => {
       return action.alerts;
 
     case types.EDIT_ALERT:
-      return [...state].map(alert => {
+      return [...state].map((alert) => {
         if (alert.id === action.alert.id) {
           return action.alert;
         }

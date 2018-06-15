@@ -10,41 +10,37 @@ export default function errorReducer(state = {}, action) {
         ...action.profile,
         friends: state.friends,
         followers: state.followers,
-        searchUsers: state.searchUsers
+        searchUsers: state.searchUsers,
       };
 
     case types.ADD_FRIEND:
       return {
         ...state,
-        friends: [action.friend, ...state.friends]
+        friends: [action.friend, ...state.friends],
       };
 
     case types.ADD_FOLLOWER:
       return {
         ...state,
-        followers: [action.follower, ...state.followers]
+        followers: [action.follower, ...state.followers],
       };
 
     case types.REMOVE_FRIEND:
       return {
         ...state,
-        friends: [...state.friends].filter(
-          friend => friend.id !== action.friend.id
-        )
+        friends: [...state.friends].filter(friend => friend.id !== action.friend.id),
       };
 
     case types.REMOVE_FOLLOWER:
       return {
         ...state,
-        followers: [...state.followers].filter(
-          follower => follower.id !== action.follower.id
-        )
+        followers: [...state.followers].filter(follower => follower.id !== action.follower.id),
       };
 
     case types.SEARCH_USERS:
       return {
         ...state,
-        searchUsers: action.users.filter(user => user.id !== state.id)
+        searchUsers: action.users.filter(user => user.id !== state.id),
       };
 
     case types.DELETE_ACCOUNT_SUCCESS:

@@ -5,41 +5,41 @@ import * as apiCallActions from '../Common/actions/apiCallActions';
 export const sendMessageSuccess = message => ({
   type: types.SEND_MESSAGE,
   message: '',
-  newMessage: message
+  newMessage: message,
 });
 
 export const startConversationSuccess = conversation => ({
   type: types.START_CONVERSATION,
   conversation,
-  message: ''
+  message: '',
 });
 
 export const editMessageSuccess = message => ({
   type: types.EDIT_MESSAGE,
   message: '',
-  newMessage: message
+  newMessage: message,
 });
 
 export const deleteMessageSuccess = message => ({
   type: types.DELETE_MESSAGE,
   message: '',
-  newMessage: message
+  newMessage: message,
 });
 
 export const deleteConversationSuccess = ({ message, conversation }) => ({
   type: types.DELETE_CONVERSATION_SUCCESS,
   message,
-  conversation
+  conversation,
 });
 
 export const getConversationsSuccess = ({ conversations, screen }) => ({
   type: types.GET_CONVERSATIONS_SUCCESS,
   message: '',
   conversations,
-  screen
+  screen,
 });
 
-export const sendMessage = message => async dispatch => {
+export const sendMessage = message => async (dispatch) => {
   const response = await messageService.sendMessage(message);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
@@ -49,12 +49,10 @@ export const sendMessage = message => async dispatch => {
 
     dispatch(apiCallActions.resetMessage());
   } else {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   }
@@ -62,18 +60,16 @@ export const sendMessage = message => async dispatch => {
   return response;
 };
 
-export const startConversation = conversation => async dispatch => {
+export const startConversation = conversation => async (dispatch) => {
   const response = await messageService.startConversation(conversation);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
 
@@ -86,7 +82,7 @@ export const startConversation = conversation => async dispatch => {
   return response;
 };
 
-export const updateMessage = message => async dispatch => {
+export const updateMessage = message => async (dispatch) => {
   const response = await messageService.updateMessage(message);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
@@ -96,12 +92,10 @@ export const updateMessage = message => async dispatch => {
 
     dispatch(apiCallActions.resetMessage());
   } else {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   }
@@ -109,7 +103,7 @@ export const updateMessage = message => async dispatch => {
   return response;
 };
 
-export const markAsRead = message => async dispatch => {
+export const markAsRead = message => async (dispatch) => {
   const response = await messageService.markAsRead(message);
 
   if (!response.error) {
@@ -119,17 +113,15 @@ export const markAsRead = message => async dispatch => {
   return response;
 };
 
-export const deleteMessage = message => async dispatch => {
+export const deleteMessage = message => async (dispatch) => {
   const response = await messageService.deleteMessage(message);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
@@ -141,27 +133,23 @@ export const deleteMessage = message => async dispatch => {
   return response;
 };
 
-export const getConversations = () => async dispatch => {
+export const getConversations = () => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'messages' }));
 
   const response = await messageService.getConversations();
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen: 'userAlerts',
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen: 'userAlerts',
+      error: response.error,
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(
-      getConversationsSuccess({
-        ...response,
-        screen: 'messages'
-      })
-    );
+    dispatch(getConversationsSuccess({
+      ...response,
+      screen: 'messages',
+    }));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -169,18 +157,16 @@ export const getConversations = () => async dispatch => {
   return response;
 };
 
-export const deleteConversation = conversation => async dispatch => {
+export const deleteConversation = conversation => async (dispatch) => {
   const response = await messageService.deleteConversation(conversation);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {

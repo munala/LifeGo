@@ -6,51 +6,47 @@ import BucketlistService from './../Common/api/bucketlistApi';
 const loadAllBucketlistsSuccess = data => ({
   type: types.LOAD_ALL_BUCKETLISTS_SUCCESS,
   data,
-  message: ''
+  message: '',
 });
 
 const addNewBucketlist = bucketlist => ({
   type: types.ADD_NEW_BUCKETLIST,
-  bucketlist
+  bucketlist,
 });
 
 const loadMore = () => dispatch =>
   dispatch({
-    type: types.LOAD_MORE_BUCKETLISTS
+    type: types.LOAD_MORE_BUCKETLISTS,
   });
 
 export const loadAllBucketlists = (
   offset = 0,
   limit = 10,
-  search = ''
-) => async dispatch => {
+  search = '',
+) => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'allBucketlists' }));
 
   const response = await BucketlistService.getAllBucketlists(
     offset,
     limit,
-    search
+    search,
   );
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen: 'allBucketlists',
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen: 'allBucketlists',
+      error: response.error,
+    }));
 
     dispatch(apiCallActions.resetError());
 
     return;
   }
 
-  dispatch(
-    loadAllBucketlistsSuccess({
-      data: response,
-      screen: 'allBucketlists'
-    })
-  );
+  dispatch(loadAllBucketlistsSuccess({
+    data: response,
+    screen: 'allBucketlists',
+  }));
 
   dispatch(apiCallActions.resetMessage());
 };
@@ -60,5 +56,5 @@ export default {
   loadAllBucketlistsSuccess,
   addNewBucketlist,
   loadMore,
-  loadAllBucketlists
+  loadAllBucketlists,
 };

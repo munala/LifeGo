@@ -9,7 +9,7 @@ export default (state = [], action) => {
       return action.notifications;
 
     case types.EDIT_NOTIFICATION:
-      return [...state].map(notification => {
+      return [...state].map((notification) => {
         if (notification.id === action.notification.id) {
           return action.notification;
         }
@@ -18,9 +18,7 @@ export default (state = [], action) => {
       });
 
     case types.DELETE_NOTIFICATION:
-      return [...state].filter(
-        notification => notification.id !== action.notification.id
-      );
+      return [...state].filter(notification => notification.id !== action.notification.id);
 
     default:
       return state;

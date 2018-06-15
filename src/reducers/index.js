@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   otherProfile,
   conversations,
   notifications,
-  alerts
+  alerts,
 });
 
 export default rootReducer;

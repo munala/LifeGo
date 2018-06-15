@@ -15,7 +15,7 @@ const BucketlistService = {
 
     return instance
       .post(bucketlistUrl, { ...bucketList })
-      .then(response => {
+      .then((response) => {
         if (response.data.message === `${bucketlist.name} already exists`) {
           return handleError(response.data.message);
         }
@@ -29,9 +29,9 @@ const BucketlistService = {
 
     return instance
       .post(`${bucketlistUrl + bucketlist.id.toString()}/items/`, {
-        name: item.name
+        name: item.name,
       })
-      .then(response => {
+      .then((response) => {
         if (response.data.message === `${item.name} already exists`) {
           return handleError(response.data.message);
         }
@@ -71,9 +71,9 @@ const BucketlistService = {
 
     return instance
       .put(`${bucketlistUrl + bucketlist.id.toString()}`, {
-        ...bucketlist
+        ...bucketlist,
       })
-      .then(response => {
+      .then((response) => {
         if (response.data.message === `${bucketlist.name} is already in use`) {
           return handleError(response.data.message);
         }
@@ -88,9 +88,9 @@ const BucketlistService = {
     return instance
       .put(`${bucketlistUrl + bucketlist.id}/items/${item.id}`, {
         name: item.name,
-        done: item.done
+        done: item.done,
       })
-      .then(response => {
+      .then((response) => {
         if (response.data.message === `${item.name} is already in use`) {
           return handleError(response.data.message);
         }
@@ -106,7 +106,7 @@ const BucketlistService = {
       .delete(`${bucketlistUrl + bucketlist.id}/items/${item.id}`)
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };
 
 export default BucketlistService;

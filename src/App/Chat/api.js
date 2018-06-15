@@ -10,9 +10,7 @@ instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
   async sendMessage(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${messageUrl}`, { ...message })
@@ -21,9 +19,7 @@ export default {
   },
 
   async startConversation(conversation) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${messageUrl}conversations`, { ...conversation })
@@ -32,22 +28,18 @@ export default {
   },
 
   async updateMessage(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .put(`${messageUrl}${message.id.toString()}`, {
-        content: message.content
+        content: message.content,
       })
       .then(response => response.data)
       .catch(error => handleError(error));
   },
 
   async markAsRead(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .put(`${messageUrl}mark_as_read/${message.id.toString()}`)
@@ -56,9 +48,7 @@ export default {
   },
 
   async deleteMessage(message) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .delete(`${messageUrl}${message.id.toString()}`)
@@ -67,9 +57,7 @@ export default {
   },
 
   async getConversations() {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .get(`${messageUrl}conversations`)
@@ -78,13 +66,11 @@ export default {
   },
 
   async deleteConversation(conversation) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .delete(`${messageUrl}conversations/${conversation.id.toString()}`)
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

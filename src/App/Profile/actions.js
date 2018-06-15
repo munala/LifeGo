@@ -6,75 +6,71 @@ export const getProfileSuccess = ({ profile, screen }) => ({
   type: types.GET_PROFILE_SUCCESS,
   profile,
   message: '',
-  screen
+  screen,
 });
 
 export const getOtherProfileSuccess = ({ profile, screen }) => ({
   type: types.GET_OTHER_PROFILE_SUCCESS,
   profile,
   message: '',
-  screen
+  screen,
 });
 
 export const searchUsersSuccess = ({ users }) => ({
   type: types.SEARCH_USERS,
-  users
+  users,
 });
 
 export const updateProfileSuccess = ({ profile, screen }) => ({
   type: types.UPDATE_PROFILE_SUCCESS,
   profile,
   message: 'Success',
-  screen
+  screen,
 });
 
 export const addFriendSuccess = ({ message, friend }) => ({
   type: types.ADD_FRIEND,
   message,
   friend,
-  screen: 'others'
+  screen: 'others',
 });
 
 export const removeFriendSuccess = ({ message }, friend) => ({
   type: types.REMOVE_FRIEND,
   message,
   friend,
-  screen: 'others'
+  screen: 'others',
 });
 
 export const removeFollower = follower => ({
   type: types.REMOVE_FOLLOWER,
   message: '',
-  follower
+  follower,
 });
 
 export const addFollower = follower => ({
   type: types.ADD_FOLLOWER,
   message: '',
-  follower
+  follower,
 });
 
-export const getProfile = () => async dispatch => {
+export const getProfile = () => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'profile' }));
 
   const response = await userService.getProfile();
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen: 'profile',
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen: 'profile',
+      error: response.error,
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(
-      getProfileSuccess({
-        profile: response,
-        screen: 'profile'
-      })
-    );
+    dispatch(getProfileSuccess({
+      profile: response,
+      screen: 'profile',
+    }));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -82,27 +78,23 @@ export const getProfile = () => async dispatch => {
   return response;
 };
 
-export const getOtherProfile = id => async dispatch => {
+export const getOtherProfile = id => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'profile' }));
 
   const response = await userService.getOtherProfile(id);
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen: 'profile',
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen: 'profile',
+      error: response.error,
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(
-      getOtherProfileSuccess({
-        profile: response,
-        screen: 'profile'
-      })
-    );
+    dispatch(getOtherProfileSuccess({
+      profile: response,
+      screen: 'profile',
+    }));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -110,18 +102,16 @@ export const getOtherProfile = id => async dispatch => {
   return response;
 };
 
-export const updateProfile = (profile, screen) => async dispatch => {
+export const updateProfile = (profile, screen) => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen }));
 
   const response = await userService.updateProfile(profile);
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        screen,
-        error: response.error
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      screen,
+      error: response.error,
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
@@ -133,18 +123,16 @@ export const updateProfile = (profile, screen) => async dispatch => {
   return response;
 };
 
-export const addFriend = user => async dispatch => {
+export const addFriend = user => async (dispatch) => {
   const response = await userService.addFriend(user);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
@@ -156,18 +144,16 @@ export const addFriend = user => async dispatch => {
   return response;
 };
 
-export const removeFriend = user => async dispatch => {
+export const removeFriend = user => async (dispatch) => {
   const response = await userService.removeFriend(user);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
@@ -179,7 +165,7 @@ export const removeFriend = user => async dispatch => {
   return response;
 };
 
-export const searchUsers = name => async dispatch => {
+export const searchUsers = name => async (dispatch) => {
   const response = await userService.searchUsers(name);
 
   if (response.users) {

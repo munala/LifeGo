@@ -12,9 +12,7 @@ instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
   async getProfile() {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .get(`${userUrl}get_profile`)
@@ -23,9 +21,7 @@ export default {
   },
 
   async getOtherProfile(id) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .get(`${userUrl}get_other_profile/${id}`)
@@ -34,11 +30,11 @@ export default {
   },
 
   async updateProfile(prof) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
-    const { friends, searchUsers, followers, ...profile } = prof;
+    const {
+      friends, searchUsers, followers, ...profile
+    } = prof;
 
     return instance
       .post(`${userUrl}update_profile`, removeEmptyFields({ ...profile }))
@@ -47,9 +43,7 @@ export default {
   },
 
   async searchUsers(name) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .get(`${userUrl}users?name=${name}`)
@@ -58,9 +52,7 @@ export default {
   },
 
   async addFriend(friend) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .post(`${userUrl}add_friend`, { ...friend })
@@ -69,13 +61,11 @@ export default {
   },
 
   async removeFriend(friend) {
-    instance.defaults.headers.common.token = await localStorage.getItem(
-      'token'
-    );
+    instance.defaults.headers.common.token = await localStorage.getItem('token');
 
     return instance
       .delete(`${userUrl}remove_friend/${friend.id}`)
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

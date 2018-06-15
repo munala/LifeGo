@@ -7,7 +7,7 @@ export const addCommentSuccess = (bucketlist, comment) => ({
   comment,
   bucketlist,
   message: '',
-  screen: 'others'
+  screen: 'others',
 });
 
 export const editCommentSuccess = (bucketlist, comment) => ({
@@ -15,7 +15,7 @@ export const editCommentSuccess = (bucketlist, comment) => ({
   comment,
   bucketlist,
   message: '',
-  screen: 'others'
+  screen: 'others',
 });
 
 export const deleteCommentSuccess = (bucketlist, comment) => ({
@@ -23,21 +23,19 @@ export const deleteCommentSuccess = (bucketlist, comment) => ({
   bucketlist,
   comment,
   message: '',
-  screen: 'others'
+  screen: 'others',
 });
 
-export const addComment = (bucketlist, comment) => async dispatch => {
+export const addComment = (bucketlist, comment) => async (dispatch) => {
   const response = await commentService.addComment(bucketlist, comment);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
 
   if (response.error) {
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
 
     dispatch(apiCallActions.resetError());
   } else {
@@ -49,7 +47,7 @@ export const addComment = (bucketlist, comment) => async dispatch => {
   return response;
 };
 
-export const updateComment = (bucketlist, comment) => async dispatch => {
+export const updateComment = (bucketlist, comment) => async (dispatch) => {
   const response = await commentService.updateComment(comment);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
@@ -57,12 +55,10 @@ export const updateComment = (bucketlist, comment) => async dispatch => {
   if (response.error) {
     dispatch(apiCallActions.resetError());
 
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
   } else {
     dispatch(editCommentSuccess(bucketlist, response));
 
@@ -72,7 +68,7 @@ export const updateComment = (bucketlist, comment) => async dispatch => {
   return response;
 };
 
-export const deleteComment = (bucketlist, comment) => async dispatch => {
+export const deleteComment = (bucketlist, comment) => async (dispatch) => {
   const response = await commentService.deleteComment(comment);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
@@ -80,12 +76,10 @@ export const deleteComment = (bucketlist, comment) => async dispatch => {
   if (response.error) {
     dispatch(apiCallActions.resetError());
 
-    dispatch(
-      apiCallActions.apiCallError({
-        ...response,
-        screen: 'others'
-      })
-    );
+    dispatch(apiCallActions.apiCallError({
+      ...response,
+      screen: 'others',
+    }));
   } else {
     dispatch(deleteCommentSuccess(bucketlist, comment));
 

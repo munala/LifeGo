@@ -10,9 +10,9 @@ import * as userAlertActions from '../App/UserAlerts/actions';
 
 const bucketlistActions = { ...homeActions, myListActions };
 
-export default store => {
+export default (store) => {
   const socket = SocketIOClient(process.env.API_HOST);
-  socket.on('messages', data => {
+  socket.on('messages', (data) => {
     const storeData = store.getState();
 
     if (
@@ -31,39 +31,35 @@ export default store => {
     }
   });
 
-  socket.on('conversations', data => {
+  socket.on('conversations', (data) => {
     const storeData = store.getState();
 
     if (
       data.type === 'new' &&
       storeData.profile.id === data.conversation.receiverId
     ) {
-      store.dispatch(
-        messageActions.startConversationSuccess(data.conversation)
-      );
+      store.dispatch(messageActions.startConversationSuccess(data.conversation));
     }
 
     if (data.type === 'delete') {
-      store.dispatch(
-        messageActions.deleteConversationSuccess({
-          message: '',
-          conversation: data.conversation
-        })
-      );
+      store.dispatch(messageActions.deleteConversationSuccess({
+        message: '',
+        conversation: data.conversation,
+      }));
     }
   });
 
-  socket.on('notifications', data => {
+  socket.on('notifications', (data) => {
     const storeData = store.getState();
     let notify;
 
-    storeData.data.bucketlists.forEach(bucketlist => {
+    storeData.data.bucketlists.forEach((bucketlist) => {
       if (bucketlist.id === data.notification.bucketlistId) {
         notify = true;
       }
     });
 
-    storeData.allData.bucketlists.forEach(bucketlist => {
+    storeData.allData.bucketlists.forEach((bucketlist) => {
       if (bucketlist.id === data.notification.bucketlistId) {
         notify = true;
       }
@@ -74,87 +70,75 @@ export default store => {
       notify &&
       data.notification.sourceUserId !== storeData.profile.id
     ) {
-      store.dispatch(
-        notificationActions.newNotification({ notification: data.notification })
-      );
+      store.dispatch(notificationActions.newNotification({ notification: data.notification }));
     }
   });
 
-  socket.on('bucketlists', data => {
+  socket.on('bucketlists', (data) => {
     const storeData = store.getState();
 
     if (data.type === 'update') {
-      storeData.profile.friends.forEach(friend => {
+      storeData.profile.friends.forEach((friend) => {
         if (friend.id === data.bucketlist.userId) {
-          store.dispatch(
-            bucketlistActions.updateBucketlistSuccess(data.bucketlist)
-          );
+          store.dispatch(bucketlistActions.updateBucketlistSuccess(data.bucketlist));
         }
       });
     }
 
     if (data.type === 'delete') {
-      storeData.profile.friends.forEach(friend => {
+      storeData.profile.friends.forEach((friend) => {
         if (friend.id === data.bucketlist.userId) {
-          store.dispatch(
-            bucketlistActions.deleteBucketlistSuccess(data.bucketlist)
-          );
+          store.dispatch(bucketlistActions.deleteBucketlistSuccess(data.bucketlist));
         }
       });
     }
   });
 
-  socket.on('comments', data => {
+  socket.on('comments', (data) => {
     const storeData = store.getState();
 
     if (data.type === 'new') {
-      [storeData.data, storeData.allData].forEach(list => {
-        list.bucketlists.forEach(bucketlist => {
+      [storeData.data, storeData.allData].forEach((list) => {
+        list.bucketlists.forEach((bucketlist) => {
           if (
             data.sourceUserId !== storeData.profile.id &&
             bucketlist.id === data.comment.bucketlistId
           ) {
-            store.dispatch(
-              commentActions.addCommentSuccess(
-                {
-                  id: data.comment.bucketlistId
-                },
-                data.comment
-              )
-            );
+            store.dispatch(commentActions.addCommentSuccess(
+              {
+                id: data.comment.bucketlistId,
+              },
+              data.comment,
+            ));
           }
         });
       });
     }
 
     if (data.type === 'update') {
-      [storeData.data, storeData.allData].forEach(list => {
-        list.bucketlists.forEach(bucketlist => {
+      [storeData.data, storeData.allData].forEach((list) => {
+        list.bucketlists.forEach((bucketlist) => {
           if (
             data.sourceUserId !== storeData.profile.id &&
             bucketlist.id === data.comment.bucketlistId
           ) {
-            store.dispatch(
-              commentActions.editCommentSuccess(
-                {
-                  id: data.comment.bucketlistId
-                },
-                data.comment
-              )
-            );
+            store.dispatch(commentActions.editCommentSuccess(
+              {
+                id: data.comment.bucketlistId,
+              },
+              data.comment,
+            ));
           }
         });
       });
     }
 
     if (data.type === 'delete') {
-      [storeData.data, storeData.allData].forEach(list => {
-        list.bucketlists.forEach(bucketlist => {
-          bucketlist.comments.forEach(comm => {
+      [storeData.data, storeData.allData].forEach((list) => {
+        list.bucketlists.forEach((bucketlist) => {
+          bucketlist.comments.forEach((comm) => {
             if (comm.id === data.comment.id) {
-              store.dispatch(
-                commentActions.deleteCommentSuccess(bucketlist, data.comment)
-              );
+              store.dispatch(commentActions.deleteCommentSuccess(bucketlist, data.comment));
             }
           });
         });
@@ -162,24 +146,22 @@ export default store => {
     }
   });
 
-  socket.on('likes', data => {
+  socket.on('likes', (data) => {
     const storeData = store.getState();
 
     if (data.type === 'like') {
-      [storeData.data, storeData.allData].forEach(list => {
-        list.bucketlists.forEach(bucketlist => {
+      [storeData.data, storeData.allData].forEach((list) => {
+        list.bucketlists.forEach((bucketlist) => {
           if (
             data.like.likerId !== storeData.profile.id &&
             bucketlist.id === data.like.bucketlistId
           ) {
-            store.dispatch(
-              likeActions.likeSuccess(
-                {
-                  id: data.like.bucketlistId
-                },
-                data.like
-              )
-            );
+            store.dispatch(likeActions.likeSuccess(
+              {
+                id: data.like.bucketlistId,
+              },
+              data.like,
+            ));
           }
         });
       });
@@ -190,7 +172,7 @@ export default store => {
     }
   });
 
-  socket.on('followers', data => {
+  socket.on('followers', (data) => {
     const storeData = store.getState();
 
     if (data.type === 'new') {
@@ -206,7 +188,7 @@ export default store => {
     }
   });
 
-  socket.on('user_notifications', data => {
+  socket.on('user_notifications', (data) => {
     const storeData = store.getState();
     if (data.type === 'new') {
       if (storeData.profile.id === data.alert.friendId) {

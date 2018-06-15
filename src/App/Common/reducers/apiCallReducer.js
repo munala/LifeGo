@@ -10,7 +10,7 @@ const initialState = {
   profile: 0,
   settings: 0,
   others: 0,
-  loader: 0
+  loader: 0,
 };
 
 function actionTypeEndsInSuccess(actionType) {
@@ -22,7 +22,7 @@ export default function apiCallReducer(state = initialState, action) {
   if (action.type === types.BEGIN_API_CALL) {
     return {
       ...state,
-      [screen]: state[screen] + 1
+      [screen]: state[screen] + 1,
     };
   } else if (
     action.type === types.API_CALL_ERROR ||
@@ -30,7 +30,7 @@ export default function apiCallReducer(state = initialState, action) {
   ) {
     return {
       ...state,
-      [screen]: state[screen] - 1
+      [screen]: state[screen] - 1,
     };
   }
   return state;

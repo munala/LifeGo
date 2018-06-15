@@ -43,5 +43,5 @@ export default {
       .delete(`${userAlertsUrl}${alert.id.toString()}`)
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

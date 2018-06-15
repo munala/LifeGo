@@ -25,5 +25,5 @@ export default {
       .delete(`${likesUrl}${like.id.toString()}`)
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

@@ -38,5 +38,5 @@ export default {
       .post(`${userUrl}reset_password`, { email })
       .then(response => response.data)
       .catch(error => handleError(error));
-  }
+  },
 };

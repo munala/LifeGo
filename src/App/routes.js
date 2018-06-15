@@ -38,7 +38,7 @@ const About = () => (
   </div>
 );
 
-const Topics = ({ match }) => (
+const Topics = ({ match }) => ( // eslint-disable-line
   <div>
     <h2>Topics</h2>
     <ul>
@@ -62,7 +62,7 @@ const Topics = ({ match }) => (
   </div>
 );
 
-const Topic = ({ match }) => (
+const Topic = ({ match }) => ( // eslint-disable-line
   <div>
     <h3>{match.params.topicId}</h3>
   </div>
