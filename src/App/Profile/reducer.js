@@ -1,6 +1,6 @@
 import * as types from './constants';
 
-export default function errorReducer(state = {}, action) {
+export default (state = {}, action) => {
   switch (action.type) {
     case types.GET_PROFILE_SUCCESS:
       return { ...action.profile, searchUsers: [] };
@@ -49,4 +49,4 @@ export default function errorReducer(state = {}, action) {
     default:
       return state;
   }
-}
+};

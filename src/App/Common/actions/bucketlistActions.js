@@ -133,17 +133,17 @@ export const searchBucketlists = (
   clearSearch()(dispatch);
 };
 
-export const saveBucketlist = (bucketlist, screen) => async (dispatch) => {
+export const saveBucketlist = bucketlist => async (dispatch) => {
   const response = await BucketlistService.saveBucketlist(bucketlist);
 
-  dispatch(apiCallActions.beginApiCall({ screen }));
+  dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
 
   if (response.error) {
-    dispatch(apiCallActions.apiCallError({ ...response, screen }));
+    dispatch(apiCallActions.apiCallError({ ...response, screen: 'myBucketlists' }));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(createBucketlistSuccess(response, screen));
+    dispatch(createBucketlistSuccess(response, 'myBucketlists'));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -151,17 +151,17 @@ export const saveBucketlist = (bucketlist, screen) => async (dispatch) => {
   return response;
 };
 
-export const updateBucketlist = (bucketlist, screen) => async (dispatch) => {
+export const updateBucketlist = bucketlist => async (dispatch) => {
   const response = await BucketlistService.updateBucketlist(bucketlist);
 
-  dispatch(apiCallActions.beginApiCall({ screen }));
+  dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
 
   if (response.error) {
-    dispatch(apiCallActions.apiCallError({ ...response, screen }));
+    dispatch(apiCallActions.apiCallError({ ...response, screen: 'myBucketlists' }));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(updateBucketlistSuccess(response, screen));
+    dispatch(updateBucketlistSuccess(response, 'myBucketlists'));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -169,17 +169,17 @@ export const updateBucketlist = (bucketlist, screen) => async (dispatch) => {
   return response;
 };
 
-export const deleteBucketlist = (bucketlist, screen) => async (dispatch) => {
+export const deleteBucketlist = bucketlist => async (dispatch) => {
   const response = await BucketlistService.deleteBucketlist(bucketlist);
 
-  dispatch(apiCallActions.beginApiCall({ screen }));
+  dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
 
   if (response.error) {
-    dispatch(apiCallActions.apiCallError(...response, screen));
+    dispatch(apiCallActions.apiCallError(...response, 'myBucketlists'));
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(deleteBucketlistSuccess({ bucketlist, ...response, screen }));
+    dispatch(deleteBucketlistSuccess({ bucketlist, ...response, screen: 'myBucketlists' }));
 
     dispatch(apiCallActions.resetMessage());
   }
