@@ -5,7 +5,7 @@ const instance = axios.create();
 instance.defaults.headers.common['Content-Type'] = 'application/json';
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-const handleError = (error) => {
+export const handleError = (error) => {
   if (error.response && error.response.status === 401) {
     return {
       error: 'Unauthorised',
