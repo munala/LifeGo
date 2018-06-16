@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.2.1",
+    "@material-ui/icons": "^1.1.0",
     "@storybook/addon-actions": "^3.4.7",
     "@storybook/addon-links": "^3.4.7",
     "@storybook/addons": "^3.4.7",
@@ -16,6 +18,7 @@
     "nock": "^9.3.3",
     "prettier": "^1.13.5",
     "prettier-eslint": "^8.8.1",
+    "prop-types": "^15.6.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
@@ -34,7 +37,7 @@
       "git add"
     ]
   },
-  "jest":{
+  "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!src/stories/*.js",
