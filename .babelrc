@@ -1,3 +1,13 @@
 {
-  "presets": ["flow", "babel-preset-env", "babel-preset-react"]
+  "presets": ["flow", "babel-preset-env", "babel-preset-react", "babel-preset-es2015", "babel-preset-stage-0"],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "transform-async-to-generator",
+    ["transform-runtime", {
+      "babel-polyfill": false,
+      "regenerator": true
+    }]
+  ]
 }

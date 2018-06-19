@@ -2,9 +2,9 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import IconLabelButton from '../App/Common/components/IconLabelButton';
+import Form from '../App/Common/components/Form';
 
-storiesOf('IconLabelButton', module)
+storiesOf('Form', module)
   .add('with some emoji', () => (
-    <IconLabelButton label="home" name="home" onClick={() => {}} />
+    <Form open onClose={() => {}} save={() => {}} />
   ));

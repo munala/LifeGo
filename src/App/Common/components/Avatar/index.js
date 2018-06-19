@@ -11,7 +11,7 @@ const UserAvatar = ({
   onClick,
 }) => (
   <div
-    className="container"
+    className="avatar-container"
     onClick={onClick}
   >
     <Avatar

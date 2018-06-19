@@ -1,27 +1,98 @@
 // @flow
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import SideMenu from './Common/components/SideMenu';
+import Header from './Common/components/Header';
+import './styles.css';
 
 const BasicExample = () => (
   <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/topics">Topics</Link>
-        </li>
-      </ul>
+    <div className="app-container">
+      <Header
+        avatarUrl={require('../assets/icons/icon.png')} // eslint-disable-line global-require
+        title="Home"
+        loggedIn
+        counts={{
+          userAlerts: {
+            count: 1,
+            icon: 'person',
+            onClick: () => {},
+          },
+          messages: {
+            count: 2,
+            icon: 'message',
+            onClick: () => {},
+          },
+          notifications: {
+            count: 3,
+            icon: 'notifications',
+            onClick: () => {},
+          },
+        }}
+        menuIconClick={() => {}}
+        onChange={() => {}}
+      />
+      <div className="app-body">
+        <SideMenu
+          menuItems={{
+            top: [
+              {
+                icon: 'home',
+                text: 'Home',
+                onClick: () => {},
+              },
+              {
+                icon: 'explore',
+                text: 'Discover',
+                onClick: () => {},
+              },
+              {
+                icon: 'list',
+                text: 'My Lists',
+                onClick: () => {},
+              },
+              {
+                icon: 'account_circle',
+                text: 'Profile',
+                onClick: () => {},
+              },
+            ],
+            bottom: [
+              {
+                text: 'Settings',
+                onClick: () => {},
+              },
+            ],
+          }}
+          activeItem="home"
+        />
+        <div className="app-content">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/topics">Topics</Link>
+            </li>
+          </ul>
 
-      <hr />
+          <hr />
 
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/topics" component={Topics} />
+          <Route
+            exact
+            path="/about"
+            component={About}
+          />
+          <Route
+            path="/"
+            component={Home}
+          />
+          <Route path="/topics" component={Topics} />
+        </div>
+      </div>
     </div>
   </Router>
 );
