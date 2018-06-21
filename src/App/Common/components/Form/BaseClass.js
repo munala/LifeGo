@@ -17,8 +17,14 @@ class BaseClass extends Component {
     });
   }
 
-  onSave = () => {
-    this.props.save(this.state.bucketlist);
+  onSave = async () => {
+    const { image, bucketlist } = this.state;
+    if (image) {
+      const { url: pictureUrl } = await this.uploadImage(image);
+      bucketlist.pictureUrl = pictureUrl;
+    }
+
+    this.props.save(bucketlist);
     this.setState({ bucketlist: initialBucketlist });
   }
 
@@ -53,15 +59,6 @@ class BaseClass extends Component {
     });
   }
 
-  selectLocation = (location) => {
-    this.setState({
-      bucketlist: {
-        ...this.state.bucketlist,
-        location,
-      },
-    });
-  }
-
   uploadImage = async (image) => {
     const apiKey = process.env.REACT_APP_CLOUDINARY_KEY;
     const formData = new FormData();
@@ -70,7 +67,7 @@ class BaseClass extends Component {
     formData.append('upload_preset', 'dl5sqcqz');
     formData.append('api_key', apiKey);
 
-    await axios.post('https://api.cloudinary.com/v1_1/lifego/image/upload', formData);
+    return axios.post('https://api.cloudinary.com/v1_1/lifego/image/upload', formData);
   };
 }
 

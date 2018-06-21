@@ -11,7 +11,6 @@ class Comments extends BaseClass {
   state = {
     page: 0,
     comment: {
-      id: '',
       content: '',
     },
     selectedComment: {

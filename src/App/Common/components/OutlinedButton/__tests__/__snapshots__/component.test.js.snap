@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutlinedButton tests renders without crashing 1`] = `
+<OutlinedButton
+  classes={
+    Object {
+      "button": "OutlinedButton-button-1",
+    }
+  }
+  disabled={false}
+  label="source"
+  onClick={[Function]}
+/>
+`;

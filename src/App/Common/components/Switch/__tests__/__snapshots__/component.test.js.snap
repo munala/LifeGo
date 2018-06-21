@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch tests renders without crashing 1`] = `
+<div
+  className="container"
+>
+  <WithStyles(Switch)
+    checked={true}
+    color="primary"
+    disabled={false}
+    onChange={[Function]}
+  />
+</div>
+`;

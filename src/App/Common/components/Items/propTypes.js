@@ -21,10 +21,6 @@ export default {
       updatedAt: PropTypes.string,
     })),
   }).isRequired,
-  // actions: PropTypes.shape({
-  //   addComment: PropTypes.func.isRequired,
-  //   deleteComment: PropTypes.func.isRequired,
-  // }).isRequired,
   profile: PropTypes.shape({
     id: PropTypes.number,
     username: PropTypes.string,
@@ -34,5 +30,4 @@ export default {
     friends: PropTypes.arrayOf(PropTypes.shape({})),
     searchUsers: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
-  // mode: PropTypes.string,
 };

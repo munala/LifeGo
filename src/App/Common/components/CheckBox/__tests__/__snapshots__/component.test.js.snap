@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckBox tests renders without crashing 1`] = `
+<div
+  className="container"
+>
+  <WithStyles(Checkbox)
+    checked={true}
+    color="primary"
+    disabled={false}
+    onChange={[Function]}
+  />
+</div>
+`;

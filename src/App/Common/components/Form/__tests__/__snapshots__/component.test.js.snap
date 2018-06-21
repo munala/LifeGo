@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form tests renders without crashing 1`] = `
+<WithStyles(Modal)
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    className="form-container"
+  >
+    <div
+      className="form-title"
+    >
+      Add bucketlist
+    </div>
+    <div
+      className="input-wrapper"
+    >
+      <WithStyles(TextInput)
+        autoFocus={true}
+        error={false}
+        name="name"
+        onChange={[Function]}
+        placeholder="name of your bucketlist"
+        value=""
+      />
+      <WithStyles(TextInput)
+        multiline={true}
+        name="description"
+        onChange={[Function]}
+        placeholder="tell people more about your bucketlist"
+        rows={4}
+        rowsMax={4}
+        value=""
+      />
+      <WithStyles(DatePicker)
+        defaultValue=""
+        label="due date"
+        onChange={[Function]}
+      />
+      <WithStyles(TextInput)
+        label="select category"
+        name="category"
+        onChange={[Function]}
+        select={true}
+        value=""
+      >
+        <WithStyles(MenuItem)
+          key="Art & Design"
+          value="Art & Design"
+        >
+          Art & Design
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Auto & Vehicles"
+          value="Auto & Vehicles"
+        >
+          Auto & Vehicles
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Books"
+          value="Books"
+        >
+          Books
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Business"
+          value="Business"
+        >
+          Business
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Dating"
+          value="Dating"
+        >
+          Dating
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Education"
+          value="Education"
+        >
+          Education
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Entertainment"
+          value="Entertainment"
+        >
+          Entertainment
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Events"
+          value="Events"
+        >
+          Events
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Finance"
+          value="Finance"
+        >
+          Finance
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Food & Drink"
+          value="Food & Drink"
+        >
+          Food & Drink
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Health & Fitness"
+          value="Health & Fitness"
+        >
+          Health & Fitness
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="House & Home"
+          value="House & Home"
+        >
+          House & Home
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Music"
+          value="Music"
+        >
+          Music
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Photography"
+          value="Photography"
+        >
+          Photography
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Shopping"
+          value="Shopping"
+        >
+          Shopping
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Social"
+          value="Social"
+        >
+          Social
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Sports"
+          value="Sports"
+        >
+          Sports
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Travel & Local"
+          value="Travel & Local"
+        >
+          Travel & Local
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Adventure"
+          value="Adventure"
+        >
+          Adventure
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="Other"
+          value="Other"
+        >
+          Other
+        </WithStyles(MenuItem)>
+      </WithStyles(TextInput)>
+      <LocationField
+        bucketlist={
+          Object {
+            "category": "",
+            "description": "",
+            "dueDate": "",
+            "location": "",
+            "name": "",
+          }
+        }
+        onChange={[Function]}
+      />
+      <PhotoField
+        bucketlist={
+          Object {
+            "category": "",
+            "description": "",
+            "dueDate": "",
+            "location": "",
+            "name": "",
+          }
+        }
+        changePhoto={[Function]}
+        imageUrl=""
+        removePhoto={[Function]}
+      />
+    </div>
+    <div
+      className="actions"
+    >
+      <WithStyles(FlatButton)
+        label="cancel"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "grey",
+          }
+        }
+      />
+      <WithStyles(FlatButton)
+        disabled={true}
+        keyboardFocused={true}
+        label="add"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+</WithStyles(Modal)>
+`;

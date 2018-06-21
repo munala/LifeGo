@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewInput tests renders without crashing 1`] = `
+<div
+  className="input-container"
+>
+  <UserAvatar
+    name="user avatar"
+    onClick={[Function]}
+    src="user.png"
+    style={
+      Object {
+        "display": "flex",
+        "height": 30,
+        "width": 30,
+      }
+    }
+  />
+  <WithStyles(TextInput)
+    className="textField"
+    disableUnderline={true}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    placeholder="type edit"
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+    type="text"
+    value=""
+  />
+  <WithStyles(OutlinedButton)
+    disabled={false}
+    label="name"
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+  />
+</div>
+`;

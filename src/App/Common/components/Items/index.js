@@ -10,7 +10,6 @@ class Items extends BaseClass {
   state = {
     page: 0,
     item: {
-      id: '',
       name: '',
     },
     selectedItem: {

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker tests renders without crashing 1`] = `
+<DatePicker
+  classes={
+    Object {
+      "container": "DatePicker-container-1",
+      "textField": "DatePicker-textField-2",
+    }
+  }
+  defaultValue=""
+  label="source"
+  onChange={[Function]}
+/>
+`;

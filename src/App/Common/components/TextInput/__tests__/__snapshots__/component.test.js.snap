@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput tests renders without crashing 1`] = `
+<TextInput
+  autoFocus={false}
+  classes={
+    Object {
+      "menu": "TextInput-menu-2",
+      "textField": "TextInput-textField-1",
+    }
+  }
+  disableUnderline={false}
+  disabled={false}
+  error={false}
+  multiline={false}
+  name="name"
+  onChange={[Function]}
+  onKeyPress={[Function]}
+  value="value"
+/>
+`;

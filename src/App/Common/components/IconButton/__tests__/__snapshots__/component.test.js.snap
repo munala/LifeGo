@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton tests renders without crashing 1`] = `
+<IconButton
+  classes={
+    Object {
+      "button": "IconButton-button-1",
+    }
+  }
+  disabled={false}
+  name="home"
+  onClick={[Function]}
+/>
+`;

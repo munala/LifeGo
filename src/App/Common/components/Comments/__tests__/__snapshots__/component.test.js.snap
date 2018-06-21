@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comments tests renders without crashing 1`] = `
+<div
+  className="comments-container"
+>
+  <div
+    className="comment-container"
+    key="1"
+  >
+    <UserAvatar
+      name="user avatar"
+      onClick={[Function]}
+      src="user.png"
+    />
+    <div
+      className="comment-body"
+    >
+      <div>
+        <a
+          className="comment-user"
+          href="#"
+          onClick={[Function]}
+        />
+        <div
+          className="comment-content"
+        >
+          comment
+        </div>
+      </div>
+      <div
+        className="time"
+      >
+        Just nowm
+      </div>
+    </div>
+  </div>
+  <NewInput
+    buttonLabel="post"
+    cancel={[Function]}
+    content={
+      Object {
+        "content": "",
+        "type": "comment",
+      }
+    }
+    editMode={false}
+    focus={[Function]}
+    onChange={[Function]}
+    pictureUrl={null}
+    save={[Function]}
+    submitting={false}
+  />
+</div>
+`;

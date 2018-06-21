@@ -1,3 +1,18 @@
-it('passes', () => {
-  expect(1).toEqual(1);
+import React from 'react';
+import { shallow } from 'enzyme';
+import Header from '../';
+
+describe('Header tests', () => {
+  it('renders without crashing', () => {
+    const wrapper = shallow(<Header
+      menuIconClick={() => {}}
+      title="home"
+      avatarUrl="url"
+      loggedIn
+      counts={{}}
+      onChange={() => {}}
+    />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
 });

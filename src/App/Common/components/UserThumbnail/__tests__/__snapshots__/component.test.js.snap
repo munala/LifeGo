@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserThumbnail tests renders without crashing 1`] = `
+<div
+  className="user-thumbnail"
+>
+  <UserAvatar
+    name="user avatar"
+    onClick={[Function]}
+    src="user.png"
+    style={
+      Object {
+        "display": "flex",
+        "height": 60,
+        "width": 60,
+      }
+    }
+  />
+  <div
+    className="user-actions"
+  >
+    <a
+      className="username"
+      href="#"
+      onClick={[Function]}
+    />
+    <WithStyles(OutlinedButton)
+      label="Remove"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;

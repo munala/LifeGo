@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Items tests renders without crashing 1`] = `
+<div
+  className="items-container"
+>
+  <NewInput
+    buttonLabel="add"
+    cancel={[Function]}
+    content={
+      Object {
+        "content": "",
+        "name": "",
+        "type": "name",
+      }
+    }
+    editMode={false}
+    focus={[Function]}
+    onChange={[Function]}
+    pictureUrl={null}
+    save={[Function]}
+    submitting={false}
+  />
+  <div
+    className="item-container"
+    key="1"
+  >
+    <div
+      className="item-name"
+    >
+      item
+    </div>
+    <CheckBox
+      checked={true}
+      disabled={false}
+      onChange={[Function]}
+    />
+  </div>
+  <div
+    className="items-nav-buttons"
+  />
+</div>
+`;

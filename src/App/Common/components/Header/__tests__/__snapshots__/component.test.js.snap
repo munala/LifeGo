@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header tests renders without crashing 1`] = `
+<Header
+  avatarUrl="url"
+  classes={
+    Object {
+      "margin": "Header-margin-2",
+      "searchInput": "Header-searchInput-1",
+    }
+  }
+  counts={Object {}}
+  loggedIn={true}
+  menuIconClick={[Function]}
+  onChange={[Function]}
+  title="home"
+/>
+`;
