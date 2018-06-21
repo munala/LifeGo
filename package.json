@@ -65,11 +65,11 @@
     "precommit": "eslint fix src/",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --coverage",
+    "test": "react-scripts test --env=jsdom --updateSnapshot --coverage",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "coverage": "react-scripts test --env=jsdom --coverage && npm run coveralls",
+    "coverage": "react-scripts test --updateSnapshot --env=jsdom --coverage && npm run coveralls",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
