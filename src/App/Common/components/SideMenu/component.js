@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import Icon from '@material-ui/core/Icon';
+
 import './styles.css';
 
-const Header = ({
+const SideMenu = ({
   menuItems: { top, bottom },
   activeItem,
 }) => (
   <div className="side-menu-container" >
     <div className="side-menu-items">
       {top.map(item => (
-        <div className="side-menu-item" key={item.icon}>
+        <Link className="side-menu-item" key={item.icon} to={item.to}>
           <Icon
             style={{ color: item.icon === activeItem ? '#00bcd4' : '#888' }}
           >
@@ -24,23 +25,23 @@ const Header = ({
           >
             {item.text}
           </div>
-        </div>
+        </Link>
       ))}
 
       <div className="divider" />
 
       {bottom.map(item => (
-        <div className="side-menu-item" key={item.text}>
+        <Link className="side-menu-item" key={item.text} to={item.to}>
           <div className="item-title-bottom" >{item.text}</div>
-        </div>
+        </Link>
       ))}
     </div>
 
-    <div className="footer">Footer</div>
+    <div className="footer">© 2018 Oliver Munala</div>
   </div>
 );
 
-Header.propTypes = {
+SideMenu.propTypes = {
   menuItems: PropTypes.shape({
     top: PropTypes.arrayOf(PropTypes.shape({})),
     bottom: PropTypes.arrayOf(PropTypes.shape({})),
@@ -48,4 +49,4 @@ Header.propTypes = {
   activeItem: PropTypes.string.isRequired,
 };
 
-export default Header;
+export default SideMenu;

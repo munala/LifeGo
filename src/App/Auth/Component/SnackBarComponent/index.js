@@ -1,0 +1,50 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+
+const SnackbarComponent = ({
+  open,
+  message: {
+    content,
+    success,
+  },
+  closeSnackBar,
+}) => (
+  <Snackbar
+    autoHideDuration={6000}
+    open={open}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+  >
+    <SnackbarContent
+      message={content}
+      style={success ? {} : { backgroundColor: 'red' }}
+      action={[
+        <IconButton
+          key="close"
+          aria-label="Close"
+          color="inherit"
+          onClick={closeSnackBar}
+        >
+          <CloseIcon />
+        </IconButton>,
+      ]}
+    />
+  </Snackbar>
+);
+
+SnackbarComponent.propTypes = {
+  open: PropTypes.bool.isRequired,
+  message: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    success: PropTypes.bool.isRequired,
+  }).isRequired,
+  closeSnackBar: PropTypes.func.isRequired,
+};
+
+export default SnackbarComponent;

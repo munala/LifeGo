@@ -1,75 +1,47 @@
-// @flow
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SideMenu from './Common/components/SideMenu';
-import Header from './Common/components/Header';
+import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Auth from './Auth/Container';
+import SideMenu from './Common/components/SideMenu/container';
+import Header from './Common/components/Header/container';
 import './styles.css';
 
-const BasicExample = () => (
+const Routes = ({ loggedIn }) => (
   <Router>
     <div className="app-container">
       <Header
         avatarUrl={require('../assets/icons/icon.png')} // eslint-disable-line global-require
-        title="Home"
-        loggedIn
-        counts={{
-          userAlerts: {
-            count: 1,
-            icon: 'person',
-            onClick: () => {},
-          },
-          messages: {
-            count: 2,
-            icon: 'message',
-            onClick: () => {},
-          },
-          notifications: {
-            count: 3,
-            icon: 'notifications',
-            onClick: () => {},
-          },
-        }}
+        to="/"
         menuIconClick={() => {}}
         onChange={() => {}}
       />
       <div className="app-body">
         <SideMenu
-          menuItems={{
-            top: [
-              {
-                icon: 'home',
-                text: 'Home',
-                onClick: () => {},
-              },
-              {
-                icon: 'explore',
-                text: 'Discover',
-                onClick: () => {},
-              },
-              {
-                icon: 'list',
-                text: 'My Lists',
-                onClick: () => {},
-              },
-              {
-                icon: 'account_circle',
-                text: 'Profile',
-                onClick: () => {},
-              },
-            ],
-            bottom: [
-              {
-                text: 'Settings',
-                onClick: () => {},
-              },
-            ],
-          }}
           activeItem="home"
         />
-        <div className="app-content" />
+        <div className="app-content" >
+          <Route exact path="/" component={loggedIn ? Home : Discover} />
+          <Route exact path="/home" component={Home} />
+          <Route path="/login" component={props => <Auth {...props} />} />
+          <Route path="/explore" component={Discover} />
+          <Route path="/mylists" component={MyLists} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/settings" component={Settings} />
+        </div>
       </div>
     </div>
   </Router>
 );
 
-export default BasicExample;
+Routes.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+};
+
+const Home = () => (<div>Home</div>);
+const Discover = () => (<div>Discover</div>);
+const MyLists = () => (<div>MyLists</div>);
+const Profile = () => (<div>Profile</div>);
+const Settings = () => (<div>Settings</div>);
+
+export default Routes;

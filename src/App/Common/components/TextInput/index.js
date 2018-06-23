@@ -38,12 +38,12 @@ const TextInput = ({
   <div className="container-input" >
     <TextField
       name={name}
+      type={name === 'password' ? 'password' : 'text'}
       label={label || name}
       select={select}
       className={classes.textField}
       autoFocus={autoFocus}
       placeholder={placeholder}
-      color="primary"
       value={value}
       rows={rows}
       multiline={multiline}

@@ -39,8 +39,8 @@ const loginUser = (user, serviceCall) => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    await localStorage.setItem('token', response);
-    await localStorage.setItem('start', 'false');
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('start', 'false');
 
     await dispatch(loginSuccess({
       response,
@@ -58,8 +58,7 @@ export const login = user => loginUser(user, userService.loginUser);
 export const socialLogin = user => loginUser(user, userService.socialLogin);
 
 export const logout = () => async (dispatch) => {
-  await localStorage.setItem('can_login', 'false');
-  await localStorage.removeItem('token');
+  localStorage.removeItem('token');
 
   await dispatch(logoutUser());
 };

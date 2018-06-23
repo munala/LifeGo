@@ -1,0 +1,75 @@
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+
+import Header from './component';
+import { logout } from '../../../Auth/actions';
+import { styles } from './styles';
+
+const mapStateToProps = ({
+  loggedIn,
+  profile,
+  ...state
+}) => {
+  let count = 0;
+
+  const keys = ['conversations', 'notifications', 'alerts'];
+
+  const counts = {
+    alerts: {
+      count: 1,
+      icon: 'person',
+      onClick: () => {},
+    },
+    conversations: {
+      count: 2,
+      icon: 'message',
+      onClick: () => {},
+    },
+    notifications: {
+      count: 3,
+      icon: 'notifications',
+      onClick: () => {},
+    },
+  };
+
+  keys.forEach((key) => {
+    if (key === 'conversations') {
+      state[key].forEach((conversation) => {
+        let unread = false;
+
+        conversation.messages.forEach((message) => {
+          if (!message.read && message.receiverId === state.profile.id) {
+            unread = true;
+          }
+        });
+
+        if (unread) { count += 1; }
+      });
+    } else {
+      state[key].forEach((item) => {
+        if (!item.read) {
+          count += 1;
+        }
+      });
+    }
+
+    counts[key].count = count;
+    count = 0;
+  });
+
+  return ({
+    loggedIn,
+    profile,
+    counts,
+  });
+};
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({
+    logout,
+  }, dispatch),
+});
+
+export default withRouter(withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Header)));
