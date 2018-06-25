@@ -17,29 +17,26 @@ exports[`NewInput tests renders without crashing 1`] = `
     }
   />
   <WithStyles(TextInput)
-    className="textField"
+    className="text-field"
     disableUnderline={true}
+    name=""
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
     placeholder="type edit"
     style={
       Object {
-        "display": "flex",
+        "fontSize": 14,
       }
     }
     type="text"
     value=""
   />
-  <WithStyles(OutlinedButton)
-    disabled={false}
-    label="name"
+  <a
+    className="submit-button"
     onClick={[Function]}
-    style={
-      Object {
-        "display": "flex",
-      }
-    }
-  />
+  >
+    NAME
+  </a>
 </div>
 `;

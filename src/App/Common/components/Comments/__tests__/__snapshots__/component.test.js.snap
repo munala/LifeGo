@@ -5,33 +5,45 @@ exports[`Comments tests renders without crashing 1`] = `
   className="comments-container"
 >
   <div
-    className="comment-container"
-    key="1"
+    className="comments"
   >
-    <UserAvatar
-      name="user avatar"
-      onClick={[Function]}
-      src="user.png"
-    />
     <div
-      className="comment-body"
+      className="comment-container"
+      key="1"
     >
-      <div>
-        <a
-          className="comment-user"
-          href="#"
-          onClick={[Function]}
-        />
-        <div
-          className="comment-content"
-        >
-          comment
-        </div>
-      </div>
+      <UserAvatar
+        name="user avatar"
+        onClick={[Function]}
+        src="user.png"
+        style={
+          Object {
+            "display": "flex",
+            "height": 30,
+            "width": 30,
+          }
+        }
+      />
       <div
-        className="time"
+        className="comment"
       >
-        Just nowm
+        <div
+          className="comment-body"
+        >
+          <span
+            className="comment-user"
+            onClick={[Function]}
+          />
+          <span
+            className="comment-content"
+          >
+            comment
+          </span>
+        </div>
+        <div
+          className="time"
+        >
+          Just now
+        </div>
       </div>
     </div>
   </div>
@@ -46,6 +58,7 @@ exports[`Comments tests renders without crashing 1`] = `
     }
     editMode={false}
     focus={[Function]}
+    name="comment"
     onChange={[Function]}
     pictureUrl={null}
     save={[Function]}

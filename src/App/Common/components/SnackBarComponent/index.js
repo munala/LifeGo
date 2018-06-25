@@ -4,6 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import FlatButton from '../FlatButton';
 
 const SnackbarComponent = ({
   open,
@@ -12,6 +13,7 @@ const SnackbarComponent = ({
     success,
   },
   closeSnackBar,
+  undo,
 }) => (
   <Snackbar
     autoHideDuration={6000}
@@ -25,14 +27,21 @@ const SnackbarComponent = ({
       message={content}
       style={success ? {} : { backgroundColor: 'red' }}
       action={[
-        <IconButton
-          key="close"
-          aria-label="Close"
-          color="inherit"
-          onClick={closeSnackBar}
-        >
-          <CloseIcon />
-        </IconButton>,
+        undo ?
+          <FlatButton
+            key="undo"
+            label="undo"
+            style={{ color: 'red' }}
+            onClick={closeSnackBar}
+          /> :
+          <IconButton
+            key="close"
+            aria-label="Close"
+            color="inherit"
+            onClick={closeSnackBar}
+          >
+            <CloseIcon />
+          </IconButton>,
       ]}
     />
   </Snackbar>
@@ -45,6 +54,11 @@ SnackbarComponent.propTypes = {
     success: PropTypes.bool.isRequired,
   }).isRequired,
   closeSnackBar: PropTypes.func.isRequired,
+  undo: PropTypes.string,
+};
+
+SnackbarComponent.defaultProps = {
+  undo: null,
 };
 
 export default SnackbarComponent;

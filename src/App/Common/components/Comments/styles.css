@@ -1,10 +1,19 @@
 .comments-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
   font-family: sans-serif;
-  font-size: 14px;
+  font-size: 12px;
+  flex-grow: 1;
+}
+
+.comments {
+  width: 100%;
+  overflow: scroll;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .comment-container {
@@ -12,38 +21,45 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 5px;
 }
 
+
 .comment-body {
-  display: flex;
   background-color: #f7f7f7;
   border-radius: 10px;
   overflow: hidden;
-  padding: 5px;
+  padding: 10px;
   margin-left: 5px;
 }
 
 .comment-user {
-  display: flex;
   color: #555;
   font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .comment-content {
-  font-size: 14px;
-  display: flex;
+  font-size: 12px;
   color: #666;
+  margin-left: 5px;
 }
 
 .time {
   display: flex;
   color: #ddd;
-  font-size: 12px;
+  font-size: 10px;
   align-self: flex-start;
   margin-left: 10px;
   margin-bottom: 5px;
+}
+
+.nav-link {
+  margin: 5px;
+}
+.nav-link:hover {
+  text-decoration: underline;
 }
 
 a {
@@ -51,6 +67,9 @@ a {
   color: #777
 }
 
-a:hover {
-  text-decoration: underline;
+.empty-text {
+  display: flex;
+  justify-content: center;
+  color:#666;
+  text-align: center;
 }

@@ -3,17 +3,21 @@ import likeService from '../api/likeApi';
 import * as apiCallActions from './apiCallActions';
 import { resetError } from './bucketlistActions';
 
-export const likeSuccess = (bucketlist, like) => ({
+const dataTypes = ['myData', 'allData', 'exploreData'];
+
+export const likeSuccess = (bucketlist, like, dataType) => ({
   type: types.LIKE,
   like,
   bucketlist,
   message: '',
+  dataType,
 });
 
-export const unlikeSuccess = like => ({
+export const unlikeSuccess = (like, dataType) => ({
   type: types.UNLIKE,
   message: '',
   like,
+  dataType,
 });
 
 export const like = bucketlist => async (dispatch) => {
@@ -22,7 +26,9 @@ export const like = bucketlist => async (dispatch) => {
     dispatch(apiCallActions.apiCallError(response.error));
     resetError(dispatch);
   } else {
-    dispatch(likeSuccess(bucketlist, response));
+    dataTypes.forEach((dataType) => {
+      dispatch(likeSuccess(bucketlist, response, dataType));
+    });
   }
 };
 
@@ -32,6 +38,8 @@ export const unlike = likes => async (dispatch) => {
     dispatch(apiCallActions.apiCallError(response.error));
     resetError(dispatch);
   } else {
-    dispatch(unlikeSuccess(likes));
+    dataTypes.forEach((dataType) => {
+      dispatch(unlikeSuccess(likes, dataType));
+    });
   }
 };

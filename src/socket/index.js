@@ -3,12 +3,11 @@ import * as messageActions from '../App/Chat/actions';
 import * as commentActions from '../App/Common/actions/commentActions';
 import * as likeActions from '../App/Common/actions/likeActions';
 import * as notificationActions from '../App/Notifications/actions';
-import homeActions from '../App/Home/actions';
-import myListActions from '../App/MyLists/actions';
+import * as bucketlistActions from '../App/Common/actions/bucketlistActions';
 import * as userActions from '../App/Profile/actions';
 import * as userAlertActions from '../App/UserAlerts/actions';
 
-const bucketlistActions = { ...homeActions, myListActions };
+const dataTypes = ['myData', 'allData', 'exploreData'];
 
 export default (store) => {
   const socket = SocketIOClient(`${process.env.REACT_APP_API_HOST}/`);
@@ -53,16 +52,12 @@ export default (store) => {
     const storeData = store.getState();
     let notify;
 
-    storeData.data.bucketlists.forEach((bucketlist) => {
-      if (bucketlist.id === data.notification.bucketlistId) {
-        notify = true;
-      }
-    });
-
-    storeData.allData.bucketlists.forEach((bucketlist) => {
-      if (bucketlist.id === data.notification.bucketlistId) {
-        notify = true;
-      }
+    dataTypes.forEach((dataType) => {
+      storeData.data[dataType].bucketlists.forEach((bucketlist) => {
+        if (bucketlist.id === data.notification.bucketlistId) {
+          notify = true;
+        }
+      });
     });
 
     if (
@@ -80,7 +75,9 @@ export default (store) => {
     if (data.type === 'update') {
       storeData.profile.friends.forEach((friend) => {
         if (friend.id === data.bucketlist.userId) {
-          store.dispatch(bucketlistActions.updateBucketlistSuccess(data.bucketlist));
+          dataTypes.forEach((dataType) => {
+            store.dispatch(bucketlistActions.updateBucketlistSuccess(data.bucketlist, dataType));
+          });
         }
       });
     }
@@ -88,7 +85,9 @@ export default (store) => {
     if (data.type === 'delete') {
       storeData.profile.friends.forEach((friend) => {
         if (friend.id === data.bucketlist.userId) {
-          store.dispatch(bucketlistActions.deleteBucketlistSuccess(data.bucketlist));
+          dataTypes.forEach((dataType) => {
+            store.dispatch(bucketlistActions.deleteBucketlistSuccess(data.bucketlist, dataType));
+          });
         }
       });
     }
@@ -98,8 +97,8 @@ export default (store) => {
     const storeData = store.getState();
 
     if (data.type === 'new') {
-      [storeData.data, storeData.allData].forEach((list) => {
-        list.bucketlists.forEach((bucketlist) => {
+      dataTypes.forEach((dataType) => {
+        storeData.data[dataType].bucketlists.forEach((bucketlist) => {
           if (
             data.sourceUserId !== storeData.profile.id &&
             bucketlist.id === data.comment.bucketlistId
@@ -109,6 +108,7 @@ export default (store) => {
                 id: data.comment.bucketlistId,
               },
               data.comment,
+              dataType,
             ));
           }
         });
@@ -116,8 +116,8 @@ export default (store) => {
     }
 
     if (data.type === 'update') {
-      [storeData.data, storeData.allData].forEach((list) => {
-        list.bucketlists.forEach((bucketlist) => {
+      dataTypes.forEach((dataType) => {
+        storeData.data[dataType].bucketlists.forEach((bucketlist) => {
           if (
             data.sourceUserId !== storeData.profile.id &&
             bucketlist.id === data.comment.bucketlistId
@@ -127,6 +127,7 @@ export default (store) => {
                 id: data.comment.bucketlistId,
               },
               data.comment,
+              dataType,
             ));
           }
         });
@@ -134,11 +135,15 @@ export default (store) => {
     }
 
     if (data.type === 'delete') {
-      [storeData.data, storeData.allData].forEach((list) => {
-        list.bucketlists.forEach((bucketlist) => {
+      dataTypes.forEach((dataType) => {
+        storeData.data[dataType].bucketlists.forEach((bucketlist) => {
           bucketlist.comments.forEach((comm) => {
             if (comm.id === data.comment.id) {
-              store.dispatch(commentActions.deleteCommentSuccess(bucketlist, data.comment));
+              store.dispatch(commentActions.deleteCommentSuccess(
+                bucketlist,
+                data.comment,
+                dataType,
+              ));
             }
           });
         });
@@ -150,8 +155,8 @@ export default (store) => {
     const storeData = store.getState();
 
     if (data.type === 'like') {
-      [storeData.data, storeData.allData].forEach((list) => {
-        list.bucketlists.forEach((bucketlist) => {
+      dataTypes.forEach((dataType) => {
+        storeData.data[dataType].bucketlists.forEach((bucketlist) => {
           if (
             data.like.likerId !== storeData.profile.id &&
             bucketlist.id === data.like.bucketlistId
@@ -161,6 +166,7 @@ export default (store) => {
                 id: data.like.bucketlistId,
               },
               data.like,
+              dataType,
             ));
           }
         });
@@ -168,7 +174,9 @@ export default (store) => {
     }
 
     if (data.type === 'unlike') {
-      store.dispatch(likeActions.unlikeSuccess(data.like));
+      dataTypes.forEach((dataType) => {
+        store.dispatch(likeActions.unlikeSuccess(data.like, dataType));
+      });
     }
   });
 

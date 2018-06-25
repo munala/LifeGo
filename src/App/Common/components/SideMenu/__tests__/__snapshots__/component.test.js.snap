@@ -1,20 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SideMenu tests renders without crashing 1`] = `
-<div
-  className="side-menu-container"
->
-  <div
-    className="side-menu-items"
-  >
-    <div
-      className="divider"
-    />
-  </div>
-  <div
-    className="footer"
-  >
-    Footer
-  </div>
-</div>
-`;
+exports[`SideMenu tests renders without crashing 1`] = `<Route />`;

@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import Avatar from '../Avatar';
 import RaisedButton from '../RaisedButton';
+import avatar from '../../../../assets/images/user.png';
 import { otherStyles } from './styles';
 import './styles.css';
 
@@ -17,12 +18,38 @@ class Header extends Component {
   state = {
     anchorEl: null,
     pathname: this.props.location.pathname,
+    loggedIn: this.props.loggedIn, // eslint-disable-line react/no-unused-state
+    profile: this.props.profile, // eslint-disable-line react/no-unused-state
   };
 
-  static getDerivedStateFromProps = ({ location: { pathname } }, state) => ({
-    ...state,
-    pathname,
-  })
+  static getDerivedStateFromProps = ({
+    location: { pathname },
+    loggedIn,
+    actions: {
+      getProfile, getNotifications, getAlerts, getConversations,
+    },
+    profile,
+  }, state) => {
+    if (loggedIn && profile.id !== state.profile.id) {
+      getProfile();
+      getNotifications();
+      getAlerts();
+      getConversations();
+    }
+
+    return ({
+      ...state,
+      profile,
+      pathname,
+    });
+  }
+
+  componentDidMount = () => {
+    const { loggedIn, profile: { id } } = this.props;
+    if (loggedIn && !id) {
+      this.props.actions.getProfile();
+    }
+  }
 
   handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
@@ -59,7 +86,7 @@ class Header extends Component {
     const titles = {
       '/': 'Home',
       '/home': 'Home',
-      '/explore': 'Discover',
+      '/explore': 'Explore',
       '/mylists': 'My Lists',
       '/profile': 'Profile',
       '/settings': 'Settings',
@@ -129,7 +156,7 @@ class Header extends Component {
             }
 
             <Avatar
-              src={pictureUrl || require('../../../../assets/images/user.png')} // eslint-disable-line global-require
+              src={pictureUrl || avatar}
               onClick={this.handleClick}
               style={otherStyles.avatar}
             />
@@ -172,10 +199,12 @@ Header.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
+    id: PropTypes.number,
     pictureUrl: PropTypes.string,
   }).isRequired,
   actions: PropTypes.shape({
     logout: PropTypes.func.isRequired,
+    getProfile: PropTypes.func.isRequired,
   }).isRequired,
   to: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,

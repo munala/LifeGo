@@ -8,20 +8,21 @@ import './styles.css';
 const SideMenu = ({
   menuItems: { top, bottom },
   activeItem,
+  location: { pathname },
 }) => (
   <div className="side-menu-container" >
     <div className="side-menu-items">
       {top.map(item => (
         <Link className="side-menu-item" key={item.icon} to={item.to}>
           <Icon
-            style={{ color: item.icon === activeItem ? '#00bcd4' : '#888' }}
+            style={{ color: item.to === pathname ? '#00bcd4' : '#888' }}
           >
             {item.icon}
           </Icon>
 
           <div
             className="item-title"
-            style={{ color: item.icon === activeItem ? '#00bcd4' : '#3F3F3F' }}
+            style={{ color: item.to === pathname ? '#00bcd4' : '#3F3F3F' }}
           >
             {item.text}
           </div>
@@ -32,7 +33,12 @@ const SideMenu = ({
 
       {bottom.map(item => (
         <Link className="side-menu-item" key={item.text} to={item.to}>
-          <div className="item-title-bottom" >{item.text}</div>
+          <div
+            className="item-title-bottom"
+            style={{ color: item.to === pathname ? '#00bcd4' : '#3F3F3F' }}
+          >
+            {item.text}
+          </div>
         </Link>
       ))}
     </div>
@@ -45,6 +51,9 @@ SideMenu.propTypes = {
   menuItems: PropTypes.shape({
     top: PropTypes.arrayOf(PropTypes.shape({})),
     bottom: PropTypes.arrayOf(PropTypes.shape({})),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
   activeItem: PropTypes.string.isRequired,
 };

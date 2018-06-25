@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
-import { renderSuggestion, cssClasses } from './autoCompleteProps';
+import { renderSuggestion } from './autoCompleteProps';
 import '../styles.css';
 
 const LocationField = ({
@@ -15,18 +15,18 @@ const LocationField = ({
     onSelect={value => onChange({ value, type: 'location' })}
   >
     {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-      <div className={cssClasses.root}>
+      <div className="location-container">
         <input
           {...getInputProps({
             placeholder: 'type location',
-            className: cssClasses.input,
+            className: 'location-input',
           })}
         />
-        <div className="autocomplete-dropdown-container">
+        <div className="location-drop-down">
           {suggestions.map(suggestion => renderSuggestion(suggestion, getSuggestionItemProps))}
         </div>
       </div>
-)}
+    )}
   </PlacesAutocomplete>
 );
 LocationField.propTypes = {

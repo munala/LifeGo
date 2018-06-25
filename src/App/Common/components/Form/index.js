@@ -22,8 +22,19 @@ class Form extends BaseClass {
     imageUrl: this.props.bucketlist.pictureUrl || '',
   };
 
+  static getDerivedStateFromProps = ({ bucketlist }, state) => {
+    if (bucketlist.updatedAt !== state.bucketlist.updatedAt) {
+      return ({
+        ...state,
+        bucketlist,
+        imageUrl: bucketlist.pictureUrl || '',
+      });
+    }
+    return state;
+  }
+
   render() {
-    const { onClose, open } = this.props;
+    const { onClose, open, bucketlist: bucketList } = this.props;
 
     const {
       bucketlist, error, disabled, saving, imageUrl,
@@ -42,14 +53,16 @@ class Form extends BaseClass {
               name="name"
               placeholder="name of your bucketlist"
               value={bucketlist.name}
+              style={{ display: 'flex', width: 460 }}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'name' })}
               error={error}
             />
             <TextInput
               name="description"
               placeholder="tell people more about your bucketlist"
-              value={bucketlist.description}
+              value={bucketlist.description || ''}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'description' })}
+              style={{ display: 'flex', width: 460 }}
               multiline
               rows={4}
               rowsMax={4}
@@ -57,14 +70,15 @@ class Form extends BaseClass {
             <DatePicker
               label="due date"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'dueDate' })}
-              defaultValue={bucketlist.dueDate}
+              defaultValue={bucketlist.dueDate || ''}
             />
             <TextInput
               name="category"
-              value={bucketlist.category}
+              value={bucketlist.category || ''}
               select
               label="select category"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'category' })}
+              style={{ display: 'flex', width: 460 }}
             >
               {categories.map(category => (
                 <MenuItem key={category} value={category}>
@@ -82,6 +96,21 @@ class Form extends BaseClass {
               imageUrl={imageUrl}
               removePhoto={this.removePhoto}
             />
+            <TextInput
+              name="privacy"
+              value={bucketlist.privacy || ''}
+              select
+              label="privacy"
+              onChange={({ target: { value } }) => this.onChange({ value, type: 'privacy' })}
+              style={{ display: 'flex', width: 460 }}
+            >
+              {['everyone', 'friends', 'no one'].map(setting => (
+                <MenuItem key={setting} value={setting}>
+                  {setting}
+                </MenuItem>
+              ))}
+            </TextInput>
+
           </div>
           <div className="actions">
             <FlatButton
@@ -90,7 +119,7 @@ class Form extends BaseClass {
               onClick={onClose}
             />
             <FlatButton
-              label="add"
+              label={bucketList ? 'save' : 'add'}
               keyboardFocused
               onClick={this.onSave}
               disabled={saving || disabled}

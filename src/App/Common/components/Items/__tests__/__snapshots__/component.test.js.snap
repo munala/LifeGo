@@ -16,6 +16,7 @@ exports[`Items tests renders without crashing 1`] = `
     }
     editMode={false}
     focus={[Function]}
+    name="item"
     onChange={[Function]}
     pictureUrl={null}
     save={[Function]}

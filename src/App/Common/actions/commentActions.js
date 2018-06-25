@@ -2,28 +2,33 @@ import * as types from '../constants';
 import commentService from '../api/commentApi';
 import * as apiCallActions from './apiCallActions';
 
-export const addCommentSuccess = (bucketlist, comment) => ({
+const dataTypes = ['myData', 'allData', 'exploreData'];
+
+export const addCommentSuccess = (bucketlist, comment, dataType) => ({
   type: types.ADD_COMMENT,
   comment,
   bucketlist,
   message: '',
   screen: 'others',
+  dataType,
 });
 
-export const editCommentSuccess = (bucketlist, comment) => ({
+export const editCommentSuccess = (bucketlist, comment, dataType) => ({
   type: types.EDIT_COMMENT,
   comment,
   bucketlist,
   message: '',
   screen: 'others',
+  dataType,
 });
 
-export const deleteCommentSuccess = (bucketlist, comment) => ({
+export const deleteCommentSuccess = (bucketlist, comment, dataType) => ({
   type: types.DELETE_COMMENT,
   bucketlist,
   comment,
   message: '',
   screen: 'others',
+  dataType,
 });
 
 export const addComment = (bucketlist, comment) => async (dispatch) => {
@@ -39,7 +44,9 @@ export const addComment = (bucketlist, comment) => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(addCommentSuccess(bucketlist, response));
+    dataTypes.forEach((dataType) => {
+      dispatch(addCommentSuccess(bucketlist, response, dataType));
+    });
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -60,7 +67,9 @@ export const updateComment = (bucketlist, comment) => async (dispatch) => {
       screen: 'others',
     }));
   } else {
-    dispatch(editCommentSuccess(bucketlist, response));
+    dataTypes.forEach((dataType) => {
+      dispatch(editCommentSuccess(bucketlist, response, dataType));
+    });
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -81,7 +90,9 @@ export const deleteComment = (bucketlist, comment) => async (dispatch) => {
       screen: 'others',
     }));
   } else {
-    dispatch(deleteCommentSuccess(bucketlist, comment));
+    dataTypes.forEach((dataType) => {
+      dispatch(deleteCommentSuccess(bucketlist, comment, dataType));
+    });
 
     dispatch(apiCallActions.resetMessage());
   }

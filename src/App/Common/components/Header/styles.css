@@ -4,7 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 64px;
+  min-height: 64px;
   align-items: center;
   box-shadow: 0 0 3px 3px rgba(0,0,0,0.2);
   font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
@@ -75,6 +75,7 @@
   color: #676767;
   font-size: 20px;
   text-decoration: none;
+  min-width: 70px;
 }
 
 .search-input {

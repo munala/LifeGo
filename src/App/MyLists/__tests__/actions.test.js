@@ -1,8 +1,10 @@
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
-import bucketlistActions from '../actions';
-import * as types from '../constants';
+import * as bucketlistActions from '../../Common/actions/bucketlistActions';
+import * as types from '../../Common/constants';
+
+const dataType = 'myData';
 
 jest.mock('../../Common/api/bucketlistApi', (() => ({
   getBucketlists: () => Promise.resolve({
@@ -26,11 +28,13 @@ describe('Bucketlist action creators', () => {
 
     const expectedAction = {
       type: types.LOAD_BUCKETLISTS_SUCCESS,
-      data: bucketlists,
+      data: { bucketlists },
       message: '',
+      dataType,
+      screen: 'explore',
     };
 
-    const action = bucketlistActions.loadBucketlistsSuccess(bucketlists);
+    const action = bucketlistActions.loadBucketlistsSuccess({ data: { bucketlists }, dataType });
 
     expect(action).toEqual(expectedAction);
   });
@@ -54,6 +58,7 @@ describe('Bucketlist actions', () => {
           body: {
             bucketlists: [{ id: 1, name: 'oliver' }],
             message: '',
+            dataType,
           },
         },
       ];

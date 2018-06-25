@@ -1,4 +1,4 @@
-import * as types from './constants';
+import * as types from '../Common/constants';
 
 const initialState = {
   bucketlists: [],

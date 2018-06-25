@@ -45,9 +45,9 @@ describe('Comments tests', () => {
   });
 
   it('handles going to profile', () => {
-    const comment = wrapper.find('a');
+    const comment = wrapper.find('span');
 
-    comment.props().onClick();
+    comment.first().props().onClick();
 
     expect(goToProfile).toHaveBeenCalledTimes(1);
   });

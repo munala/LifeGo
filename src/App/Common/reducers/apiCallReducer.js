@@ -13,11 +13,9 @@ const initialState = {
   loader: 0,
 };
 
-function actionTypeEndsInSuccess(actionType) {
-  return actionType.substring(actionType.length - 8) === '_SUCCESS';
-}
+const actionTypeEndsInSuccess = actionType => actionType.substring(actionType.length - 8) === '_SUCCESS';
 
-export default function apiCallReducer(state = initialState, action) {
+export default (state = initialState, action) => {
   const screen = action.screen || 'others';
   if (action.type === types.BEGIN_API_CALL) {
     return {
@@ -34,4 +32,4 @@ export default function apiCallReducer(state = initialState, action) {
     };
   }
   return state;
-}
+};

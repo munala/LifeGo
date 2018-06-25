@@ -22,6 +22,12 @@ exports[`Form tests renders without crashing 1`] = `
         name="name"
         onChange={[Function]}
         placeholder="name of your bucketlist"
+        style={
+          Object {
+            "display": "flex",
+            "width": 460,
+          }
+        }
         value=""
       />
       <WithStyles(TextInput)
@@ -31,6 +37,12 @@ exports[`Form tests renders without crashing 1`] = `
         placeholder="tell people more about your bucketlist"
         rows={4}
         rowsMax={4}
+        style={
+          Object {
+            "display": "flex",
+            "width": 460,
+          }
+        }
         value=""
       />
       <WithStyles(DatePicker)
@@ -43,6 +55,12 @@ exports[`Form tests renders without crashing 1`] = `
         name="category"
         onChange={[Function]}
         select={true}
+        style={
+          Object {
+            "display": "flex",
+            "width": 460,
+          }
+        }
         value=""
       >
         <WithStyles(MenuItem)
@@ -174,6 +192,7 @@ exports[`Form tests renders without crashing 1`] = `
             "dueDate": "",
             "location": "",
             "name": "",
+            "privacy": "everyone",
           }
         }
         onChange={[Function]}
@@ -186,12 +205,45 @@ exports[`Form tests renders without crashing 1`] = `
             "dueDate": "",
             "location": "",
             "name": "",
+            "privacy": "everyone",
           }
         }
         changePhoto={[Function]}
         imageUrl=""
         removePhoto={[Function]}
       />
+      <WithStyles(TextInput)
+        label="privacy"
+        name="privacy"
+        onChange={[Function]}
+        select={true}
+        style={
+          Object {
+            "display": "flex",
+            "width": 460,
+          }
+        }
+        value="everyone"
+      >
+        <WithStyles(MenuItem)
+          key="everyone"
+          value="everyone"
+        >
+          everyone
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="friends"
+          value="friends"
+        >
+          friends
+        </WithStyles(MenuItem)>
+        <WithStyles(MenuItem)
+          key="no one"
+          value="no one"
+        >
+          no one
+        </WithStyles(MenuItem)>
+      </WithStyles(TextInput)>
     </div>
     <div
       className="actions"
@@ -208,7 +260,7 @@ exports[`Form tests renders without crashing 1`] = `
       <WithStyles(FlatButton)
         disabled={true}
         keyboardFocused={true}
-        label="add"
+        label="save"
         onClick={[Function]}
       />
     </div>

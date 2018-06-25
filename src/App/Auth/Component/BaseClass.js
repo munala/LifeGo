@@ -41,7 +41,7 @@ class BaseClass extends Component {
 
         const submittedUser = { ...user };
         delete submittedUser['display name'];
-        submittedUser.displayName = this.titleCase(user['display name']).trim();
+        submittedUser.displayName = this.titleCase(user['display name']);
 
         if (valid) {
           this.sendRequest(submittedUser);
@@ -50,20 +50,24 @@ class BaseClass extends Component {
     }
 
     titleCase = (name) => {
-      let [first, middle, last] = name.split(' ');
-      if (first) {
-        first = `${first.charAt(0).toUpperCase()}${first.substr(1, first.length - 1)}`;
+      if (name) {
+        let [first, middle, last] = name.trim().split(' ');
+        if (first) {
+          first = `${first.charAt(0).toUpperCase()}${first.substr(1, first.length - 1)}`;
+        }
+
+        if (middle) {
+          middle = `${middle.charAt(0).toUpperCase()}${middle.substr(1, middle.length - 1)}`;
+        }
+
+        if (last) {
+          last = `${last.charAt(0).toUpperCase()}${last.substr(1, last.length - 1)}`;
+        }
+
+        return `${first || ''} ${last || ''} ${middle || ''}`;
       }
 
-      if (middle) {
-        middle = `${middle.charAt(0).toUpperCase()}${middle.substr(1, middle.length - 1)}`;
-      }
-
-      if (last) {
-        last = `${last.charAt(0).toUpperCase()}${last.substr(1, last.length - 1)}`;
-      }
-
-      return `${first || ''} ${last || ''} ${middle || ''}`;
+      return name;
     }
 
     sendRequest = async (user) => {
@@ -111,24 +115,26 @@ class BaseClass extends Component {
     }
 
     socialLogin = async (data) => {
-      const {
-        email,
-        name: displayName,
-        id: confirm,
-        id: password,
-        profilePicURL: pictureUrl,
-      } = data._profile; // eslint-disable-line no-underscore-dangle
+      if (data._profile) { // eslint-disable-line no-underscore-dangle
+        const {
+          email,
+          name: displayName,
+          id: confirm,
+          id: password,
+          profilePicURL: pictureUrl,
+        } = data._profile; // eslint-disable-line no-underscore-dangle
 
-      const user = {
-        email,
-        password,
-        confirm,
-        displayName,
-        pictureUrl,
-        social: true,
-      };
+        const user = {
+          email,
+          password,
+          confirm,
+          displayName,
+          pictureUrl,
+          social: true,
+        };
 
-      this.props.actions.socialLogin(user);
+        this.props.actions.socialLogin(user);
+      }
     }
 
     resetPassword = () => {

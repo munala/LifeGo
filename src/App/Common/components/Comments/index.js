@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import NewInput from '../NewInput';
 import BaseClass from './BaseClass';
+import avatar from '../../../../assets/images/user.png';
 import { setTime } from '../../../../utils';
 import './styles.css';
 
@@ -22,40 +23,38 @@ class Comments extends BaseClass {
     editMode: false,
   }
 
-  renderComments = ({ comments, mode, goToProfile }) => comments.map(comment => (
-    <div key={comment.id} className="comment-container">
-      <Avatar src={comment.userPictureUrl
-        ? {
-          uri: (comment.userPictureUrl.replace((
-            comment.userPictureUrl.includes('https://')
-            ? 'https://'
-            : 'http://'), 'https://')),
-        }
-        : require('../../../../assets/images/user.png') // eslint-disable-line global-require
+  renderComments = ({ comments, mode, goToProfile }) => comments
+    .slice(this.state.page * 8, (this.state.page * 8) + 8)
+    .map(comment => (
+      <div key={comment.id} className="comment-container">
+        <Avatar
+          src={comment.userPictureUrl
+        ? comment.userPictureUrl
+        : avatar // eslint-disable-line global-require
       }
-      />
-      <div className="comment-body">
-        <div >
-          <a href="#" onClick={() => goToProfile({ id: comment.senderId })} className="comment-user">
-            {comment.user}
-          </a>
-          <div className="comment-content">
-            {comment.content}
+          style={{ display: 'flex', height: 30, width: 30 }}
+        />
+        <div className="comment">
+          <div className="comment-body">
+            <span onClick={() => goToProfile({ id: comment.senderId })} className="comment-user">
+              {comment.user}
+            </span>
+            <span className="comment-content">
+              {comment.content}
+            </span>
+          </div>
+          <div className="time">
+            {mode && `${setTime(comment).createdAt}${setTime(comment).time}`}
           </div>
         </div>
-        <div className="time">
-          {mode && `${setTime(comment).createdAt}${setTime(comment).time}`}
-        </div>
       </div>
-
-    </div>
-  ));
+    ));
 
   render() {
     const {
       bucketlist: {
         comments,
-      }, goToProfile, mode,
+      }, goToProfile, mode, profile,
     } = this.props;
 
     const {
@@ -66,22 +65,26 @@ class Comments extends BaseClass {
 
     return (
       <div className="comments-container">
-        {
-          comments.length > 0 && page > 0 &&
-          <div onClick={() => this.navigatePage('previous')}>
-            <a href="#">more comments</a>
-          </div>
-        }
+        <div className="comments">
+          {
+            comments.length > 0 && page > 0 &&
+            <div className="nav-link" onClick={() => this.navigatePage('previous')}>
+              <a href="#">more comments</a>
+            </div>
+          }
 
-        {this.renderComments({ comments, goToProfile, mode })}
+          {this.renderComments({ comments, goToProfile, mode })}
 
-        {
-          comments.length > 0 && page < lastPage &&
-          <div onClick={() => this.navigatePage('next')}>
-            <a href="#">previous comments</a>
-          </div>
-        }
+          {
+            comments.length > 0 && page < lastPage &&
+            <div className="nav-link" onClick={() => this.navigatePage('next')}>
+              <a href="#">previous comments</a>
+            </div>
+          }
+        </div>
         <NewInput
+          name="comment"
+          pictureUrl={profile.pictureUrl}
           content={{ ...comment, type: 'comment' }}
           onChange={this.onChange}
           save={this.saveComment}

@@ -39,7 +39,7 @@ const TextInput = ({
     <TextField
       name={name}
       type={name === 'password' ? 'password' : 'text'}
-      label={label || name}
+      label={label || name || ''}
       select={select}
       className={classes.textField}
       autoFocus={autoFocus}
@@ -51,7 +51,9 @@ const TextInput = ({
       onChange={onChange}
       disabled={disabled}
       error={error}
-      InputProps={{ disableUnderline, style, onKeyPress }}
+      InputProps={{
+       disableUnderline, style, onKeyPress,
+      }}
       style={style}
     >
       {children && children}

@@ -17,6 +17,7 @@ describe('Form tests', () => {
     category: '',
     dueDate: '',
     location: '',
+    privacy: 'everyone',
   };
 
   beforeAll(() => {
@@ -59,11 +60,6 @@ describe('Form tests', () => {
     // adding photo
     photoField.props().changePhoto({ target: { files: [image] } });
     expect(wrapper.instance().state.image).toEqual(image);
-
-    // uploading photo
-    const buttons = wrapper.find('WithStyles(FlatButton)');
-    buttons.last().props().onClick();
-    expect(axios.post).toHaveBeenCalledTimes(1);
 
     // remove photo
     photoField.props().removePhoto();

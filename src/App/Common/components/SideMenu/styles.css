@@ -1,10 +1,12 @@
 .side-menu-container {
-  width:210px;
+  min-width:220px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
   padding-right: 24px;
+  font-size: 14px;
+  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
 
 .side-menu-items {

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import Avatar from '../Avatar';
 import TextInput from '../TextInput';
-import OutlinedButton from '../OutlinedButton';
 import './styles.css';
 
 const NewInput = ({
+  name,
   pictureUrl,
   content,
   focus,
@@ -25,25 +25,26 @@ const NewInput = ({
       }
     />
     <TextInput
+      name=""
       type="text"
       placeholder={`type ${content.type}`}
       disableUnderline
       onFocus={focus}
       value={content.content || ''}
       onChange={onChange}
-      className="textField"
-      style={{ display: 'flex' }}
+      className="text-field"
+      style={{ fontSize: 14 }}
       onKeyPress={(e) => {
         if (e.key === 'Enter') { save(); }
       }
 }
     />
-    <OutlinedButton
-      onClick={save}
-      disabled={submitting}
-      label={buttonLabel}
-      style={{ display: 'flex' }}
-    />
+    <a
+      className="submit-button"
+      onClick={submitting ? () => {} : save}
+    >
+      {buttonLabel.toUpperCase()}
+    </a>
     {
       editMode &&
       <div onClick={cancel}>
@@ -65,6 +66,7 @@ NewInput.propTypes = {
   submitting: PropTypes.bool.isRequired,
   cancel: PropTypes.func,
   buttonLabel: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 NewInput.defaultProps = {

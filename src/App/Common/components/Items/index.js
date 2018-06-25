@@ -35,7 +35,7 @@ class Items extends BaseClass {
     ))
 
   render = () => {
-    const { bucketlist } = this.props;
+    const { bucketlist, profile } = this.props;
     const {
       page, editMode, submitting, item,
     } = this.state;
@@ -50,6 +50,8 @@ class Items extends BaseClass {
               content: item.name,
               type: 'name',
             }}
+            pictureUrl={profile.pictureUrl}
+            name="item"
             onChange={this.onChange}
             save={this.onSave}
             submitting={submitting}
@@ -57,16 +59,23 @@ class Items extends BaseClass {
           />
         }
 
-        {this.renderItems(bucketlist)}
+        {this.renderItems(bucketlist) }
+
+        {
+          bucketlist.items.length === 0 &&
+          this.props.bucketlist.userId !== this.props.profile.id &&
+          this.props.mode &&
+          <div className="empty-text">no items</div>
+        }
 
         <div className="items-nav-buttons">
           {
             bucketlist.items.length > 0 && page > 0 &&
-            <a href="#" onClick={() => this.navigatePage('previous')}>previous</a>
+            <a href="#" className="link" onClick={() => this.navigatePage('previous')}>previous</a>
           }
           {
             bucketlist.items.length > 0 && bucketlist.items.length > ((page + 1) * 5) &&
-            <a href="#" onClick={() => this.navigatePage('next')}>next</a>
+            <a href="#" className="link" onClick={() => this.navigatePage('next')}>next</a>
           }
         </div>
       </div>

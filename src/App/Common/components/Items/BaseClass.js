@@ -33,7 +33,11 @@ class BaseClass extends Component {
     }
 
     if (!response.error) {
-      // TODO
+      this.setState({
+        item: {
+          name: '',
+        },
+      });
     }
   }
 

@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unused-state */
 import { Component } from 'react';
-import axios from 'axios';
 
 import propTypes from './propTypes';
 
@@ -59,16 +58,27 @@ class BaseClass extends Component {
     });
   }
 
-  uploadImage = async (image) => {
+  uploadImage = async image => new Promise((resolve, reject) => {
     const apiKey = process.env.REACT_APP_CLOUDINARY_KEY;
     const formData = new FormData();
 
     formData.append('file', image);
     formData.append('upload_preset', 'dl5sqcqz');
     formData.append('api_key', apiKey);
+    formData.append('mode', 'no-cors');
 
-    return axios.post('https://api.cloudinary.com/v1_1/lifego/image/upload', formData);
-  };
+    let response;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.cloudinary.com/v1_1/lifego/image/upload', true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.send(formData);
+    xhr.onreadystatechange = (e) => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        response = JSON.parse(xhr.responseText);
+        resolve(response);
+      }
+    };
+  });
 }
 
 BaseClass.propTypes = propTypes;
@@ -79,6 +89,7 @@ export const initialBucketlist = {
   category: '',
   dueDate: '',
   location: '',
+  privacy: 'everyone',
 };
 
 export default BaseClass;

@@ -1,10 +1,10 @@
-import * as types from '../constants';
+import * as types from '../../Common/constants';
 
 describe('Constants tests', () => {
   it('asserts constants', () => {
     expect(types.LOAD_BUCKETLISTS_SUCCESS).toEqual('LOAD_BUCKETLISTS_SUCCESS');
     expect(types.LOAD_MORE_BUCKETLISTS).toEqual('LOAD_MORE_BUCKETLISTS');
-    expect(types.LOAD_ALL_BUCKETLISTS_SUCCESS).toEqual('LOAD_ALL_BUCKETLISTS_SUCCESS');
+    expect(types.LOAD_BUCKETLISTS_SUCCESS).toEqual('LOAD_BUCKETLISTS_SUCCESS');
     expect(types.CREATE_BUCKETLIST_SUCCESS).toEqual('CREATE_BUCKETLIST_SUCCESS');
     expect(types.UPDATE_BUCKETLIST_SUCCESS).toEqual('UPDATE_BUCKETLIST_SUCCESS');
     expect(types.DELETE_BUCKETLIST_SUCCESS).toEqual('DELETE_BUCKETLIST_SUCCESS');

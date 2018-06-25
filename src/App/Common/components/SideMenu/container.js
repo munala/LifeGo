@@ -15,7 +15,7 @@ const mapStateToProps = ({
       {
         to: '/',
         icon: 'explore',
-        text: 'Discover',
+        text: 'Explore',
       },
       {
         to: '/login',
@@ -37,7 +37,7 @@ const mapStateToProps = ({
       {
         to: '/explore',
         icon: 'explore',
-        text: 'Discover',
+        text: 'Explore',
       },
       {
         to: '/mylists',

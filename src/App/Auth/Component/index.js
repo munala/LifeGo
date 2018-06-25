@@ -2,7 +2,7 @@ import React from 'react';
 
 import BaseClass from './BaseClass';
 import Form from './Form';
-import SnackBarComponent from './SnackBarComponent';
+import SnackBarComponent from '../../Common/components/SnackBarComponent';
 import LinearProgress from './LinearProgress';
 import propTypes from './propTypes';
 import '../styles.css';
@@ -31,7 +31,9 @@ class AuthComponent extends BaseClass {
     open: false,
   }
 
-  static getDerivedStateFromProps = ({ location, history, loggedIn }, state) => {
+  static getDerivedStateFromProps = ({
+    location, history, loggedIn, actions: { getProfile },
+  }, state) => {
     if (loggedIn !== state.loggedIn && loggedIn) {
       history.push('/home');
     }

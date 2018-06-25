@@ -5,6 +5,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Header from './component';
 import { logout } from '../../../Auth/actions';
+import { getProfile } from '../../../Profile/actions';
+import { getNotifications } from '../../../Notifications/actions';
+import { getConversations } from '../../../Chat/actions';
+import { getAlerts } from '../../../UserAlerts/actions';
 import { styles } from './styles';
 
 const mapStateToProps = ({
@@ -40,7 +44,7 @@ const mapStateToProps = ({
         let unread = false;
 
         conversation.messages.forEach((message) => {
-          if (!message.read && message.receiverId === state.profile.id) {
+          if (!message.read && message.receiverId === profile.id) {
             unread = true;
           }
         });
@@ -69,6 +73,10 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     logout,
+    getProfile,
+    getNotifications,
+    getConversations,
+    getAlerts,
   }, dispatch),
 });
 

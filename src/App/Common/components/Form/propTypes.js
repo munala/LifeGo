@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export default {
   bucketlist: PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     pictureUrl: PropTypes.string,
   }),
   onClose: PropTypes.func.isRequired,

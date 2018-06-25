@@ -4,7 +4,7 @@ const userAlertsUrl = `${process.env.REACT_APP_API_HOST}/api/user_notifications/
 
 export default {
   getAlerts: async () => sendRequest({
-    method: 'post',
+    method: 'get',
     url: userAlertsUrl,
   }),
 

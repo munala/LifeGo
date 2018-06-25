@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import data from '../App/MyLists/reducer';
-import allData from '../App/Home/reducer';
+import data from '../App/Common/reducers/bucketlistReducer';
 import loggedIn from '../App/Auth/reducer';
 import currentApiCalls from '../App/Common/reducers/apiCallReducer';
 import error from '../App/Common/reducers/errorReducer';
@@ -13,7 +12,6 @@ import alerts from '../App/UserAlerts/reducer';
 
 const rootReducer = combineReducers({
   data,
-  allData,
   currentApiCalls,
   loggedIn,
   error,
