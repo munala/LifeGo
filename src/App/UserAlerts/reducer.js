@@ -19,6 +19,9 @@ export default (state = [], action) => {
     case types.DELETE_ALERT:
       return [...state].filter(alert => alert.id !== action.alert.id);
 
+    case types.LOGOUT:
+      return [];
+
     default:
       return state;
   }

@@ -49,6 +49,9 @@ export default function conversationReducer(state = [], action) {
         })),
       ];
 
+    case types.LOGOUT:
+      return [];
+
     default:
       return state;
   }

@@ -7,9 +7,11 @@ import myListsActions from '../actions';
 const mapStateToProps = ({
   data: { myData },
   profile,
+  currentApiCalls: { myBucketlists: currentApiCalls },
 }) => ({
   data: myData,
   profile,
+  currentApiCalls,
 });
 
 const mapDispatchToProps = dispatch => ({

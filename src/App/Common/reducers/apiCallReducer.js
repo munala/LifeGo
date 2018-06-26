@@ -2,6 +2,7 @@ import * as types from '../constants';
 
 const initialState = {
   user: 0,
+  explore: 0,
   allBucketlists: 0,
   myBucketlists: 0,
   notifications: 0,

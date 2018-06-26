@@ -28,7 +28,7 @@ const Form = ({
   } : user;
 
   return (
-    <div className="form-container ">
+    <div className="login-form-container ">
       {
       Object.keys(formUser).map(key => (
         <TextInput
@@ -37,7 +37,7 @@ const Form = ({
           value={formUser[key]}
           onChange={resetMode ? onEmailChange : onChange}
           invalid={invalid}
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 10, width: 480 }}
           disabled={touched && !formUser[key]}
         />
       ))

@@ -4,6 +4,45 @@ exports[`Items tests renders without crashing 1`] = `
 <div
   className="items-container"
 >
+  <div
+    className="items-nav-buttons"
+  />
+  <div
+    className="item-container"
+    key="1"
+  >
+    <div
+      className="item-left"
+    >
+      <div
+        className="item-name"
+      >
+        item
+      </div>
+      <CheckBox
+        checked={true}
+        disabled={false}
+        onChange={[Function]}
+      />
+    </div>
+    <WithStyles(IconButton)
+      aria-haspopup="true"
+      aria-label="More"
+      aria-owns={null}
+      onClick={[Function]}
+    >
+      <pure(MoreVert)
+        style={
+          Object {
+            "color": "#444",
+          }
+        }
+      />
+    </WithStyles(IconButton)>
+  </div>
+  <div
+    className="items-nav-buttons"
+  />
   <NewInput
     buttonLabel="add"
     cancel={[Function]}
@@ -22,23 +61,16 @@ exports[`Items tests renders without crashing 1`] = `
     save={[Function]}
     submitting={false}
   />
-  <div
-    className="item-container"
-    key="1"
-  >
-    <div
-      className="item-name"
-    >
-      item
-    </div>
-    <CheckBox
-      checked={true}
-      disabled={false}
-      onChange={[Function]}
-    />
-  </div>
-  <div
-    className="items-nav-buttons"
+  <SnackbarComponent
+    closeSnackBar={[Function]}
+    message={
+      Object {
+        "content": "You have deleted undefined",
+        "success": true,
+      }
+    }
+    open={false}
+    undo="undo"
   />
 </div>
 `;

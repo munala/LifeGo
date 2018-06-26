@@ -180,7 +180,7 @@ Card.propTypes = {
     deleteBucketlist: PropTypes.func.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

@@ -14,6 +14,7 @@ import { styles } from './styles';
 const mapStateToProps = ({
   loggedIn,
   profile,
+  currentApiCalls: { profile: currentApiCalls },
   ...state
 }) => {
   let count = 0;
@@ -67,6 +68,7 @@ const mapStateToProps = ({
     loggedIn,
     profile,
     counts,
+    currentApiCalls,
   });
 };
 

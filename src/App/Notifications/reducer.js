@@ -20,6 +20,9 @@ export default (state = [], action) => {
     case types.DELETE_NOTIFICATION:
       return [...state].filter(notification => notification.id !== action.notification.id);
 
+    case types.LOGOUT:
+      return [];
+
     default:
       return state;
   }

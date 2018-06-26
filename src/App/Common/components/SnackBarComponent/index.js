@@ -31,7 +31,7 @@ const SnackbarComponent = ({
           <FlatButton
             key="undo"
             label="undo"
-            style={{ color: 'red' }}
+            style={{ color: 'orange' }}
             onClick={closeSnackBar}
           /> :
           <IconButton

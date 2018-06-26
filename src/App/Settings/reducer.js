@@ -13,6 +13,9 @@ export default (state = {}, action) => {
         searchUsers: state.searchUsers,
       };
 
+    case types.LOGOUT:
+      return {};
+
     default:
       return state;
   }

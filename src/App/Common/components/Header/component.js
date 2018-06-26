@@ -19,7 +19,7 @@ class Header extends Component {
     anchorEl: null,
     pathname: this.props.location.pathname,
     loggedIn: this.props.loggedIn, // eslint-disable-line react/no-unused-state
-    profile: this.props.profile, // eslint-disable-line react/no-unused-state
+    profile: {}, // eslint-disable-line react/no-unused-state
   };
 
   static getDerivedStateFromProps = ({
@@ -29,8 +29,9 @@ class Header extends Component {
       getProfile, getNotifications, getAlerts, getConversations,
     },
     profile,
+    currentApiCalls,
   }, state) => {
-    if (loggedIn && profile.id !== state.profile.id) {
+    if (loggedIn && (loggedIn !== state.loggedIn || (!profile.id && !currentApiCalls))) {
       getProfile();
       getNotifications();
       getAlerts();
@@ -42,13 +43,6 @@ class Header extends Component {
       profile,
       pathname,
     });
-  }
-
-  componentDidMount = () => {
-    const { loggedIn, profile: { id } } = this.props;
-    if (loggedIn && !id) {
-      this.props.actions.getProfile();
-    }
   }
 
   handleClick = (event) => {

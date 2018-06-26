@@ -7,10 +7,12 @@ import homeActions from '../actions';
 
 const mapStateToProps = ({
   data: { allData },
+  currentApiCalls: { allBucketlists: currentApiCalls },
   profile,
 }) => ({
   data: allData,
   profile,
+  currentApiCalls,
 });
 
 const mapDispatchToProps = dispatch => ({

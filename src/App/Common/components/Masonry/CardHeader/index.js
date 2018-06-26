@@ -23,8 +23,8 @@ class CardHeader extends Component {
   selectItem = (item) => {
     const { openModal, bucketlist, deleteBucketlist } = this.props;
     const actions = {
-      edit: () => openModal(bucketlist),
-      delete: () => deleteBucketlist(bucketlist),
+      Edit: () => openModal(bucketlist),
+      Delete: () => deleteBucketlist(bucketlist),
     };
     actions[item]();
     this.handleClose();
@@ -47,7 +47,7 @@ class CardHeader extends Component {
 
     const { anchorEl } = this.state;
 
-    const menuItems = ['edit', 'delete'];
+    const menuItems = ['Edit', 'Delete'];
 
     return (
       <div className="bucketlist-header">
@@ -115,7 +115,7 @@ CardHeader.propTypes = {
     PropTypes.number,
   ]).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
   }).isRequired,
   time: PropTypes.string.isRequired,
   modal: PropTypes.bool.isRequired,

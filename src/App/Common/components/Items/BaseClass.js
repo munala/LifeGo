@@ -37,6 +37,7 @@ class BaseClass extends Component {
         item: {
           name: '',
         },
+        editMode: false,
       });
     }
   }
@@ -48,44 +49,75 @@ class BaseClass extends Component {
   }
 
   deleteItem = () => {
-    this.closeMenu();
-    this.props.openDialog();
-  }
+    const { selectedItem: deletedItem } = this.state;
 
-  delete = () => {
-    this.props.closeDialog();
-    this.props.actions.deleteItem(
-      this.props.bucketlist,
-      this.state.selectedItem,
+    this.setState(
+      { deletedItem },
+      () => {
+        this.setState({ snackOpen: true });
+        this.timeout = setTimeout(() => {
+          this.delete(deletedItem);
+          this.setState(
+            { snackOpen: false },
+            () => {
+              setTimeout(() => {
+                this.setState({
+                  deletedItem: { },
+                  selectedItem: { name: '' },
+                });
+              }, 1000);
+            },
+          );
+        }, 5000);
+      },
     );
   }
 
-  editItem = () => {
-    this.closeMenu();
-    this.openForm({
-      type: 'Edit',
-      name: 'item',
-    }, this.state.selectedItem);
+  delete = (item) => {
+    this.props.actions.deleteItem(
+      this.props.bucketlist,
+      item,
+    );
   }
 
-  cancel = () => {
+  editItem = (item) => {
+    this.handleClose();
     this.setState({
-      item: {},
-      editMode: false,
+      item,
+      editMode: true,
     });
   }
 
-  openForm = (context, content = {}) => {
-    // TODO
+  cancel = () => {
+    clearTimeout(this.timeout);
+    this.setState({
+      item: {},
+      deletedItem: { },
+      editMode: false,
+      snackOpen: false,
+    });
   }
 
-  openMenu = (selectedItem) => {
-    // TODO
+  handleClick = ({ event, selectedItem }) => {
+    this.setState({
+      selectedItem,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  selectItem = ({ menuItem }) => {
+    const { selectedItem: item } = this.state;
+    const actions = {
+      Edit: () => this.editItem(item),
+      Delete: () => this.deleteItem(item),
+    };
+    actions[menuItem]();
+    this.handleClose();
   }
 
-  closeMenu = () => {
-    // TODO
-  }
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 }
 
 BaseClass.propTypes = propTypes;

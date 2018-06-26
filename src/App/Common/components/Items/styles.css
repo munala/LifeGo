@@ -1,6 +1,6 @@
 .items-container {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: center;
   align-items: stretch;
   font-family: sans-serif;
@@ -60,4 +60,13 @@
   justify-content: center;
   color:#666;
   text-align: center;
+  padding-bottom: 10px;
+}
+
+.item-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex:1;
 }

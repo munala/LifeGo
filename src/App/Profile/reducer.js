@@ -46,6 +46,9 @@ export default (state = {}, action) => {
     case types.DELETE_ACCOUNT_SUCCESS:
       return {};
 
+    case types.LOGOUT:
+      return {};
+
     default:
       return state;
   }

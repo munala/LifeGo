@@ -19,6 +19,7 @@ exports[`NewInput tests renders without crashing 1`] = `
   <WithStyles(TextInput)
     className="text-field"
     disableUnderline={true}
+    multiline={true}
     name=""
     onChange={[Function]}
     onFocus={[Function]}
@@ -26,7 +27,11 @@ exports[`NewInput tests renders without crashing 1`] = `
     placeholder="type edit"
     style={
       Object {
+        "backgroundColor": "#f7f7f7",
+        "borderRadius": 10,
         "fontSize": 14,
+        "overflow": "hidden",
+        "padding": 5,
       }
     }
     type="text"

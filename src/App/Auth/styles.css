@@ -3,17 +3,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin:auto;
+  align-self: center;
   box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+  padding:0px;
+  background-color: #fff;
 }
 
-.form-container {
-  width:500px;
-  flex-grow:1;
+.login-form-container {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  background-color: #fff;
-  padding: 16px;
+  margin: 20px 10px;
 }
 
 .form-title {

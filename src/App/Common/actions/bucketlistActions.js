@@ -12,12 +12,12 @@ export const createBucketlistSuccess = (bucketlist, screen, dataType) => ({
   dataType,
 });
 
-export const loadBucketlistsSuccess = ({ data, dataType }) => ({
+export const loadBucketlistsSuccess = ({ data, dataType, screen }) => ({
   type: types.LOAD_BUCKETLISTS_SUCCESS,
   data,
   dataType,
   message: '',
-  screen: 'explore',
+  screen,
 });
 
 export const updateBucketlistSuccess = (bucketlist, screen, dataType) => ({
@@ -153,6 +153,7 @@ export const explore = (
   dispatch(loadBucketlistsSuccess({
     data: response,
     dataType: 'exploreData',
+    screen: 'explore',
   }));
 
   dispatch(apiCallActions.resetMessage());
@@ -185,6 +186,7 @@ export const loadBucketlists = (
   dispatch(loadBucketlistsSuccess({
     data: response,
     dataType: 'myData',
+    screen: 'myBucketlists',
   }));
 
   dispatch(apiCallActions.resetMessage());
@@ -217,6 +219,7 @@ export const loadAllBucketlists = (
   dispatch(loadBucketlistsSuccess({
     data: response,
     dataType: 'allData',
+    screen: 'allBucketlists',
   }));
 
   dispatch(apiCallActions.resetMessage());
@@ -350,7 +353,7 @@ export const updateItem = (bucketlist, item) => async (dispatch) => {
   } else {
     dataTypes.forEach((dataType) => {
       dispatch(updateItemSuccess({
-        bucketlist, item, ...response, dataType,
+        bucketlist, item: { item, ...response }, dataType,
       }));
     });
 

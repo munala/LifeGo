@@ -27,22 +27,26 @@ exports[`Comments tests renders without crashing 1`] = `
         className="comment"
       >
         <div
-          className="comment-body"
+          className="comment-left"
         >
-          <span
-            className="comment-user"
-            onClick={[Function]}
-          />
-          <span
-            className="comment-content"
+          <div
+            className="comment-body"
           >
-            comment
-          </span>
+            <span
+              className="comment-user"
+              onClick={[Function]}
+            />
+            <span
+              className="comment-content"
+            >
+              comment
+            </span>
+          </div>
         </div>
         <div
           className="time"
         >
-          Just nowm
+          Just now
         </div>
       </div>
     </div>
@@ -63,6 +67,17 @@ exports[`Comments tests renders without crashing 1`] = `
     pictureUrl={null}
     save={[Function]}
     submitting={false}
+  />
+  <SnackbarComponent
+    closeSnackBar={[Function]}
+    message={
+      Object {
+        "content": "You have deleted undefined's comment",
+        "success": true,
+      }
+    }
+    open={false}
+    undo="undo"
   />
 </div>
 `;

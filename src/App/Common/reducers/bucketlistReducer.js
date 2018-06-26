@@ -89,7 +89,7 @@ export default (state = initialState, action) => {
               if (bucketlist.id === action.bucketlist.id) {
                 return {
                   ...bucketlist,
-                  items: [action.item, ...bucketlist.items],
+                  items: [...bucketlist.items, action.item],
                 };
               }
 
@@ -251,6 +251,9 @@ export default (state = initialState, action) => {
         ...state,
         [action.dataType]: { searchResults: [] },
       };
+
+    case types.LOGOUT:
+      return initialState;
 
     default:
       return state;

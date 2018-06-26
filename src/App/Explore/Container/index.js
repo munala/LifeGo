@@ -7,9 +7,11 @@ import exploreActions from '../actions';
 
 const mapStateToProps = ({
   data: { exploreData },
+  currentApiCalls: { explore: currentApiCalls },
   profile,
 }) => ({
   data: exploreData,
+  currentApiCalls,
   profile,
 });
 

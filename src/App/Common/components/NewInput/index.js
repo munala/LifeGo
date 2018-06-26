@@ -28,12 +28,19 @@ const NewInput = ({
       name=""
       type="text"
       placeholder={`type ${content.type}`}
+      multiline
       disableUnderline
       onFocus={focus}
       value={content.content || ''}
       onChange={onChange}
       className="text-field"
-      style={{ fontSize: 14 }}
+      style={{
+        fontSize: 14,
+        borderRadius: 10,
+        backgroundColor: '#f7f7f7',
+        overflow: 'hidden',
+        padding: 5,
+      }}
       onKeyPress={(e) => {
         if (e.key === 'Enter') { save(); }
       }

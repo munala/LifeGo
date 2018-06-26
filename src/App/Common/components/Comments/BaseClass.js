@@ -37,13 +37,7 @@ class BaseClass extends Component {
     });
   }
 
-  deleteComment = () => {
-    this.closeMenu();
-    this.props.openDialog();
-  }
-
   delete = () => {
-    this.props.closeDialog();
     this.props.actions.deleteComment(
       this.props.bucketlist,
       this.state.selectedComment,
@@ -64,12 +58,16 @@ class BaseClass extends Component {
   }
 
   cancel = () => {
+    clearTimeout(this.timeout);
     this.setState({
       comment: {
         id: '',
         content: '',
       },
       editMode: false,
+      snackOpen: false,
+      deletedComment: { },
+      selectedComment: {},
     });
   }
 
@@ -92,13 +90,57 @@ class BaseClass extends Component {
     }
   }
 
-  openMenu = (selectedComment) => {
-    // TODO
+  deleteComment = (deletedComment) => {
+    this.setState(
+      { deletedComment },
+      () => {
+        this.setState({ snackOpen: true });
+        this.timeout = setTimeout(() => {
+          this.delete(deletedComment);
+          this.setState(
+            { snackOpen: false },
+            () => {
+              setTimeout(() => {
+                this.setState({
+                  deletedComment: { },
+                  selectedComment: { name: '', content: '' },
+                });
+              }, 1000);
+            },
+          );
+        }, 5000);
+      },
+    );
   }
 
-  closeMenu = () => {
-    // TODO
+  editComment = (comment) => {
+    this.handleClose();
+    this.setState({
+      comment,
+      editMode: true,
+    });
   }
+
+  handleClick = ({ event, selectedComment }) => {
+    this.setState({
+      selectedComment,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  selectComment = ({ menuItem }) => {
+    const { selectedComment: comment } = this.state;
+    const actions = {
+      Edit: () => this.editComment(comment),
+      Delete: () => this.deleteComment(comment),
+    };
+    actions[menuItem]();
+    this.handleClose();
+  }
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 }
 
 BaseClass.propTypes = propTypes;

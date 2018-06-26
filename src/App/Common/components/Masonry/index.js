@@ -9,12 +9,14 @@ import SnackBarComponent from '../SnackBarComponent';
 import Fab from '../Fab';
 import Form from '../Form';
 import Card from './Card';
+import Loading from './Loading';
 import propTypes from './propTypes';
 import './styles.css';
 
 class Masonry extends BaseClass {
   state = {
-    bucketlist: [],
+    bucketlists: [],
+    bucketlist: {},
     selectedBucketlist: {},
     mode: '',
     showAddModal: false,
@@ -53,16 +55,20 @@ class Masonry extends BaseClass {
     actions[pathname]();
   }
 
-  renderCards = (columns) => {
+  renderCards = ({ columnCount, currentApiCalls }) => { // eslint-disable-line react/prop-types
     const { bucketlists: bucks, mode } = this.state;
     const { profile, actions } = this.props;
 
-    const cols = bucks.length < columns ? bucks.length : columns;
+    const cols = bucks.length < columnCount ? bucks.length : columnCount;
 
     const { reorderd: bucketlists } = this.reorder(bucks, cols);
 
+    if (currentApiCalls > 0) {
+      return <Loading columnCount={columnCount} />;
+    }
+
     return (
-      <div style={{ columnCount: cols, overflow: 'scroll' }}>
+      <div style={{ columnCount, overflow: 'scroll' }}>
         {bucketlists.map(bucketlist => (
           <Card
             key={bucketlist.id}
@@ -87,7 +93,7 @@ class Masonry extends BaseClass {
     } = this.state;
 
     const {
-      profile, actions, data: { bucketlists }, location: { pathname },
+      profile, actions, data: { bucketlists }, location: { pathname }, currentApiCalls,
     } = this.props;
 
     const [bucketlist] = bucketlists.filter(buck => buck.id === selectedBucketlist.id);
@@ -97,25 +103,25 @@ class Masonry extends BaseClass {
         className="stack-grid"
       >
         <MediaQuery query="(min-width: 1825px)">
-          {this.renderCards(5)}
+          {this.renderCards({ columnCount: 5, currentApiCalls })}
         </MediaQuery>
         <MediaQuery query="(max-width: 1824px)">
           <MediaQuery query="(min-width: 1225px)">
-            {this.renderCards(4)}
+            {this.renderCards({ columnCount: 4, currentApiCalls })}
           </MediaQuery>
         </MediaQuery>
         <MediaQuery query="(max-width: 1224px)">
           <MediaQuery query="(min-width: 1025px)">
-            {this.renderCards(3)}
+            {this.renderCards({ columnCount: 3, currentApiCalls })}
           </MediaQuery>
         </MediaQuery>
         <MediaQuery query="(max-width: 1024px)">
           <MediaQuery query="(min-width: 481px)">
-            {this.renderCards(2)}
+            {this.renderCards({ columnCount: 2, currentApiCalls })}
           </MediaQuery>
         </MediaQuery>
         <MediaQuery query="(max-width: 480px)">
-          {this.renderCards(1)}
+          {this.renderCards({ columnCount: 1, currentApiCalls })}
         </MediaQuery>
         <Modal
           open={!!selectedBucketlist.id}

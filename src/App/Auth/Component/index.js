@@ -59,11 +59,16 @@ class AuthComponent extends BaseClass {
       resetEmail,
     } = this.state;
 
+    const { currentApiCalls } = this.props;
+
     const user = login ? loginUser : registerUser;
 
     return (
       <div className="auth-container">
-        {submitting && <div className="progress"><LinearProgress color="error" /></div>}
+        {
+          currentApiCalls > 0 &&
+          <div className="progress"><LinearProgress color="error" /></div>
+        }
 
         <Form
           loginMode={!!login}
