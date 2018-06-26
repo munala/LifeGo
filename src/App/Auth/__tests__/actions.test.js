@@ -18,14 +18,14 @@ const user = {
 const types = { ...authConstants, ...commonConstants };
 
 jest.mock('../api', (() => ({
-  loginUser: () => Promise.resolve('dfknefenfiefnef'),
-  socialLogin: () => Promise.resolve('dfknefenfiefnef'),
+  loginUser: () => Promise.resolve({ token: 'dfknefenfiefnef' }),
+  socialLogin: () => Promise.resolve({ token: 'dfknefenfiefnef' }),
   registerUser: () => Promise.resolve('dfknefenfiefnef'),
   resetPassword: () => Promise.resolve({ message: 'dfknefenfiefnef' }),
 })));
 
 describe('Auth actions', () => {
-  it('should create a LOGIN_SUCCESS action', () => {
+  it('should create a LOGIN_SUCCESS action', async () => {
     const data = {
       token: 'oliver',
       screen: 'login',

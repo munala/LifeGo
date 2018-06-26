@@ -1,8 +1,8 @@
-import bucketlistReducer from '../reducer';
-import * as actions from '../../Common/actions/bucketlistActions';
+import bucketlistReducer from '../reducers/bucketlistReducer';
+import * as actions from '../actions/bucketlistActions';
 
 const initialState = {
-  allData: {
+  myData: {
     bucketlists: [
       { id: 1, name: 'oliver', items: [] },
       { id: 2, name: 'munala', items: [{ id: 1, name: 'oliver' }, { id: 2, name: 'derp' }] },
@@ -12,7 +12,7 @@ const initialState = {
   },
 };
 
-const dataType = 'allData';
+const dataType = 'myData';
 
 describe('Bucketlist reducer', () => {
   it('should add bucketlist when passed CREATE_BUCKETLIST_SUCCESS', () => {
@@ -28,7 +28,10 @@ describe('Bucketlist reducer', () => {
 
   it('should load bucketlists when passed LOAD_BUCKETLISTS_SUCCESS', () => {
     const newBucketlists = { bucketlists: [{ id: 3, name: 'ngoitsi' }], nextUrl: '', previousUrl: '' };
-    const action = actions.loadBucketlistsSuccess({ bucketlists: newBucketlists, dataType });
+    const action = actions.loadBucketlistsSuccess({
+      data: newBucketlists,
+      dataType,
+    });
     const newState = bucketlistReducer(initialState, action)[dataType];
 
     expect(newState.bucketlists.length).toEqual(1);
@@ -54,7 +57,11 @@ describe('Bucketlist reducer', () => {
 
   it('should add item when passed LOAD_BUCKETLISTS_SUCCESS', () => {
     const newItem = { id: 3, name: 'ngoitsi' };
-    const action = actions.createItemSuccess(initialState.bucketlists[0], newItem, dataType);
+    const action = actions.createItemSuccess(
+      initialState[dataType].bucketlists[0],
+      newItem,
+      dataType,
+    );
     const newState = bucketlistReducer(initialState, action)[dataType];
 
     expect(newState.bucketlists[0].items.length).toEqual(1);
@@ -64,7 +71,7 @@ describe('Bucketlist reducer', () => {
   it('should update item when passed UPDATE_ITEM_SUCCESS', () => {
     const updatedItem = { id: 1, name: 'olivers' };
     const action = actions.updateItemSuccess({
-      bucketlist: initialState.bucketlists[1],
+      bucketlist: initialState[dataType].bucketlists[1],
       item: updatedItem,
       dataType,
     });
@@ -76,7 +83,7 @@ describe('Bucketlist reducer', () => {
   it('should delete item when passed DELETE_ITEM_SUCCESS', () => {
     const deletedItem = { id: 1, name: 'oliver' };
     const action = actions.deleteItemSuccess({
-      bucketlist: initialState.bucketlists[1],
+      bucketlist: initialState[dataType].bucketlists[1],
       item: deletedItem,
       dataType,
     });

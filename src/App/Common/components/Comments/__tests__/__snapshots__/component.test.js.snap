@@ -42,7 +42,7 @@ exports[`Comments tests renders without crashing 1`] = `
         <div
           className="time"
         >
-          Just now
+          Just nowm
         </div>
       </div>
     </div>
