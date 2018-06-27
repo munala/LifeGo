@@ -55,6 +55,31 @@ class Masonry extends BaseClass {
     actions[pathname]();
   }
 
+  onScroll = ({ target }) => {
+    const bottomReached = (target.scrollHeight - target.scrollTop) === target.clientHeight;
+
+    if (bottomReached) {
+      const {
+        data: { nextUrl, bucketlists: { length } },
+        actions: { loadMoreBucketlists },
+        location: { pathname },
+      } = this.props;
+
+      const dataTypes = {
+        '/': 'allData',
+        '/home': 'allData',
+        '/mylists': 'myData',
+      };
+
+      const dataType = dataTypes[pathname];
+
+      if (nextUrl && dataType) {
+        const offset = Math.ceil(length / 50) * 50;
+        loadMoreBucketlists(dataType, offset);
+      }
+    }
+  }
+
   renderCards = ({ columnCount, currentApiCalls }) => { // eslint-disable-line react/prop-types
     const { bucketlists: bucks, mode } = this.state;
     const { profile, actions } = this.props;
@@ -99,9 +124,7 @@ class Masonry extends BaseClass {
     const [bucketlist] = bucketlists.filter(buck => buck.id === selectedBucketlist.id);
 
     return (
-      <div
-        className="stack-grid"
-      >
+      <div className="stack-grid" onScroll={this.onScroll}>
         <MediaQuery query="(min-width: 1825px)">
           {this.renderCards({ columnCount: 5, currentApiCalls })}
         </MediaQuery>

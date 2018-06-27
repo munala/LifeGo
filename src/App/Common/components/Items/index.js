@@ -37,10 +37,15 @@ class Items extends BaseClass {
       const menuItems = ['Edit', 'Delete'];
 
       const { profile } = this.props;
-      const { anchorEl, selectedItem, snackOpen } = this.state;
+      const {
+        anchorEl, selectedItem, snackOpen,
+      } = this.state;
 
       return (
-        <div key={item.id} className="item-container">
+        <div
+          key={item.id}
+          className="item-container"
+        >
           <div className="item-left">
             <div className="item-name">{item.name}</div>
             <CheckBox

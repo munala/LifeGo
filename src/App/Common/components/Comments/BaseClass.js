@@ -141,6 +141,11 @@ class BaseClass extends Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  hover = (comment) => {
+    const { hoveredComment } = this.state;
+    this.setState({ hoveredComment: hoveredComment.id === comment.id ? {} : comment });
+  }
 }
 
 BaseClass.propTypes = propTypes;

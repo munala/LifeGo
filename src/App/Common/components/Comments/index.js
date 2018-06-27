@@ -30,6 +30,7 @@ class Comments extends BaseClass {
     submitting: false,
     editMode: false,
     snackOpen: false,
+    hoveredComment: {},
   }
 
   renderComments = ({ comments, mode, goToProfile }) => comments
@@ -38,10 +39,17 @@ class Comments extends BaseClass {
     .map((comment) => {
       const { bucketlist, profile } = this.props;
       const menuItems = comment.senderId === profile.id ? ['Edit', 'Delete'] : ['Delete'];
-      const { anchorEl, selectedComment, snackOpen } = this.state;
+      const {
+        anchorEl, selectedComment, snackOpen, hoveredComment,
+      } = this.state;
 
       return (
-        <div key={comment.id} className="comment-container">
+        <div
+          key={comment.id}
+          className="comment-container"
+          onMouseEnter={() => this.hover(comment)}
+          onMouseLeave={() => this.hover(comment)}
+        >
           <Avatar
             src={comment.userPictureUrl
               ? comment.userPictureUrl
@@ -61,7 +69,7 @@ class Comments extends BaseClass {
               </div>
               {
                 (bucketlist.userId === profile.id || comment.senderId === profile.id)
-                && !snackOpen &&
+                && !snackOpen && hoveredComment.id === comment.id &&
                 <IconButton
                   aria-label="More"
                   aria-owns={anchorEl ? 'long-menu' : null}

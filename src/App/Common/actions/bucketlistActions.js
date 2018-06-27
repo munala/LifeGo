@@ -84,38 +84,34 @@ export const addNewBucketlist = bucketlist => ({
   bucketlist,
 });
 
-export const loadMore = data => ({
+export const loadMore = ({ data, dataType }) => ({
   type: types.LOAD_MORE_BUCKETLISTS,
   data,
-  message: '',
-  screen: 'loader',
-});
-
-export const loadMoreAll = data => ({
-  type: types.LOAD_MORE_ALL_BUCKETLISTS,
-  data,
+  dataType,
   message: '',
   screen: 'loader',
 });
 
 export const loadMoreBucketlists = (
-  type,
+  dataType,
   offset = 0,
-  limit = 10,
+  limit = 50,
   search = '',
 ) => async (dispatch) => {
   const action =
-    type === 'allBucketlists'
+    dataType === 'allData'
       ? BucketlistService.getAllBucketlists
       : BucketlistService.getBucketlists;
-  const actionCreator = type === 'allBucketlists' ? loadMoreAll : loadMore;
 
   dispatch(apiCallActions.beginApiCall({ screen: 'loader' }));
 
   const response = await action(offset, limit, search);
 
   if (!response.error) {
-    dispatch(actionCreator(response));
+    dispatch(loadMore({
+      data: response,
+      dataType,
+    }));
 
     return;
   }
