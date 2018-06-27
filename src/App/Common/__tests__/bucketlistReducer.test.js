@@ -9,6 +9,7 @@ const initialState = {
     ],
     nextUrl: '',
     previousUrl: '',
+    newBucketlists: [],
   },
 };
 
@@ -17,7 +18,11 @@ const dataType = 'myData';
 describe('Bucketlist reducer', () => {
   it('should add bucketlist when passed CREATE_BUCKETLIST_SUCCESS', () => {
     const newBucketlist = { name: 'ngoitsi' };
-    const action = actions.createBucketlistSuccess(newBucketlist, 'explore', dataType);
+    const action = actions.createBucketlistSuccess({
+      bucketlist: newBucketlist,
+      screen: 'explore',
+      dataType,
+    });
     const newState = bucketlistReducer(initialState, action)[dataType];
 
     expect(newState.bucketlists.length).toEqual(3);
@@ -40,7 +45,11 @@ describe('Bucketlist reducer', () => {
 
   it('should update bucketlist when passed UPDATE_BUCKETLIST_SUCCESS', () => {
     const updatedBucketlist = { id: 1, name: 'olivers' };
-    const action = actions.updateBucketlistSuccess(updatedBucketlist, 'explore', dataType);
+    const action = actions.updateBucketlistSuccess({
+      bucketlist: updatedBucketlist,
+      screen: 'explore',
+      dataType,
+    });
     const newState = bucketlistReducer(initialState, action)[dataType];
 
     expect(newState.bucketlists[0].name).toEqual('olivers');
@@ -48,7 +57,12 @@ describe('Bucketlist reducer', () => {
 
   it('should delete bucketlist when passed DELETE_BUCKETLIST_SUCCESS', () => {
     const deletedBucketlist = { id: 1, name: 'oliver' };
-    const action = actions.deleteBucketlistSuccess({ bucketlist: deletedBucketlist, screen: 'explore', dataType });
+    const action = actions.deleteBucketlistSuccess({
+      bucketlist: deletedBucketlist,
+      screen: 'explore',
+      dataType,
+    });
+
     const newState = bucketlistReducer(initialState, action)[dataType];
 
     expect(newState.bucketlists.length).toEqual(1);
@@ -57,11 +71,11 @@ describe('Bucketlist reducer', () => {
 
   it('should add item when passed LOAD_BUCKETLISTS_SUCCESS', () => {
     const newItem = { id: 3, name: 'ngoitsi' };
-    const action = actions.createItemSuccess(
-      initialState[dataType].bucketlists[0],
-      newItem,
+    const action = actions.createItemSuccess({
+      bucketlist: initialState[dataType].bucketlists[0],
+      item: newItem,
       dataType,
-    );
+    });
     const newState = bucketlistReducer(initialState, action)[dataType];
 
     expect(newState.bucketlists[0].items.length).toEqual(1);

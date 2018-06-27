@@ -4,7 +4,7 @@
   flex-grow: 1;
   padding-right: 20px;
   overflow: scroll;
-  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   font-size: 14px;
   min-width: 500px;
 }
@@ -27,7 +27,7 @@
   margin: 16px;
   margin-top: 0px;
   font-size: 14px;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 .bottom-section {
@@ -41,8 +41,8 @@
 .card {
   font-size: 14px;
   background-color: #fff;
-  margin:5px;
-  margin-bottom:20px;
+  margin: 5px;
+  margin-bottom: 20px;
   padding-top: 16px;
   display: inline-block;
   flex-direction: column;
@@ -51,7 +51,7 @@
   border-radius: 4px;
   break-inside: avoid-column;
   -webkit-column-break-inside: avoid;
-  box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   cursor: pointer;
   width: calc(100% - 10px);
@@ -206,7 +206,7 @@
 
 .counter {
   display: flex;
-  color:grey;
+  color: grey;
   margin-left: 5px;
   font-size: 14px;
   font-weight: lighter;
@@ -282,4 +282,26 @@
   margin: 5px;
   margin-top: 20px;
   border-radius: 6px;
+}
+
+.load-more-indicator {
+  position: absolute;
+  background-color: #00bcd4;
+  color: #fff;
+  top: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  left: 210px;
+  right: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100px;
+  border-radius: 15px;
+  z-index: 300;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.3);
 }

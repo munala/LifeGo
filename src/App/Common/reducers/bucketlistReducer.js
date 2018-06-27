@@ -19,43 +19,73 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case types.ADD_NEW_BUCKETLIST:
-      return {
-        ...state,
-        [action.dataType]: {
-          newBucketlists: [action.bucketlist, ...state[action.dataType].newBucketlists],
-          count: state.count + 1,
-        },
-      };
+      if (action.dataType === 'allData') {
+        return {
+          ...state,
+          [action.dataType]: {
+            ...state[action.dataType],
+            newBucketlists: [action.bucketlist, ...state[action.dataType].newBucketlists],
+          },
+        };
+      }
+
+      return state;
 
     case types.LOAD_BUCKETLISTS_SUCCESS:
       return {
         ...state,
-        [action.dataType]: { ...action.data },
-      };
-
-    case types.LOAD_MORE_BUCKETLISTS:
-      return {
-        ...state,
         [action.dataType]: {
-          nextUrl: action.data.nextUrl,
-          previousUrl: action.data.previousUrl,
-          bucketlists: [
-            ...new Set([...state[action.dataType].bucketlists, ...action.data.bucketlists]),
-          ],
+          ...state[action.dataType],
+          ...action.data,
         },
       };
 
-    case types.CREATE_BUCKETLIST_SUCCESS:
-      bucketList = { ...action.bucketlist, items: [], comments: [] };
+    case types.LOAD_OTHER_MORE_BUCKETLISTS:
       return {
         ...state,
-        [action.dataType]: { bucketlists: [bucketList, ...state[action.dataType].bucketlists] },
+        [action.dataType]: {
+          ...state[action.dataType],
+          bucketlists: [
+            ...state[action.dataType].newBucketlists,
+            ...state[action.dataType].bucketlists,
+          ],
+          newBucketlists: [],
+        },
+      };
+
+    case types.LOAD_MORE_BUCKETLISTS:
+      if (action.dataType === 'allData') {
+        return {
+          ...state,
+          [action.dataType]: {
+            ...state[action.dataType],
+            nextUrl: action.data.nextUrl,
+            previousUrl: action.data.previousUrl,
+            bucketlists: [
+              ...new Set([...state[action.dataType].bucketlists, ...action.data.bucketlists]),
+            ],
+          },
+        };
+      }
+
+      return state;
+
+    case types.CREATE_BUCKETLIST_SUCCESS:
+      bucketList = { ...action.bucketlist, items: [], comments: [] };
+
+      return {
+        ...state,
+        [action.dataType]: {
+          ...state[action.dataType],
+          bucketlists: [bucketList, ...state[action.dataType].bucketlists],
+        },
       };
 
     case types.UPDATE_BUCKETLIST_SUCCESS:
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map(bucketlist =>
               (bucketlist.id === action.bucketlist.id
@@ -73,8 +103,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists
+              .filter(bucketlist => bucketlist.id !== action.bucketlist.id),
+          ],
+          newBucketlists: [
+            ...state[action.dataType].newBucketlists
               .filter(bucketlist => bucketlist.id !== action.bucketlist.id),
           ],
         },
@@ -84,6 +119,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.bucketlist.id) {
@@ -103,6 +139,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.bucketlist.id) {
@@ -125,6 +162,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.bucketlist.id) {
@@ -146,6 +184,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.bucketlist.id) {
@@ -165,6 +204,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.bucketlist.id) {
@@ -189,6 +229,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.bucketlist.id) {
@@ -210,6 +251,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map((bucketlist) => {
               if (bucketlist.id === action.like.bucketlistId) {
@@ -229,6 +271,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.dataType]: {
+          ...state[action.dataType],
           bucketlists: [
             ...state[action.dataType].bucketlists.map(bucketlist => ({
               ...bucketlist,
@@ -243,13 +286,19 @@ export default (state = initialState, action) => {
     case types.SEARCH_BUCKETLISTS:
       return {
         ...state,
-        [action.dataType]: { searchResults: action.bucketlists },
+        [action.dataType]: {
+          ...state[action.dataType],
+          searchResults: action.bucketlists,
+        },
       };
 
     case types.CLEAR_SEARCH_RESULTS:
       return {
         ...state,
-        [action.dataType]: { searchResults: [] },
+        [action.dataType]: {
+          ...state[action.dataType],
+          searchResults: [],
+        },
       };
 
     case types.LOGOUT:

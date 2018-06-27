@@ -10,6 +10,8 @@ exports[`Comments tests renders without crashing 1`] = `
     <div
       className="comment-container"
       key="1"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <UserAvatar
         name="user avatar"
@@ -46,7 +48,7 @@ exports[`Comments tests renders without crashing 1`] = `
         <div
           className="time"
         >
-          Just now
+          Just nowm
         </div>
       </div>
     </div>

@@ -85,7 +85,7 @@ describe('Bucketlist actions', () => {
       message: '',
     };
 
-    const action = bucketlistActions.createBucketlistSuccess(bucketlist);
+    const action = bucketlistActions.createBucketlistSuccess({ bucketlist });
 
     expect(action).toEqual(expectedAction);
   });
@@ -101,7 +101,7 @@ describe('Bucketlist actions', () => {
       message: '',
     };
 
-    const action = bucketlistActions.updateBucketlistSuccess(bucketlist);
+    const action = bucketlistActions.updateBucketlistSuccess({ bucketlist });
 
     expect(action).toEqual(expectedAction);
   });
@@ -139,7 +139,7 @@ describe('Bucketlist actions', () => {
       screen: 'myBucketlists',
     };
 
-    const action = bucketlistActions.createItemSuccess(bucketlist, item);
+    const action = bucketlistActions.createItemSuccess({ bucketlist, item });
 
     expect(action).toEqual(expectedAction);
   });
@@ -215,7 +215,9 @@ describe('Async calls', () => {
         },
       ];
       const store = mockStore({ data: { bucketlists: [] }, expectedActions });
-      store.dispatch(bucketlistActions.saveBucketlist(expectedActions[1].body.bucketlist))
+      store.dispatch(bucketlistActions.saveBucketlist({
+        bucketlist: expectedActions[1].body.bucketlist,
+      }))
         .then(() => {
           const actions = store.getActions();
           expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
@@ -245,7 +247,9 @@ describe('Async calls', () => {
         },
       ];
       const store = mockStore({ data: { bucketlists: [] }, expectedActions });
-      store.dispatch(bucketlistActions.updateBucketlist(expectedActions[1].body.bucketlist))
+      store.dispatch(bucketlistActions.updateBucketlist({
+        bucketlist: expectedActions[1].body.bucketlist,
+      }))
         .then(() => {
           const actions = store.getActions();
           expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
@@ -275,7 +279,9 @@ describe('Async calls', () => {
         },
       ];
       const store = mockStore({ data: { bucketlists: [] }, expectedActions });
-      store.dispatch(bucketlistActions.deleteBucketlist(expectedActions[1].body.bucketlist))
+      store.dispatch(bucketlistActions.deleteBucketlist({
+        bucketlist: expectedActions[1].body.bucketlist,
+      }))
         .then(() => {
           const actions = store.getActions();
           expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
@@ -312,10 +318,10 @@ describe('Async calls', () => {
         },
       ];
       const store = mockStore({ data: { bucketlists: [] }, expectedActions });
-      store.dispatch(bucketlistActions.saveItem(
-        expectedActions[1].body.bucketlist,
-        expectedActions[1].body.item,
-      ))
+      store.dispatch(bucketlistActions.saveItem({
+        bucketlist: expectedActions[1].body.bucketlist,
+        item: expectedActions[1].body.item,
+      }))
         .then(() => {
           const actions = store.getActions();
           expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
@@ -352,10 +358,10 @@ describe('Async calls', () => {
         },
       ];
       const store = mockStore({ data: { bucketlists: [] }, expectedActions });
-      store.dispatch(bucketlistActions.updateItem(
-        expectedActions[1].body.bucketlist,
-        expectedActions[1].body.item,
-      ))
+      store.dispatch(bucketlistActions.updateItem({
+        bucketlist: expectedActions[1].body.bucketlist,
+        item: expectedActions[1].body.item,
+      }))
         .then(() => {
           const actions = store.getActions();
           expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
@@ -392,10 +398,10 @@ describe('Async calls', () => {
         },
       ];
       const store = mockStore({ data: { bucketlists: [] }, expectedActions });
-      store.dispatch(bucketlistActions.deleteItem(
-        expectedActions[1].body.bucketlist,
-        expectedActions[1].body.item,
-      ))
+      store.dispatch(bucketlistActions.deleteItem({
+        bucketlist: expectedActions[1].body.bucketlist,
+        item: expectedActions[1].body.item,
+      }))
         .then(() => {
           const actions = store.getActions();
           expect(actions[0].type).toEqual(types.BEGIN_API_CALL);

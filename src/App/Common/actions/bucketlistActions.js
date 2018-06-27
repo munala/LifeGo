@@ -4,7 +4,7 @@ import * as apiCallActions from './apiCallActions';
 
 const dataTypes = ['myData', 'allData', 'exploreData'];
 
-export const createBucketlistSuccess = (bucketlist, screen, dataType) => ({
+export const createBucketlistSuccess = ({ bucketlist, screen, dataType }) => ({
   type: types.CREATE_BUCKETLIST_SUCCESS,
   bucketlist,
   message: '',
@@ -20,7 +20,7 @@ export const loadBucketlistsSuccess = ({ data, dataType, screen }) => ({
   screen,
 });
 
-export const updateBucketlistSuccess = (bucketlist, screen, dataType) => ({
+export const updateBucketlistSuccess = ({ bucketlist, screen, dataType }) => ({
   type: types.UPDATE_BUCKETLIST_SUCCESS,
   bucketlist,
   message: '',
@@ -36,7 +36,7 @@ export const deleteBucketlistSuccess = ({ bucketlist, screen, dataType }) => ({
   dataType,
 });
 
-export const createItemSuccess = (bucketlist, item, dataType) => ({
+export const createItemSuccess = ({ bucketlist, item, dataType }) => ({
   type: types.CREATE_ITEM_SUCCESS,
   bucketlist,
   item,
@@ -79,17 +79,15 @@ export const resetError = dispatch =>
     type: types.RESET_ERROR,
   });
 
-export const addNewBucketlist = bucketlist => ({
+export const addNewBucketlist = ({ bucketlist, dataType }) => ({
   type: types.ADD_NEW_BUCKETLIST,
   bucketlist,
+  dataType,
 });
 
-export const loadMore = ({ data, dataType }) => ({
-  type: types.LOAD_MORE_BUCKETLISTS,
-  data,
-  dataType,
-  message: '',
-  screen: 'loader',
+export const loadMore = () => dispatch => dispatch({
+  type: types.LOAD_OTHER_MORE_BUCKETLISTS,
+  dataType: 'allData',
 });
 
 export const loadMoreBucketlists = (
@@ -260,7 +258,11 @@ export const saveBucketlist = bucketlist => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dataTypes.slice(0, 2).forEach((dataType) => {
-      dispatch(createBucketlistSuccess(response, 'myBucketlists', dataType));
+      dispatch(createBucketlistSuccess({
+        bucketlist: response,
+        screen: 'myBucketlists',
+        dataType,
+      }));
     });
 
     dispatch(apiCallActions.resetMessage());
@@ -280,7 +282,11 @@ export const updateBucketlist = bucketlist => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dataTypes.forEach((dataType) => {
-      dispatch(updateBucketlistSuccess(response, 'myBucketlists', dataType));
+      dispatch(updateBucketlistSuccess({
+        bucketlist: response,
+        screen: 'myBucketlists',
+        dataType,
+      }));
     });
 
     dispatch(apiCallActions.resetMessage());
@@ -325,7 +331,11 @@ export const saveItem = (bucketlist, item) => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dataTypes.forEach((dataType) => {
-      dispatch(createItemSuccess(bucketlist, response, dataType));
+      dispatch(createItemSuccess({
+        bucketlist,
+        item: response,
+        dataType,
+      }));
     });
 
     dispatch(apiCallActions.resetMessage());

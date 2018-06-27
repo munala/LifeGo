@@ -72,11 +72,30 @@ export default (store) => {
   socket.on('bucketlists', (data) => {
     const storeData = store.getState();
 
+    if (data.type === 'new') {
+      storeData.profile.friends.forEach((friend) => {
+        if (friend.id === data.bucketlist.userId) {
+          store.dispatch(bucketlistActions.addNewBucketlist({
+            bucketlist: {
+              ...data.bucketlist,
+              comments: [],
+              likes: [],
+              items: [],
+            },
+            dataType: 'allData',
+          }));
+        }
+      });
+    }
+
     if (data.type === 'update') {
       storeData.profile.friends.forEach((friend) => {
         if (friend.id === data.bucketlist.userId) {
           dataTypes.forEach((dataType) => {
-            store.dispatch(bucketlistActions.updateBucketlistSuccess(data.bucketlist, dataType));
+            store.dispatch(bucketlistActions.updateBucketlistSuccess({
+              bucketlist: data.bucketlist,
+              dataType,
+            }));
           });
         }
       });
@@ -86,7 +105,10 @@ export default (store) => {
       storeData.profile.friends.forEach((friend) => {
         if (friend.id === data.bucketlist.userId) {
           dataTypes.forEach((dataType) => {
-            store.dispatch(bucketlistActions.deleteBucketlistSuccess(data.bucketlist, dataType));
+            store.dispatch(bucketlistActions.deleteBucketlistSuccess({
+              bucketlist: data.bucketlist,
+              dataType,
+            }));
           });
         }
       });

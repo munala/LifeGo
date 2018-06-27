@@ -118,13 +118,26 @@ class Masonry extends BaseClass {
     } = this.state;
 
     const {
-      profile, actions, data: { bucketlists }, location: { pathname }, currentApiCalls,
+      profile,
+      actions,
+      data: { bucketlists, newBucketlists: { length: totalNew } },
+      location: { pathname },
+      currentApiCalls,
     } = this.props;
 
     const [bucketlist] = bucketlists.filter(buck => buck.id === selectedBucketlist.id);
 
     return (
       <div className="stack-grid" onScroll={this.onScroll}>
+        {
+          totalNew > 0 &&
+          <div
+            className="load-more-indicator"
+            onClick={actions.loadMore}
+          >
+            {`${totalNew > 9 ? `${totalNew}+` : totalNew} new post${totalNew === 1 ? '' : 's'}`}
+          </div>
+        }
         <MediaQuery query="(min-width: 1825px)">
           {this.renderCards({ columnCount: 5, currentApiCalls })}
         </MediaQuery>
