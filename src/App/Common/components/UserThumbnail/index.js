@@ -3,44 +3,62 @@ import PropTypes from 'prop-types';
 
 import Avatar from '../Avatar';
 import OutlinedButton from '../OutlinedButton';
+import FlatButton from '../FlatButton';
 import RaisedButton from '../RaisedButton';
 import './styles.css';
 
-const isFriend = ({ person, profile }) => {
-  const { friends } = profile;
-
-  return friends.some(friend => friend.id === person.id && person.id);
-};
+const isFriend = ({ person, profile: { friends } }) => friends
+  .some(friend => friend.id === person.id && person.id);
 
 const UserThumbnail = ({
   profile,
   person,
   addFriend,
   removeFriend,
+  deleteAlert,
   goToProfile,
+  alert,
 }) => {
   const isaFriend = isFriend({ profile, person });
+
   return (
-    <div className="user-thumbnail">
+    <div
+      className="user-thumbnail"
+      style={alert.read !== true ? { backgroundColor: '#f7f7f7' } : {}}
+    >
       <Avatar
         style={{ display: 'flex', height: 60, width: 60 }}
         src={
           person.pictureUrl || require('../../../../assets/images/user.png') // eslint-disable-line global-require
         }
+        onClick={goToProfile}
       />
       <div className="user-actions">
-        <a href="#" className="username" onClick={() => goToProfile(person)}>{person.displayName}</a>
-        {
-          isaFriend ?
-            <RaisedButton
-              onClick={() => addFriend(person)}
-              label="Add"
-            /> :
-            <OutlinedButton
-              onClick={() => removeFriend(person)}
-              label="Remove"
-            />
-        }
+        <div
+          className="user-alert-text"
+          onClick={goToProfile}
+        >
+          <span className="username">{`${person.displayName} `}</span>
+          <span className="alert-text">added you.</span>
+        </div>
+        <div className="user-alert-buttons">
+          {
+            isaFriend ?
+              <OutlinedButton
+                onClick={removeFriend}
+                label="Remove"
+              /> :
+              <RaisedButton
+                onClick={addFriend}
+                label="Add"
+              />
+          }
+          <FlatButton
+            onClick={() => deleteAlert(alert)}
+            style={{ color: 'grey', backgroundColor: '#eee' }}
+            label="Ignore"
+          />
+        </div>
       </div>
     </div>
   );
@@ -53,11 +71,18 @@ UserThumbnail.propTypes = {
       id: PropTypes.number.isRequired,
     })).isRequired,
   }).isRequired,
+  alert: PropTypes.shape({
+    id: PropTypes.number,
+    read: PropTypes.bool,
+    user: PropTypes.string,
+    userPictureUrl: PropTypes.string,
+  }).isRequired,
   person: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
   addFriend: PropTypes.func.isRequired,
   removeFriend: PropTypes.func.isRequired,
+  deleteAlert: PropTypes.func.isRequired,
   goToProfile: PropTypes.func.isRequired,
 };
 

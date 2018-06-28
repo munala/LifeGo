@@ -1,11 +1,11 @@
 import SocketIOClient from 'socket.io-client';
-import * as messageActions from '../App/Chat/actions';
+import * as messageActions from '../App/Common/components/Chat/actions';
 import * as commentActions from '../App/Common/actions/commentActions';
 import * as likeActions from '../App/Common/actions/likeActions';
-import * as notificationActions from '../App/Notifications/actions';
+import * as notificationActions from '../App/Common/components/Notifications/actions';
 import * as bucketlistActions from '../App/Common/actions/bucketlistActions';
 import * as userActions from '../App/Profile/actions';
-import * as userAlertActions from '../App/UserAlerts/actions';
+import * as userAlertActions from '../App/Common/components/UserAlerts/actions';
 
 const dataTypes = ['myData', 'allData', 'exploreData'];
 

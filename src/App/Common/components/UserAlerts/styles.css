@@ -1,0 +1,40 @@
+.user-alerts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow: scroll;
+  padding-bottom: 10px;
+}
+
+.no-alerts {
+  display: flex;
+  min-width: 200px;
+  color: #aaa;
+  padding: 10px;
+}
+
+
+.top-alert-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.top-alert-row-left {
+  display: flex;
+  color: #777;
+}
+
+.top-alert-row-right {
+  display: flex;
+  color: #444;
+  cursor: pointer;
+}
+
+.top-alert-row-right:hover {
+  text-decoration: underline;
+}

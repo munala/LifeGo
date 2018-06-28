@@ -1,4 +1,4 @@
-.user-thumbnail {
+.notification-thumbnail {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -11,25 +11,25 @@
   border-bottom: 1px solid #f7f7f7;
 }
 
-.user-thumbnail:last-child {
+.notification-thumbnail:last-child {
   border-bottom: none;
 }
 
 
-.user-actions {
+.notification-actions {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items:flex-start;
   margin-left: 10px;
+  overflow-wrap: normal;
 }
-.username {
-  margin-left: 10px;
+.notification-username {
   color: #555;
   font-weight: bold;
 }
 
-.user-display-name {
+.display-name {
   display: flex;
   flex-direction: row;
   text-decoration: none;
@@ -39,12 +39,27 @@
   vertical-align: baseline;
 }
 
-.user-alert-text {
+.notification-text {
+  padding: 0px 10px;
+}
+
+.notification-text-detail {
   color: #777;
 }
 
-.user-alert-buttons {
+.notification-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.mark-notification-as-read {
+  display: 'flex';
+  color: #777;
+  margin-left: 10px;
+}
+
+.mark-notification-as-read:hover {
+  color: #444;
+  text-decoration: underline;
 }

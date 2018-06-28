@@ -78,6 +78,12 @@ class BaseClass extends Component {
 
   selectBucketlist = (bucketlist, mode) => {
     const { selectedBucketlist } = this.state;
+    const { match: { params: { id } }, history: { goBack } } = this.props;
+
+    if (id && selectedBucketlist.id) {
+      goBack();
+    }
+
     this.setState({
       mode: mode || '',
       selectedBucketlist: bucketlist.id !== selectedBucketlist.id ? bucketlist : {},

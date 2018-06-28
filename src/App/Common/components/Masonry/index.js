@@ -24,11 +24,24 @@ class Masonry extends BaseClass {
     deleting: false,
   }
 
-  static getDerivedStateFromProps = ({ data: { bucketlists } }, state) => {
+  static getDerivedStateFromProps = ({
+    data: { bucketlists },
+    match: { params: { id } },
+  }, state) => {
     if (state.bucketlist && state.deleting) {
       return ({
         ...state,
         bucketlists: bucketlists.filter(buck => buck.id !== state.bucketlist.id),
+      });
+    }
+    if (id && !state.selectedBucketlist.id) {
+      const [selectedBucketlist] = bucketlists
+        .filter(bucketlist => bucketlist.id.toString() === id);
+
+      return ({
+        ...state,
+        bucketlists,
+        selectedBucketlist: selectedBucketlist || state.selectedBucketlist,
       });
     }
     return ({
@@ -39,6 +52,7 @@ class Masonry extends BaseClass {
 
   componentDidMount = () => {
     const {
+      data: { bucketlists },
       location: { pathname },
       actions: {
         explore,
@@ -46,13 +60,22 @@ class Masonry extends BaseClass {
         loadAllBucketlists,
       },
     } = this.props;
-    const actions = {
-      '/': loadAllBucketlists,
-      '/home': loadAllBucketlists,
-      '/mylists': loadBucketlists,
-      '/explore': explore,
-    };
-    actions[pathname]();
+    if (bucketlists.length === 0) {
+      const actions = {
+        '/': loadAllBucketlists,
+        '/home': loadAllBucketlists,
+        '/mylists': loadBucketlists,
+        '/explore': explore,
+      };
+      const action = actions[pathname];
+      if (action) {
+        action();
+        return;
+      }
+      if (pathname.includes('/home')) {
+        loadAllBucketlists();
+      }
+    }
   }
 
   onScroll = ({ target }) => {

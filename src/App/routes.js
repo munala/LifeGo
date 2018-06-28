@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Auth from './Auth/Container';
 import SideMenu from './Common/components/SideMenu/container';
-import Header from './Common/components/Header/container';
+import Header from './Common/components/Header/Container';
 import Explore from './Explore/Container';
 import Home from './Home/Container';
 import MyLists from './MyLists/Container';
@@ -26,6 +26,7 @@ const Routes = ({ loggedIn }) => (
         <div className="app-content" >
           <Route exact path="/" component={loggedIn ? Home : Explore} />
           <Route exact path="/home" component={Home} />
+          <Route path="/home/:id" component={Home} />
           <Route path="/login" component={props => <Auth {...props} />} />
           <Route path="/explore" component={Explore} />
           <Route path="/mylists" component={MyLists} />
