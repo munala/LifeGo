@@ -64,7 +64,8 @@ class Items extends BaseClass {
             >
               <MoreVertIcon style={{ color: '#444' }} />
             </IconButton>
-          }{
+          }
+          {
             selectedItem.id === item.id &&
             <Menu
               id="long-menu"

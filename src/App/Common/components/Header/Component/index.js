@@ -3,12 +3,12 @@ import Popover from '@material-ui/core/Popover';
 import Modal from '@material-ui/core/Modal';
 
 import BaseClass from './BaseClass';
-import Chat from '../../Chat/Container';
-import Notifications from '../../Notifications/Container';
-import UserAlerts from '../../UserAlerts/Container';
+import Chat from '../../../../Chat/Container';
+import Notifications from '../../../../Notifications/Container';
+import UserAlerts from '../../../../UserAlerts/Container';
 import HeaderLeft from '../HeaderLeft';
 import HeaderRight from '../HeaderRight';
-import propTypes from '../propTypes';
+import propTypes from './propTypes';
 import '../styles.css';
 
 class Header extends BaseClass {
@@ -145,7 +145,12 @@ class Header extends BaseClass {
             panel: selectedPanel,
           })}
         >
-          <Chat />
+          <Chat
+            onClose={() => this.selectPanel({
+              event: { target: null },
+              panel: selectedPanel,
+            })}
+          />
         </Modal>
       </div>
     );

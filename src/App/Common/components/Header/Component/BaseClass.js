@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import { Component } from 'react';
-import propTypes from '../propTypes';
+import propTypes from './propTypes';
 
 class Header extends Component {
   handleClick = (event) => {

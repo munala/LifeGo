@@ -15,11 +15,12 @@ export const setTime = (item) => {
 
     if (createdAt > 23) {
       time = '';
+      createdAt = Math.floor(difference.asDays());
 
       if (createdAt > 365) {
-        createdAt = moment(item.createdAt).format('MMMM Do YYYY, HH:mm');
+        createdAt = moment(item.createdAt).format('MMMM Do YYYY');
       } else {
-        createdAt = moment(item.createdAt).format('MMMM Do, HH:mm');
+        createdAt = moment(item.createdAt).format('MMMM Do');
       }
     }
   }

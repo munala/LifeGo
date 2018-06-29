@@ -8,7 +8,7 @@
   padding: 10px 20px;
   cursor: pointer;
   background-color: #fff;
-  border-bottom: 1px solid #f7f7f7;
+  border-bottom: 1px solid #e9e9e9;
 }
 
 .notification-thumbnail:last-child {
@@ -22,8 +22,8 @@
   justify-content: center;
   align-items:flex-start;
   margin-left: 10px;
-  overflow-wrap: normal;
 }
+
 .notification-username {
   color: #555;
   font-weight: bold;
@@ -41,22 +41,38 @@
 
 .notification-text {
   padding: 0px 10px;
+  max-height: 32px;
+  line-height: 16px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .notification-text-detail {
   color: #777;
+  text-overflow: ellipsis;
 }
 
-.notification-buttons {
+.notification-bottom-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-self: stretch;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.notification-time {
+  display: flex;
+  color: #bbb;
+  align-self: center;
 }
 
 .mark-notification-as-read {
   display: 'flex';
-  color: #777;
-  margin-left: 10px;
+  color: #555;
 }
 
 .mark-notification-as-read:hover {

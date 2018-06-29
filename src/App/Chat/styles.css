@@ -1,0 +1,270 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 70px auto;
+  min-width: 45%;
+  max-width: 480px;
+  min-height: 500px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.chat-container:focus {
+  outline:0;
+}
+
+.new-conversation-body {
+  flex-shrink: 0;
+  padding: 5px 20px;
+}
+
+.chat-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  border-bottom: 1px solid #aaa;
+  padding: 5px 20px;
+}
+
+.conversation-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-header-title {
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  cursor: pointer;
+}
+
+.chat-header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow: scroll;
+}
+
+.new-chat-list {
+  flex-direction: column;
+}
+
+.message-list {
+  flex-grow: 1;
+}
+
+.chat-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 70px;
+  border-bottom: 0.5px solid #ddd;
+  padding: 10px 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.message-container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 5px 20px;
+  flex-shrink: 0;
+}
+
+.message-container-sender {
+  align-items: flex-end;
+}
+
+.chat-list-item:hover {
+  background-color: #f7f7f7;
+}
+
+.new-conversation-item {
+  border: 1px solid transparent;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.new-conversation-item:hover {
+  border-top: 0.5px solid #ccc;
+  border-bottom: 0.5px solid #ccc;
+}
+
+.chat-mark-all {
+  display: flex;
+  color: #444;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-mark-all:hover {
+  text-decoration: underline;
+}
+
+.chat-unread {
+  background-color: #f0f0f0;
+}
+
+.chat-item-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex: 1;
+  padding: 0px 10px;
+}
+
+.chat-item-top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.chat-item-user {
+  display: flex;
+  margin-left: 10px;
+  color: #444;
+  font-weight: bold;
+  font-size: 14px,
+}
+
+.new-conversation-user {
+  font-weight: normal;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.chat-item-time {
+  display: flex;
+  color: #bbb;
+  font-size: 12px;
+  align-self: center;
+}
+
+.chat-item-recent {
+  font-size: 14px;
+  margin: 5px 10px 0px 10px;
+  color: #666;
+  line-height: 14px;
+  height: 42px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: -o-ellipsis-lastline;
+}
+
+.message-top-content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: flex-end;
+  max-width: 70%;
+}
+
+.message-top-sender {
+  flex-direction: row;
+}
+
+.message-content {
+  display: flex;
+  margin: 5px 0px;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.message-time {
+  display: flex;
+  color: #bbb;
+  font-size: 11px;
+  font-weight: lighter;
+  margin: 0px 55px;
+}
+
+.new-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0px 20px;
+  margin: 10px 0px 30px 0px;
+}
+
+.message-delete-icon {
+  display: flex;
+  font-size: 14px;
+  color: #777;
+  padding: 10px 5px;
+  margin: 5px 0px;
+  cursor: pointer;
+  width:26px;
+}
+
+.no-messages {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  font-size: 14px;
+  margin: 10px;
+}
+
+.icon-placeholder {
+  display: flex;
+  width: 48px;
+}
+
+.search-input-container {
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 10px 20px;
+  flex-shrink: 0;
+}
+
+.recipient-label {
+  display: flex;
+  color: #444;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.recipient-input {
+  display: flex;
+  color: #444;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.recent-label {
+  margin-top: 20px;
+  flex-shrink: 0;
+}

@@ -5,6 +5,7 @@ import Avatar from '../Avatar';
 import OutlinedButton from '../OutlinedButton';
 import FlatButton from '../FlatButton';
 import RaisedButton from '../RaisedButton';
+import avatar from '../../../../assets/images/user.png';
 import './styles.css';
 
 const isFriend = ({ person, profile: { friends } }) => friends
@@ -24,13 +25,11 @@ const UserThumbnail = ({
   return (
     <div
       className="user-thumbnail"
-      style={alert.read !== true ? { backgroundColor: '#f7f7f7' } : {}}
+      style={alert.read !== true ? { backgroundColor: '#f0f0f0' } : {}}
     >
       <Avatar
         style={{ display: 'flex', height: 60, width: 60 }}
-        src={
-          person.pictureUrl || require('../../../../assets/images/user.png') // eslint-disable-line global-require
-        }
+        src={person.pictureUrl || avatar}
         onClick={goToProfile}
       />
       <div className="user-actions">

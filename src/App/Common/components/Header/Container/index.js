@@ -6,9 +6,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Header from '../Component';
 import { logout } from '../../../../Auth/actions';
 import { getProfile } from '../../../../Profile/actions';
-import { getNotifications } from '../../Notifications/actions';
-import { getConversations } from '../../Chat/actions';
-import { getAlerts } from '../../UserAlerts/actions';
+import { getNotifications } from '../../../../Notifications/actions';
+import { getConversations } from '../../../../Chat/actions';
+import { getAlerts } from '../../../../UserAlerts/actions';
 import { styles } from '../styles';
 
 const mapStateToProps = ({

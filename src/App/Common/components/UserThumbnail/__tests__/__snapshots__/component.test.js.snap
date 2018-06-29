@@ -3,6 +3,11 @@
 exports[`UserThumbnail tests renders without crashing 1`] = `
 <div
   className="user-thumbnail"
+  style={
+    Object {
+      "backgroundColor": "#f0f0f0",
+    }
+  }
 >
   <UserAvatar
     name="user avatar"
@@ -19,15 +24,39 @@ exports[`UserThumbnail tests renders without crashing 1`] = `
   <div
     className="user-actions"
   >
-    <a
-      className="username"
-      href="#"
+    <div
+      className="user-alert-text"
       onClick={[Function]}
-    />
-    <WithStyles(OutlinedButton)
-      label="Remove"
-      onClick={[Function]}
-    />
+    >
+      <span
+        className="username"
+      >
+        undefined 
+      </span>
+      <span
+        className="alert-text"
+      >
+        added you.
+      </span>
+    </div>
+    <div
+      className="user-alert-buttons"
+    >
+      <WithStyles(RaisedButton)
+        label="Add"
+        onClick={[Function]}
+      />
+      <WithStyles(FlatButton)
+        label="Ignore"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#eee",
+            "color": "grey",
+          }
+        }
+      />
+    </div>
   </div>
 </div>
 `;
