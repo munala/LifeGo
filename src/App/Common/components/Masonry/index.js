@@ -8,8 +8,9 @@ import BaseClass from './BaseClass';
 import SnackBarComponent from '../SnackBarComponent';
 import Fab from '../Fab';
 import Form from '../Form';
-import Card from './Card';
+import Card from '../Card';
 import Loading from './Loading';
+import EmptyState from './EmptyState';
 import propTypes from './propTypes';
 import './styles.css';
 
@@ -26,7 +27,6 @@ class Masonry extends BaseClass {
 
   static getDerivedStateFromProps = ({
     data: { bucketlists },
-    match: { params: { id } },
   }, state) => {
     if (state.bucketlist && state.deleting) {
       return ({
@@ -34,16 +34,7 @@ class Masonry extends BaseClass {
         bucketlists: bucketlists.filter(buck => buck.id !== state.bucketlist.id),
       });
     }
-    if (id && !state.selectedBucketlist.id) {
-      const [selectedBucketlist] = bucketlists
-        .filter(bucketlist => bucketlist.id.toString() === id);
 
-      return ({
-        ...state,
-        bucketlists,
-        selectedBucketlist: selectedBucketlist || state.selectedBucketlist,
-      });
-    }
     return ({
       ...state,
       bucketlists,
@@ -207,6 +198,7 @@ class Masonry extends BaseClass {
           save={this.save}
         />
         {pathname !== '/explore' && <Fab onClick={this.openModal} />}
+        {currentApiCalls === 0 && bucketlists.length === 0 && <EmptyState />}
         <SnackBarComponent
           open={snackOpen}
           message={{

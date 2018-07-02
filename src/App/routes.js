@@ -8,6 +8,7 @@ import Header from './Common/components/Header/Container';
 import Explore from './Explore/Container';
 import Home from './Home/Container';
 import MyLists from './MyLists/Container';
+import SingleList from './SingleList/container';
 import './styles.css';
 
 const Routes = ({ loggedIn }) => (
@@ -26,8 +27,8 @@ const Routes = ({ loggedIn }) => (
         <div className="app-content" >
           <Route exact path="/" component={loggedIn ? Home : Explore} />
           <Route exact path="/home" component={Home} />
-          <Route path="/home/:id" component={Home} />
-          <Route path="/login" component={props => <Auth {...props} />} />
+          <Route path="/home/:id" component={SingleList} />
+          <Route path="/login" component={Auth} />
           <Route path="/explore" component={Explore} />
           <Route path="/mylists" component={MyLists} />
           <Route path="/profile" component={Profile} />

@@ -52,7 +52,7 @@ class Form extends BaseClass {
               autoFocus
               name="name"
               placeholder="name of your bucketlist"
-              value={bucketlist.name}
+              value={bucketlist.name || ''}
               style={{ display: 'flex', width: 460 }}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'name' })}
               error={error}

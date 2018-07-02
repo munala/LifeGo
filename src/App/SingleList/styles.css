@@ -1,0 +1,88 @@
+.single-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  min-width: 500px;
+  max-width: 500px;
+  margin: auto;
+  overflow: scroll;
+  outline: none !important;
+}
+
+.no-bucketlist {
+  font-size: 14px;
+  color: #777;
+  margin: 5px;
+  margin-bottom: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-column-break-inside: avoid;
+  overflow: hidden;
+  width: calc(100% - 10px);
+}
+
+.select-bucketlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  margin: auto;
+  overflow: scroll;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
+  max-width: 500px;
+}
+
+.error-icon {
+  display: flex;
+  font-size: 50px;
+  margin: 20px auto;
+  color: red;
+}
+
+.loading-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.loading-detail {
+  background-color: #eaeaea;
+  display: flex;
+  margin: 5px;
+  border-radius: 7px;
+  height: 14px;
+}
+
+.loading-body-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.loading-body-detail {
+  background-color: #eaeaea;
+  display: flex;
+  margin: 5px;
+  border-radius: 6px;
+  height: 12px;
+}
+
+.loading-image {
+  display: flex;
+  min-height: 300px;
+  width: 100%;
+  background-color: #eaeaea;
+  margin: 5px;
+  margin-top: 20px;
+  border-radius: 6px;
+}

@@ -219,7 +219,6 @@
 .loading-item {
   display: flex;
   margin: 10px;
-  padding:10px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;

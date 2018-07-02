@@ -10,6 +10,7 @@ const initialState = {
     nextUrl: '',
     previousUrl: '',
     newBucketlists: [],
+    bucketlist: {},
   },
 };
 

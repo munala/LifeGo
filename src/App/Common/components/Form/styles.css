@@ -10,6 +10,7 @@
   max-width: 500px;
   min-width: 500px;
   background-color: #fff;
+  outline:0;
 }
 
 .input-wrapper {

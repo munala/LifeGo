@@ -12,6 +12,7 @@ const initialState = {
   settings: 0,
   others: 0,
   loader: 0,
+  single: 0,
 };
 
 const actionTypeEndsInSuccess = actionType => actionType.substring(actionType.length - 8) === '_SUCCESS';

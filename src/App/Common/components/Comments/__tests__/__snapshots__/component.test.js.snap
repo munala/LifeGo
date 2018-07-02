@@ -44,6 +44,9 @@ exports[`Comments tests renders without crashing 1`] = `
               comment
             </span>
           </div>
+          <div
+            className="icon-placeholder"
+          />
         </div>
         <div
           className="time"

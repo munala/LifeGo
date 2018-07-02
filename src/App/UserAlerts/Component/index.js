@@ -6,9 +6,11 @@ import '../styles.css';
 
 class UserAlerts extends Component {
   goToProfile = async (alert) => {
-    const { history: { push }, actions: { markAlertAsRead } } = this.props;
+    const { onClose, history: { push }, actions: { markAlertAsRead } } = this.props;
 
     markAlertAsRead(alert);
+
+    onClose();
 
     push(`profile/${alert.userId}`);
   }

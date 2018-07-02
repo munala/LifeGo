@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import Comments from '../../Comments';
-import Items from '../../Items';
-import CardHeader from '../CardHeader';
-import ButtonRow from '../ButtonRow';
-import { setTime } from '../../../../../utils';
-import '../styles.css';
+import Comments from '../Comments';
+import Items from '../Items';
+import CardHeader from './CardHeader';
+import ButtonRow from './ButtonRow';
+import { setTime } from '../../../../utils';
+import './styles.css';
 
 class Card extends Component {
   state = {

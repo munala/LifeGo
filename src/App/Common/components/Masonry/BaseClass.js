@@ -67,7 +67,7 @@ class BaseClass extends Component {
 
     const { actions: { updateBucketlist, saveBucketlist } } = this.props;
 
-    const action = this.state.bucketlist ? updateBucketlist : saveBucketlist;
+    const action = this.state.bucketlist.id ? updateBucketlist : saveBucketlist;
 
     const { error } = await action(bucketlist);
 

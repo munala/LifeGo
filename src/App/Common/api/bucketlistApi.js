@@ -22,6 +22,11 @@ const BucketlistService = {
     url: `${bucketlistUrl + bucketlist.id.toString()}`,
   }),
 
+  getBucketlist: async id => sendRequest({
+    method: 'get',
+    url: `${bucketlistUrl}/${id}`,
+  }),
+
   getBucketlists: async (offset, limit, name) => sendRequest({
     method: 'get',
     url: `${bucketlistUrl}?offset=${offset}&limit=${limit}&q=${name}`,

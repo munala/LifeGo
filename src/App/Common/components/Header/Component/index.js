@@ -59,19 +59,22 @@ class Header extends BaseClass {
     const { selectedPanel, topAnchor } = this.state;
 
     if (selectedPanel && selectedPanel !== 'conversations') {
+      const onClose = () => this.selectPanel({
+        event: { target: null },
+        panel: selectedPanel,
+      });
+
       const panels = {
-        notifications: () => <Notifications />,
-        alerts: () => <UserAlerts />,
+        notifications: () => <Notifications onClose={onClose} />,
+        alerts: () => <UserAlerts onClose={onClose} />,
       };
+
       const Panel = panels[selectedPanel];
       return (
         <Popover
           open={Boolean(topAnchor)}
           anchorEl={topAnchor}
-          onClose={() => this.selectPanel({
-            event: { target: null },
-            panel: selectedPanel,
-          })}
+          onClose={onClose}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',

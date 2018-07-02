@@ -69,16 +69,17 @@ class Comments extends BaseClass {
               </div>
               {
                 (bucketlist.userId === profile.id || comment.senderId === profile.id)
-                && !snackOpen && hoveredComment.id === comment.id &&
-                <IconButton
-                  aria-label="More"
-                  aria-owns={anchorEl ? 'long-menu' : null}
-                  aria-haspopup="true"
-                  style={{ maxHeight: 20, alignSelf: 'center' }}
-                  onClick={event => this.handleClick({ event, selectedComment: comment })}
-                >
-                  <MoreHorizIcon style={{ color: '#444' }} />
-                </IconButton>
+                && !snackOpen && hoveredComment.id === comment.id ?
+                  <IconButton
+                    aria-label="More"
+                    aria-owns={anchorEl ? 'long-menu' : null}
+                    aria-haspopup="true"
+                    style={{ maxHeight: 20, alignSelf: 'center' }}
+                    onClick={event => this.handleClick({ event, selectedComment: comment })}
+                  >
+                    <MoreHorizIcon style={{ color: '#444' }} />
+                  </IconButton> :
+                  <div className="icon-placeholder" />
               }
               {
                 selectedComment.id === comment.id &&

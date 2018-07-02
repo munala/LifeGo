@@ -86,3 +86,8 @@ a {
   align-items: flex-start;
   flex:1;
 }
+
+.icon-placeholder {
+  display: flex;
+  min-width: 48px;
+}

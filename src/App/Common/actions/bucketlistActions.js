@@ -4,6 +4,14 @@ import * as apiCallActions from './apiCallActions';
 
 const dataTypes = ['myData', 'allData', 'exploreData'];
 
+export const getBucketlistSuccess = ({ bucketlist, screen, dataType }) => ({
+  type: types.GET_BUCKETLIST_SUCCESS,
+  bucketlist,
+  message: '',
+  screen,
+  dataType,
+});
+
 export const createBucketlistSuccess = ({ bucketlist, screen, dataType }) => ({
   type: types.CREATE_BUCKETLIST_SUCCESS,
   bucketlist,
@@ -245,6 +253,28 @@ export const searchBucketlists = (
   }
 
   clearSearch()(dispatch);
+};
+
+export const getBucketlist = id => async (dispatch) => {
+  const response = await BucketlistService.getBucketlist(id);
+
+  dispatch(apiCallActions.beginApiCall({ screen: 'single' }));
+
+  if (response.error) {
+    dispatch(apiCallActions.apiCallError({ ...response, screen: 'single' }));
+
+    dispatch(apiCallActions.resetError());
+  } else {
+    dispatch(getBucketlistSuccess({
+      bucketlist: response,
+      screen: 'single',
+      dataType: 'allData',
+    }));
+
+    dispatch(apiCallActions.resetMessage());
+  }
+
+  return response;
 };
 
 export const saveBucketlist = bucketlist => async (dispatch) => {

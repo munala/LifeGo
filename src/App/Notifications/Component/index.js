@@ -10,9 +10,11 @@ class Notifications extends Component {
   }
 
   goToBucketlist = async (notification) => {
-    const { history: { push }, actions: { markNotificationAsRead } } = this.props;
+    const { onClose, history: { push }, actions: { markNotificationAsRead } } = this.props;
 
     markNotificationAsRead(notification);
+
+    onClose();
 
     push(`home/${notification.bucketlistId}`);
   }

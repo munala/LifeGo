@@ -6,6 +6,11 @@ const initialData = {
   previousUrl: '',
   newBucketlists: [],
   count: 0,
+  bucketlist: {
+    likes: [],
+    comments: [],
+    items: [],
+  },
 };
 
 const initialState = {
@@ -81,6 +86,16 @@ export default (state = initialState, action) => {
         },
       };
 
+    case types.GET_BUCKETLIST_SUCCESS:
+
+      return {
+        ...state,
+        [action.dataType]: {
+          ...state[action.dataType],
+          bucketlist: action.bucketlist,
+        },
+      };
+
     case types.UPDATE_BUCKETLIST_SUCCESS:
       return {
         ...state,
@@ -96,6 +111,9 @@ export default (state = initialState, action) => {
                   comments: bucketlist.comments || [],
                 })),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            action.bucketlist :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -112,6 +130,9 @@ export default (state = initialState, action) => {
             ...state[action.dataType].newBucketlists
               .filter(bucketlist => bucketlist.id !== action.bucketlist.id),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {} :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -132,6 +153,12 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              items: [...state[action.dataType].bucketlist.items, action.item],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -155,6 +182,15 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              items: [
+                ...state[action.dataType].bucketlist.items
+                  .map(item => (item.id === action.item.id ? action.item : item)),
+              ],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -177,6 +213,15 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              items: [
+                ...state[action.dataType].bucketlist.items
+                  .filter(item => item.id !== action.item.id),
+              ],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -197,6 +242,12 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              comments: [...state[action.dataType].bucketlist.comments, action.comment],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -211,10 +262,12 @@ export default (state = initialState, action) => {
                 return {
                   ...bucketlist,
                   comments: [
-                    ...bucketlist.comments.map(comment =>
-                      (comment.id === action.comment.id
-                        ? action.comment
-                        : comment)),
+                    ...bucketlist.comments
+                      .map(comment => (
+                        comment.id === action.comment.id ?
+                          action.comment :
+                          comment
+                      )),
                   ],
                 };
               }
@@ -222,6 +275,15 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              comments: [
+                ...state[action.dataType].bucketlist.comments
+                  .map(comment => (comment.id === action.comment.id ? action.comment : comment)),
+              ],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -244,6 +306,15 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              comments: [
+                ...state[action.dataType].bucketlist.comments
+                  .filter(comment => comment.id !== action.comment.id),
+              ],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -264,6 +335,12 @@ export default (state = initialState, action) => {
               return bucketlist;
             }),
           ],
+          bucketlist: state[action.dataType].bucketlist.id === action.bucketlist.id ?
+            {
+              ...state[action.dataType].bucketlist,
+              likes: [...state[action.dataType].bucketlist.likes, action.like],
+            } :
+            state[action.dataType].bucketlist,
         },
       };
 
@@ -280,6 +357,13 @@ export default (state = initialState, action) => {
               ],
             })),
           ],
+          bucketlist: {
+            ...state[action.dataType].bucketlist,
+            likes: [
+              ...state[action.dataType].bucketlist.likes
+                .filter(like => like.id !== action.like.id),
+            ],
+          },
         },
       };
 
