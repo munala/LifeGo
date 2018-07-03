@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Auth from './Auth/Container';
 import SideMenu from './Common/components/SideMenu/container';
 import Header from './Common/components/Header/Container';
 import Explore from './Explore/Container';
 import Home from './Home/Container';
-import MyLists from './MyLists/Container';
+import Profile from './Profile/Container';
 import SingleList from './SingleList/container';
+import NotFound from './Common/components/NotFound';
 import './styles.css';
 
 const Routes = ({ loggedIn }) => (
@@ -25,14 +26,17 @@ const Routes = ({ loggedIn }) => (
           activeItem="home"
         />
         <div className="app-content" >
-          <Route exact path="/" component={loggedIn ? Home : Explore} />
-          <Route exact path="/home" component={Home} />
-          <Route path="/home/:id" component={SingleList} />
-          <Route path="/login" component={Auth} />
-          <Route path="/explore" component={Explore} />
-          <Route path="/mylists" component={MyLists} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/settings" component={Settings} />
+          <Switch>
+            <Route exact path="/" component={loggedIn ? Home : Explore} />
+            <Route exact path="/home" component={Home} />
+            <Route path="/lists/:id" component={SingleList} />
+            <Route path="/login" component={Auth} />
+            <Route path="/explore" component={Explore} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/profile/:id" component={Profile} />
+            <Route path="/settings" component={Settings} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </div>
     </div>
@@ -43,7 +47,6 @@ Routes.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
 };
 
-const Profile = () => (<div>Profile</div>);
 const Settings = () => (<div>Settings</div>);
 
 export default Routes;

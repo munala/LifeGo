@@ -1,0 +1,90 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import TopBar from '../TopBar';
+import Content from '../Content';
+import EditProfile from '../EditProfile';
+import '../styles.css';
+
+class Profile extends Component {
+  state = {
+    stat: 'lists',
+    editProfileMode: false,
+  }
+
+  static getDerivedStateFromProps = ({
+    match: {
+      params: { id },
+    },
+    actions: { loadOtherBucketlists, loadBucketlists, getOtherProfile },
+  }, state) => {
+    if (!id && id !== state.id) {
+      loadBucketlists();
+      return state;
+    }
+    if (id && id !== state.id) {
+      loadOtherBucketlists(id);
+      getOtherProfile(id);
+      return ({ ...state, id });
+    }
+    return state;
+  }
+
+  componentDidMount = async () => {
+    const { match: { params: { id } } } = this.props;
+    if (id) {
+      this.props.actions.loadOtherBucketlists(id);
+      await this.props.actions.getOtherProfile(id);
+    } else {
+      this.props.actions.loadBucketlists();
+    }
+  }
+
+  selectStat = ({ stat }) => {
+    this.setState({ stat });
+  }
+
+  toggleProfileMode = (editProfileMode) => {
+    this.setState({
+      editProfileMode,
+    });
+  }
+
+  render() {
+    const { stat, editProfileMode } = this.state;
+
+    return (
+      <div className="profile-container">
+        <TopBar
+          {...this.props}
+          stat={stat}
+          editProfileMode={editProfileMode}
+          selectStat={this.selectStat}
+          toggleProfileMode={this.toggleProfileMode}
+        />
+        {
+          editProfileMode ?
+            <EditProfile
+              {...this.props}
+              toggleProfileMode={this.toggleProfileMode}
+            /> :
+            <Content
+              {...this.props}
+              stat={stat}
+              selectStat={this.selectStat}
+            />
+        }
+      </div>
+    );
+  }
+}
+
+Profile.propTypes = {
+  actions: PropTypes.shape({
+    loadOtherBucketlists: PropTypes.func.isRequired,
+    getOtherProfile: PropTypes.func.isRequired,
+    loadBucketlists: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default Profile;

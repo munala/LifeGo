@@ -40,11 +40,6 @@ const mapStateToProps = ({
         text: 'Explore',
       },
       {
-        to: '/mylists',
-        icon: 'list',
-        text: 'My Lists',
-      },
-      {
         to: '/profile',
         icon: 'account_circle',
         text: 'Profile',

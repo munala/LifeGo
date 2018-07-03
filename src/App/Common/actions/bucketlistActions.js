@@ -227,6 +227,41 @@ export const loadAllBucketlists = (
   dispatch(apiCallActions.resetMessage());
 };
 
+export const loadOtherBucketlists = (
+  id,
+  offset = 0,
+  limit = 50,
+  search = '',
+) => async (dispatch) => {
+  dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
+
+  const response = await BucketlistService.getOtherBucketlists(
+    id,
+    offset,
+    limit,
+    search,
+  );
+
+  if (response.error) {
+    dispatch(apiCallActions.apiCallError({
+      screen: 'myBucketlists',
+      error: response.error,
+    }));
+
+    dispatch(apiCallActions.resetError());
+
+    return;
+  }
+
+  dispatch(loadBucketlistsSuccess({
+    data: response,
+    dataType: 'myData',
+    screen: 'myBucketlists',
+  }));
+
+  dispatch(apiCallActions.resetMessage());
+};
+
 export const clearSearch = () => async (dispatch) => {
   dataTypes.forEach((dataType) => {
     dispatch({ type: types.CLEAR_SEARCH_RESULTS, dataType });

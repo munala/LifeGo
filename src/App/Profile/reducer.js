@@ -1,9 +1,22 @@
 import * as types from './constants';
 
-export default (state = {}, action) => {
+export default (state = {
+  searchUsers: [],
+  friends: [],
+  followers: [],
+  otherProfile: {
+    searchUsers: [],
+    friends: [],
+    followers: [],
+  },
+}, action) => {
   switch (action.type) {
     case types.GET_PROFILE_SUCCESS:
-      return { ...action.profile, searchUsers: [] };
+      return {
+        ...action.profile,
+        searchUsers: [],
+        otherProfile: {},
+      };
 
     case types.UPDATE_PROFILE_SUCCESS:
       return {

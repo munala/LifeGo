@@ -8,7 +8,8 @@ const mapStateToProps = ({
   data: { myData },
   profile,
   currentApiCalls: { myBucketlists: currentApiCalls },
-}) => ({
+}, otherProps) => ({
+  ...otherProps,
   data: myData,
   profile,
   currentApiCalls,

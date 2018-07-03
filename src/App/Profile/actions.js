@@ -115,7 +115,7 @@ export const updateProfile = (profile, screen) => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(updateProfileSuccess({ profile, screen }));
+    dispatch(updateProfileSuccess({ profile: response.profile, screen }));
 
     dispatch(apiCallActions.resetMessage());
   }

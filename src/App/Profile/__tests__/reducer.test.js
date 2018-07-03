@@ -5,6 +5,7 @@ const initialState = {
   followers: [],
   friends: [],
   searchUsers: [],
+  otherProfile: {},
 };
 
 describe('Profile reducer', () => {
@@ -16,6 +17,7 @@ describe('Profile reducer', () => {
       name: 'oliver',
       id: 1,
       searchUsers: [],
+      otherProfile: {},
     });
   });
 

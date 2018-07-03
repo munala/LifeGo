@@ -16,7 +16,7 @@ class Notifications extends Component {
 
     onClose();
 
-    push(`home/${notification.bucketlistId}`);
+    push(`lists/${notification.bucketlistId}`);
   }
 
   markAllAsRead = () => {

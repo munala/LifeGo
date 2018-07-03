@@ -47,7 +47,6 @@ class Masonry extends BaseClass {
       location: { pathname },
       actions: {
         explore,
-        loadBucketlists,
         loadAllBucketlists,
       },
     } = this.props;
@@ -55,7 +54,6 @@ class Masonry extends BaseClass {
       const actions = {
         '/': loadAllBucketlists,
         '/home': loadAllBucketlists,
-        '/mylists': loadBucketlists,
         '/explore': explore,
       };
       const action = actions[pathname];
@@ -98,7 +96,7 @@ class Masonry extends BaseClass {
     const { bucketlists: bucks, mode } = this.state;
     const { profile, actions } = this.props;
 
-    const cols = bucks.length < columnCount ? bucks.length : columnCount;
+    const cols = bucks.length <= columnCount ? bucks.length : columnCount;
 
     const { reorderd: bucketlists } = this.reorder(bucks, cols);
 
@@ -137,6 +135,7 @@ class Masonry extends BaseClass {
       data: { bucketlists, newBucketlists: { length: totalNew } },
       location: { pathname },
       currentApiCalls,
+      fromProfile,
     } = this.props;
 
     const [bucketlist] = bucketlists.filter(buck => buck.id === selectedBucketlist.id);
@@ -197,8 +196,9 @@ class Masonry extends BaseClass {
           onClose={this.closeModal}
           save={this.save}
         />
-        {pathname !== '/explore' && <Fab onClick={this.openModal} />}
-        {currentApiCalls === 0 && bucketlists.length === 0 && <EmptyState />}
+        {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
+        {currentApiCalls === 0 && bucketlists.length === 0 &&
+          <EmptyState fromProfile={fromProfile} />}
         <SnackBarComponent
           open={snackOpen}
           message={{

@@ -41,8 +41,8 @@ class UserAlerts extends Component {
           alert={alert}
           profile={profile}
           person={person}
-          addFriend={() => removeFriend(person)}
-          removeFriend={() => addFriend(person)}
+          addFriend={() => addFriend(person)}
+          removeFriend={() => removeFriend(person)}
           deleteAlert={() => deleteAlert(alert)}
           goToProfile={() => this.goToProfile(alert)}
         />
