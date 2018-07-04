@@ -197,8 +197,8 @@ class Masonry extends BaseClass {
           save={this.save}
         />
         {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
-        {currentApiCalls === 0 && bucketlists.length === 0 &&
-          <EmptyState fromProfile={fromProfile} />}
+        {currentApiCalls === 0 && bucketlists.length === 0 && !fromProfile && <EmptyState />}
+        {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}
         <SnackBarComponent
           open={snackOpen}
           message={{

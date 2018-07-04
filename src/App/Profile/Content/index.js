@@ -43,7 +43,9 @@ class SideBar extends Component {
       stat,
       profile,
       otherProfile,
+      currentApiCalls,
       match: { params: { id } },
+      data: { bucketlists },
     } = this.props;
 
     const selectedProfile = id && otherProfile.id && otherProfile.id !== profile.id ?
@@ -61,7 +63,13 @@ class SideBar extends Component {
           }
           {
             stat === 'lists' &&
-            <MyLists fromProfile />
+            <div>
+              {
+                currentApiCalls === 0 && bucketlists.length === 0 &&
+                <div className="no-stat">{`No ${stat}`}</div>
+              }
+              <MyLists fromProfile />
+            </div>
           }
         </div>
       </div>
@@ -75,6 +83,12 @@ SideBar.propTypes = {
       id: PropTypes.number.isRequired,
     })).isRequired,
   }).isRequired,
+  data: PropTypes.shape({
+    bucketlists: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })).isRequired,
+  }).isRequired,
+  currentApiCalls: PropTypes.number.isRequired,
   otherProfile: PropTypes.shape({}).isRequired,
   actions: PropTypes.shape({}).isRequired,
   match: PropTypes.shape({}).isRequired,

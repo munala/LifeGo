@@ -317,6 +317,7 @@
   padding:10% 30%;
   vertical-align: middle;
 }
+
 .empty-logo {
   display: flex;
   width: 200px;
@@ -324,6 +325,7 @@
   filter: grayscale(100%);
   opacity: 0.5;
 }
+
 .empty-bottom {
   text-align: center;
   margin-top: 50px;
@@ -333,6 +335,7 @@
   font-size: 20px;
   color: #777;
 }
+
 .add-icon {
   font-size: 30px;
   color: #00bcd4;

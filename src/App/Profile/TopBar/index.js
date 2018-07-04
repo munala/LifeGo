@@ -14,16 +14,12 @@ import '../styles.css';
 const styles = {
   inActive: {
     display: 'flex',
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     color: '#777',
-    width: 200,
-    borderRadius: 20,
     boxShadow: 'none',
   },
   active: {
     display: 'flex',
-    width: 200,
-    borderRadius: 20,
   },
 };
 
@@ -55,7 +51,7 @@ class TopBar extends BaseClass {
                     style={styles.active}
                     onClick={() => addFriend(selectedProfile)}
                   />
-                }
+              }
             </div> :
             <IconLabelButton
               label={editProfileMode ? 'change photo' : 'edit profile'}
@@ -127,11 +123,11 @@ class TopBar extends BaseClass {
               src={selectedProfile.pictureUrl || avatar}
               onClick={this.handleClick}
               style={{
-            display: 'flex',
-            width: 120,
-            height: 120,
-            flexShrink: 0,
-          }}
+                display: 'flex',
+                width: 120,
+                height: 120,
+                flexShrink: 0,
+              }}
             />
           </div>
           <div className="profile-details">
@@ -150,11 +146,11 @@ class TopBar extends BaseClass {
           open={Boolean(anchorEl)}
           onClose={() => this.openPhotoOptions({ currentTarget: null })}
           PaperProps={{
-          style: {
-            paddingLeft: 10,
-            paddingRight: 10,
-          },
-        }}
+            style: {
+              paddingLeft: 10,
+              paddingRight: 10,
+            },
+          }}
         >
           <MenuItem onClick={() => {}}>
             <label
@@ -171,11 +167,10 @@ class TopBar extends BaseClass {
             />
           </MenuItem>
           {
-          profile.pictureUrl &&
-          <MenuItem onClick={this.removePhoto}>Remove</MenuItem>
-        }
+            profile.pictureUrl &&
+            <MenuItem onClick={this.removePhoto}>Remove</MenuItem>
+          }
         </Menu>
-
       </div>;
   }
 }

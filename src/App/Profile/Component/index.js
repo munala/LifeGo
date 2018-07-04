@@ -13,20 +13,21 @@ class Profile extends Component {
   }
 
   static getDerivedStateFromProps = ({
-    match: {
-      params: { id },
-    },
+    profile: { id: profileId },
+    match: { params: { id } },
     actions: { loadOtherBucketlists, loadBucketlists, getOtherProfile },
   }, state) => {
-    if (!id && id !== state.id) {
-      loadBucketlists();
-      return state;
+    const userId = id || profileId;
+
+    if (userId !== state.id) {
+      loadOtherBucketlists(userId);
+      getOtherProfile(userId);
+      return ({
+        ...state,
+        id: userId,
+      });
     }
-    if (id && id !== state.id) {
-      loadOtherBucketlists(id);
-      getOtherProfile(id);
-      return ({ ...state, id });
-    }
+
     return state;
   }
 
