@@ -89,7 +89,7 @@ export const initialBucketlist = {
   category: '',
   dueDate: '',
   location: '',
-  privacy: 'everyone',
+  privacy: '',
 };
 
 export default BaseClass;

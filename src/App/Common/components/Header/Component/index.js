@@ -16,7 +16,7 @@ class Header extends BaseClass {
     anchorEl: null,
     topAnchor: null,
     pathname: this.props.location.pathname,
-    loggedIn: this.props.loggedIn, // eslint-disable-line react/no-unused-state
+    loggedIn: false, // eslint-disable-line react/no-unused-state
     profile: {}, // eslint-disable-line react/no-unused-state
     selectedPanel: '',
   };
@@ -30,7 +30,7 @@ class Header extends BaseClass {
     profile,
     currentApiCalls,
   }, state) => {
-    if (loggedIn && (loggedIn !== state.loggedIn || (!profile.id && !currentApiCalls))) {
+    if (loggedIn && loggedIn !== state.loggedIn) {
       getProfile();
       getNotifications();
       getAlerts();
@@ -41,18 +41,8 @@ class Header extends BaseClass {
       ...state,
       profile,
       pathname,
+      loggedIn,
     });
-  }
-
-  componentDidMount = () => {
-    const {
-      getProfile, getNotifications, getAlerts, getConversations,
-    } = this.props.actions;
-
-    getProfile();
-    getNotifications();
-    getAlerts();
-    getConversations();
   }
 
   renderPanels =() => {
@@ -95,7 +85,6 @@ class Header extends BaseClass {
       classes,
       loggedIn,
       counts,
-      onChange,
       history,
       profile: { pictureUrl },
     } = this.props;
@@ -123,7 +112,7 @@ class Header extends BaseClass {
           to={to}
           title={title}
           classes={classes}
-          onChange={onChange}
+          onChange={() => {}}
         />
 
         <HeaderRight

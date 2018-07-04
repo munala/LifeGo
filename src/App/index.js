@@ -21,10 +21,7 @@ const store = configureStore();
 
 const token = localStorage.getItem('token');
 
-let loggedIn = false;
-
 if (token && jwtDecode(token).exp >= Date.now() / 1000) {
-  loggedIn = true;
   store.dispatch(loginSuccess({ loggedIn: true }));
   socket(store);
 }
@@ -32,7 +29,7 @@ if (token && jwtDecode(token).exp >= Date.now() / 1000) {
 export default () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
-      <Routes loggedIn={loggedIn} />
+      <Routes />
     </Provider>
   </MuiThemeProvider>
 );

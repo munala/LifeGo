@@ -146,7 +146,7 @@ export const updateProfile = user => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(updateProfileSuccess({ user, screen: 'settings' }));
+    dispatch(updateProfileSuccess({ ...response, screen: 'settings' }));
 
     dispatch(apiCallActions.resetMessage());
   }

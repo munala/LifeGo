@@ -32,7 +32,7 @@ class AuthComponent extends BaseClass {
   }
 
   static getDerivedStateFromProps = ({
-    location, history, loggedIn, actions: { getProfile },
+    location, history, loggedIn,
   }, state) => {
     if (loggedIn !== state.loggedIn && loggedIn) {
       history.push('/home');

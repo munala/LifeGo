@@ -195,6 +195,7 @@ class Masonry extends BaseClass {
           open={showAddModal}
           onClose={this.closeModal}
           save={this.save}
+          profile={profile}
         />
         {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
         {currentApiCalls === 0 && bucketlists.length === 0 && !fromProfile && <EmptyState />}

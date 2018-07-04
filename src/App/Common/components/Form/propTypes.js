@@ -8,4 +8,5 @@ export default {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   save: PropTypes.func.isRequired,
+  profile: PropTypes.shape({}).isRequired,
 };

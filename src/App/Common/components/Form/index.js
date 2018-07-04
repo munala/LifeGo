@@ -34,11 +34,17 @@ class Form extends BaseClass {
   }
 
   render() {
-    const { onClose, open, bucketlist: bucketList } = this.props;
+    const {
+      onClose, open, bucketlist: bucketList, profile,
+    } = this.props;
 
     const {
-      bucketlist, error, disabled, saving, imageUrl,
+      error, disabled, saving, imageUrl,
     } = this.state;
+
+    const { bucketlist } = this.state;
+
+    bucketlist.privacy = bucketlist.privacy || profile.privacy;
 
     return (
       <Modal

@@ -1,0 +1,42 @@
+.settings-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0px 20px;
+  align-items: flex-start;
+  background-color: #fff;
+  overflow: scroll;
+  width: 100%;
+}
+
+.settings-submit-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.settings-reminder {
+  display: flex;
+  justify-content: space-between;
+  width: 230px;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+.settings-input-label {
+  display: flex;
+  color: #444;
+  margin-left: 5px;
+  flex-shrink: 0;
+}
+
+.settings-inputs {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  padding: 10px 0px;
+  flex-shrink: 0;
+}

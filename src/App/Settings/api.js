@@ -10,16 +10,16 @@ export default {
   updateProfile,
   getProfile,
 
-  changePassword: async ({ userId, username, ...user }) => sendRequest({
+  changePassword: async data => sendRequest({
     method: 'post',
     url: `${userUrl}change_password`,
-    data: removeEmptyFields(user),
+    data,
   }),
 
-  changeEmail: async user => sendRequest({
+  changeEmail: async data => sendRequest({
     method: 'post',
     url: `${userUrl}change_email`,
-    data: removeEmptyFields(user),
+    data,
   }),
 
   changeUsername: async user => sendRequest({

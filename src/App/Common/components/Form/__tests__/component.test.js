@@ -25,6 +25,7 @@ describe('Form tests', () => {
       onClose={onClose}
       open
       save={save}
+      profile={{ privacy: 'everyone' }}
     />);
   });
 

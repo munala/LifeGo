@@ -24,5 +24,4 @@ export default {
   classes: PropTypes.shape({}).isRequired,
   loggedIn: PropTypes.bool.isRequired,
   counts: PropTypes.shape({}).isRequired,
-  onChange: PropTypes.func.isRequired,
 };

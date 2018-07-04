@@ -20,6 +20,13 @@ export const handleError = (error) => {
     };
   }
 
+  if (error.response && error.response.data.message) {
+    return {
+      error: error.response.data.message,
+      code: error.response.status,
+    };
+  }
+
   return {
     error: error.message || error,
     code: 0,
