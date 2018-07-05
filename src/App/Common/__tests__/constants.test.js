@@ -21,8 +21,6 @@ describe('Constants tests', () => {
     expect(types.API_CALL_ERROR).toEqual('API_CALL_ERROR');
     expect(types.RESET_ERROR).toEqual('RESET_ERROR');
     expect(types.RESET_MESSAGE).toEqual('RESET_MESSAGE');
-    expect(types.SEARCH_BUCKETLISTS).toEqual('SEARCH_BUCKETLISTS');
-    expect(types.CLEAR_SEARCH_RESULTS).toEqual('CLEAR_SEARCH_RESULTS');
     expect(types.LOGOUT).toEqual('LOGOUT');
   });
 });

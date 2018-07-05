@@ -16,11 +16,6 @@ export const getOtherProfileSuccess = ({ profile, screen }) => ({
   screen,
 });
 
-export const searchUsersSuccess = ({ users }) => ({
-  type: types.SEARCH_USERS,
-  users,
-});
-
 export const updateProfileSuccess = ({ profile, screen }) => ({
   type: types.UPDATE_PROFILE_SUCCESS,
   profile,
@@ -163,12 +158,4 @@ export const removeFriend = user => async (dispatch) => {
   }
 
   return response;
-};
-
-export const searchUsers = name => async (dispatch) => {
-  const response = await userService.searchUsers(name);
-
-  if (response.users) {
-    dispatch(searchUsersSuccess(response));
-  }
 };

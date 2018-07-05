@@ -71,12 +71,6 @@ export const deleteItemSuccess = ({ bucketlist, item, dataType }) => ({
   dataType,
 });
 
-export const searchSuccess = ({ data: { bucketlists }, dataType }) => ({
-  type: types.SEARCH_BUCKETLISTS,
-  bucketlists,
-  dataType,
-});
-
 export const resetMessage = dispatch =>
   dispatch({
     type: types.RESET_MESSAGE,
@@ -260,34 +254,6 @@ export const loadOtherBucketlists = (
   }));
 
   dispatch(apiCallActions.resetMessage());
-};
-
-export const clearSearch = () => async (dispatch) => {
-  dataTypes.forEach((dataType) => {
-    dispatch({ type: types.CLEAR_SEARCH_RESULTS, dataType });
-  });
-};
-
-export const searchBucketlists = (
-  offset = 0,
-  limit = 100,
-  search = '',
-) => async (dispatch) => {
-  if (search) {
-    const response = await BucketlistService.getAllBucketlists(
-      offset,
-      limit,
-      search,
-    );
-
-    dataTypes.forEach((dataType) => {
-      dispatch(searchSuccess({ data: response, dataType }));
-    });
-
-    return;
-  }
-
-  clearSearch()(dispatch);
 };
 
 export const getBucketlist = id => async (dispatch) => {

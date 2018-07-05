@@ -17,7 +17,7 @@ const DeleteAccountField = ({
   </div> :
   <RaisedButton
     label="Delete account"
-    style={{ width: 200 }}
+    style={{ width: 200, backgroundColor: 'red' }}
     onClick={() => toggleMode('deleteMode', true)}
   />);
 

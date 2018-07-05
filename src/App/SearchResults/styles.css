@@ -1,0 +1,158 @@
+.search-results-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  background-color: #fff;
+  color: #444;
+  width: calc(100% - 20px);
+  margin-left: 20px;
+}
+
+.option-active {
+  display: flex;
+  padding: 10px 20px;
+  color:'#444';
+  cursor: pointer;
+  border-top: 4px solid #fff;
+  border-bottom: 4px solid #00bcd4;
+}
+
+.option-inactive {
+  display: flex;
+  padding: 10px 20px;
+  color:'#444';
+  background-color: #fff;
+  cursor: pointer;
+  border-top: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+}
+
+.search-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #fff;
+  flex-shrink: 0;
+  background-color: #00bcd4;
+  padding:10px 20px;
+  font-size: 27px;
+}
+
+.search-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-shrink: 0;
+  box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.2);
+}
+
+.user-results {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: scroll;
+  margin-top: 10px;
+}
+
+.search-dropdown-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 0px;
+  width: 100%;
+}
+
+.search-dropdown-container {
+  position: relative;
+  min-height: 0px;
+  margin-top: 12px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  z-index: 10;
+  margin-right: 14px;
+}
+
+.search-dropdown {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-size: 14px;
+  color: #777;
+  z-index: 10;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
+  background-color: #fff;
+  flex-shrink: 0;
+}
+
+.search-dropdown-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.search-dropdown-display-name {
+  display: flex;
+  margin-left: 10px;
+}
+
+.search-view-all {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-top: 1px solid #eee;
+}
+
+.search-view-all:hover {
+  text-decoration: underline;
+}
+
+.search-view-all:first-child {
+  border-top: 0px;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #444;
+  font-size: 20px;
+  margin:20px;
+}
+
+.no-results-description {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  color: #777;
+  font-size: 14px;
+}
+
+.list-results {
+  display: flex;
+  flex-grow: 1;
+  overflow: scroll;
+  margin-top: 5px;
+}
+
+.search-progress {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}

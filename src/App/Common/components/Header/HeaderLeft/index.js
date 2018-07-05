@@ -5,6 +5,8 @@ import Icon from '@material-ui/core/Icon';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+import SearchDropDown from '../../../../SearchResults/SearchDropDown';
+
 import '../styles.css';
 
 const HeaderLeft = ({
@@ -16,6 +18,10 @@ const HeaderLeft = ({
   title,
   classes,
   onChange,
+  users,
+  onSelect,
+  searchText,
+  viewAll,
 }) => (
   <div className="left">
     <Icon
@@ -40,20 +46,35 @@ const HeaderLeft = ({
       <Link to={to} className="header-title">{title}</Link>
     }
 
-    <TextField
-      id="search"
-      className={classes.searchInput}
-      onChange={onChange}
-      placeholder="Search LifeGo"
-      InputProps={{
-      disableUnderline: true,
-      startAdornment: (
-        <InputAdornment position="start">
-          <Icon onClick={menuIconClick} className="menu-icon">search</Icon>
-        </InputAdornment>
-      ),
-    }}
-    />
+    <div className="search-input-container">
+      <TextField
+        id="search"
+        className={classes.searchInput}
+        onChange={onChange}
+        placeholder="Search LifeGo"
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) { viewAll(); }
+       }}
+        InputProps={{
+          disableUnderline: true,
+          style: { flex: 1 },
+          startAdornment: (
+            <InputAdornment position="start">
+              <Icon onClick={menuIconClick} className="menu-icon">search</Icon>
+            </InputAdornment>
+          ),
+        }}
+      />
+      {
+        searchText &&
+        <SearchDropDown
+          users={users}
+          onSelect={onSelect}
+          searchText={searchText}
+          viewAll={viewAll}
+        />
+      }
+    </div>
   </div>
 );
 
@@ -66,6 +87,13 @@ HeaderLeft.propTypes = {
   title: PropTypes.string.isRequired,
   classes: PropTypes.shape({}).isRequired,
   onChange: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired,
+  viewAll: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    displayName: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default HeaderLeft;

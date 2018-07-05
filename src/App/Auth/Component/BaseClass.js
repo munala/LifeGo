@@ -95,7 +95,7 @@ class BaseClass extends Component {
         if (errorResponse.includes('404') || errorResponse.includes('401')) {
           errorResponse = 'wrong username or password';
         }
-        this.popSnackBar(errorResponse);
+        this.popSnackBar(errorResponse, false);
       }
     }
 

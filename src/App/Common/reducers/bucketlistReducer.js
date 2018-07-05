@@ -367,24 +367,6 @@ export default (state = initialState, action) => {
         },
       };
 
-    case types.SEARCH_BUCKETLISTS:
-      return {
-        ...state,
-        [action.dataType]: {
-          ...state[action.dataType],
-          searchResults: action.bucketlists,
-        },
-      };
-
-    case types.CLEAR_SEARCH_RESULTS:
-      return {
-        ...state,
-        [action.dataType]: {
-          ...state[action.dataType],
-          searchResults: [],
-        },
-      };
-
     case types.LOGOUT:
       return initialState;
 

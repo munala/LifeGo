@@ -3,6 +3,29 @@ import { Component } from 'react';
 import propTypes from './propTypes';
 
 class Header extends Component {
+  onChange = ({ target: { value: searchText } }) => {
+    this.setState({ searchText });
+    this.props.actions.searchUsers(searchText);
+  }
+
+  onSelect = async (id) => {
+    const {
+      history: { push },
+    } = this.props;
+
+    this.setState({ searchText: '' });
+    push(`/profile/${id}`);
+  }
+
+  viewAll = async () => {
+    const {
+      history: { push },
+    } = this.props;
+
+    this.setState({ searchText: '' });
+    push(`/search?q=${this.state.searchText}`);
+  }
+
   handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };

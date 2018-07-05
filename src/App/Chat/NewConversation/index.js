@@ -78,7 +78,7 @@ class NewConversation extends Component {
 
   render() {
     const {
-      onClose, closeNewConversation, conversations, profile: { searchUsers },
+      onClose, closeNewConversation, conversations, searchResults,
     } = this.props;
 
     const { searchText } = this.state;
@@ -112,7 +112,7 @@ class NewConversation extends Component {
         </div>
         <div className={`chat-list${searchText ? ' new-chat-list' : ''}`}>
           {!searchText && this.renderRecents(conversations) }
-          {searchText && this.renderResults(searchUsers) }
+          {searchText && this.renderResults(searchResults) }
         </div>
       </div>
     );
@@ -130,12 +130,12 @@ NewConversation.propTypes = {
     displayName: PropTypes.string,
     pictureUrl: PropTypes.string,
     username: PropTypes.string,
-    searchUsers: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      displayName: PropTypes.string,
-      pictureUrl: PropTypes.string,
-    }).isRequired).isRequired,
   }).isRequired,
+  searchResults: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    displayName: PropTypes.string,
+    pictureUrl: PropTypes.string,
+  }).isRequired).isRequired,
   searchUsers: PropTypes.func.isRequired,
   selectConversation: PropTypes.func.isRequired,
   setPictureUrl: PropTypes.func.isRequired,

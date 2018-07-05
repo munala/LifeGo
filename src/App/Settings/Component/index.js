@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import BaseClass, { userSettings } from './BaseClass';
 import RaisedButton from '../../Common/components/RaisedButton';
 import OutlinedButton from '../../Common/components/OutlinedButton';
+import SnackBarComponent from '../../Common/components/SnackBarComponent';
 import ChangeEmailField from '../ChangeEmailField';
 import ChangePasswordField from '../ChangePasswordField';
 import DeleteAccountField from '../DeleteAccountField';
@@ -16,6 +17,8 @@ const privacyStyle = { display: 'flex', width: 230, margin: 5 };
 
 class Settings extends BaseClass {
   state = {
+    open: false,
+    error: '',
     emailMode: false,
     passwordMode: false,
     settings: userSettings,
@@ -77,6 +80,7 @@ class Settings extends BaseClass {
         <RaisedButton
           onClick={actions[type]}
           label={saving ? `${type === 'deleteMode' ? 'deleting' : 'saving'}...` : text}
+          style={type === 'deleteMode' ? { backgroundColor: 'red' } : {}}
         />
       </div>
     );
@@ -85,6 +89,8 @@ class Settings extends BaseClass {
   render() {
     const { profile } = this.props;
     const {
+      open,
+      error,
       emailMode,
       passwordMode,
       deleteMode,
@@ -141,6 +147,14 @@ class Settings extends BaseClass {
             onCancel={this.closeDialog}
           />
         }
+        <SnackBarComponent
+          open={open}
+          message={{
+            content: error,
+            success: false,
+          }}
+          closeSnackBar={this.closeSnackBar}
+        />
       </div>
     );
   }

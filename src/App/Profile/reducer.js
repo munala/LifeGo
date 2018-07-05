@@ -13,6 +13,7 @@ export default (state = {
   switch (action.type) {
     case types.GET_PROFILE_SUCCESS:
       return {
+        ...state,
         ...action.profile,
         searchUsers: [],
         otherProfile: {},
@@ -20,6 +21,7 @@ export default (state = {
 
     case types.UPDATE_PROFILE_SUCCESS:
       return {
+        ...state,
         ...action.profile,
         friends: state.friends,
         followers: state.followers,
@@ -48,12 +50,6 @@ export default (state = {
       return {
         ...state,
         followers: [...state.followers].filter(follower => follower.id !== action.follower.id),
-      };
-
-    case types.SEARCH_USERS:
-      return {
-        ...state,
-        searchUsers: action.users.filter(user => user.id !== state.id),
       };
 
     case types.DELETE_ACCOUNT_SUCCESS:

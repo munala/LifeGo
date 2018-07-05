@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 
+import SnackBarComponent from '../../Common/components/SnackBarComponent';
 import IconLabelButton from '../../Common/components/IconLabelButton';
 import '../styles.css';
 
@@ -20,6 +21,8 @@ const cancelStyle = {
 
 class EditProfile extends Component {
   state = {
+    open: false,
+    error: '',
     touched: false,
     firstName: this.props.profile.id ? this.props.profile.displayName.split(' ')[0] : '',
     lastName: this.props.profile.id ? this.props.profile.displayName.split(' ')[1] : '',
@@ -59,12 +62,26 @@ class EditProfile extends Component {
       if (!error) {
         this.setState({ touched: false });
         this.props.toggleProfileMode(false);
+      } else {
+        this.setState({
+          error,
+          open: true,
+        });
       }
     }
   }
 
+  closeSnackBar = () => {
+    this.setState({
+      open: false,
+      error: '',
+    });
+  }
+
   render() {
-    const { firstName, lastName, touched } = this.state;
+    const {
+      firstName, lastName, touched, open, error,
+    } = this.state;
 
     return (
       <div className="edit-profile-wrapper" >
@@ -100,6 +117,14 @@ class EditProfile extends Component {
             />
           </div>
         </div>
+        <SnackBarComponent
+          open={open}
+          message={{
+            content: error,
+            success: false,
+          }}
+          closeSnackBar={this.closeSnackBar}
+        />
       </div>
     );
   }

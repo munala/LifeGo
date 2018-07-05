@@ -4,15 +4,17 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import * as messageActions from '../actions';
-import { searchUsers } from '../../Profile/actions';
+import { searchUsers } from '../../SearchResults/actions';
 import Conversations from '../Component';
 
 const mapStateToProps = ({
   profile,
   conversations,
   currentApiCalls: { messages: currentApiCalls },
+  searchResults: { users },
 }, ownProps) => ({
   profile,
+  searchResults: users,
   conversations,
   currentApiCalls,
   ...ownProps,

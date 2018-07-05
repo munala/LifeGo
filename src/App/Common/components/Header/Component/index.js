@@ -19,6 +19,7 @@ class Header extends BaseClass {
     loggedIn: false, // eslint-disable-line react/no-unused-state
     profile: {}, // eslint-disable-line react/no-unused-state
     selectedPanel: '',
+    searchText: '',
   };
 
   static getDerivedStateFromProps = ({
@@ -86,10 +87,13 @@ class Header extends BaseClass {
       loggedIn,
       counts,
       history,
+      users,
       profile: { pictureUrl },
     } = this.props;
 
-    const { pathname, anchorEl, selectedPanel } = this.state;
+    const {
+      pathname, anchorEl, selectedPanel, searchText,
+    } = this.state;
 
     const titles = {
       '/': 'Home',
@@ -100,7 +104,13 @@ class Header extends BaseClass {
       '/settings': 'Settings',
     };
 
-    const title = titles[pathname] || 'Home';
+    let title = pathname.includes('profile') ? 'Profile' : titles[pathname];
+
+    title = pathname.includes('search') ? 'Search' : title;
+
+    title = title || titles[pathname];
+
+    title = title || 'Home';
 
     return (
       <div className="header-container" >
@@ -112,7 +122,11 @@ class Header extends BaseClass {
           to={to}
           title={title}
           classes={classes}
-          onChange={() => {}}
+          users={users}
+          searchText={searchText}
+          onChange={this.onChange}
+          onSelect={this.onSelect}
+          viewAll={this.viewAll}
         />
 
         <HeaderRight

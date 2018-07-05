@@ -117,7 +117,7 @@ class Chat extends BaseClass {
 
   render() {
     const {
-      conversations, onClose, profile, actions, history,
+      conversations, onClose, profile, actions, history, searchResults,
     } = this.props;
 
     const {
@@ -149,6 +149,7 @@ class Chat extends BaseClass {
           onClose={onClose}
           conversations={conversations}
           searchUsers={actions.searchUsers}
+          searchResults={searchResults}
           setPictureUrl={this.setPictureUrl}
           getName={this.getName}
           closeNewConversation={this.closeNewConversation}

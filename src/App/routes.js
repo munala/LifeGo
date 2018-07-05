@@ -11,6 +11,7 @@ import Home from './Home/Container';
 import Profile from './Profile/Container';
 import Settings from './Settings/Container';
 import SingleList from './SingleList/container';
+import SearchResults from './SearchResults/Container';
 import NotFound from './Common/components/NotFound';
 import icon from '../assets/icons/icon.png';
 import './styles.css';
@@ -57,6 +58,7 @@ const Routes = ({ loggedIn }) => (
             <Route exact path="/profile" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
             <Route path="/profile/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
             <Route path="/settings" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Settings} />} />
+            <Route path="/search" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SearchResults} />} />
             <Route component={NotFound} />
           </Switch>
         </div>

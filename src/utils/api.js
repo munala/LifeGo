@@ -6,6 +6,13 @@ instance.defaults.headers.common['Content-Type'] = 'application/json';
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export const handleError = (error) => {
+  if (error.response && error.response.data.message) {
+    return {
+      error: error.response.data.message,
+      code: error.response.status,
+    };
+  }
+
   if (error.response && error.response.status === 401) {
     return {
       error: 'Unauthorised',
@@ -14,13 +21,6 @@ export const handleError = (error) => {
   }
 
   if (error.response && error.response.status === 409) {
-    return {
-      error: error.response.data.message,
-      code: error.response.status,
-    };
-  }
-
-  if (error.response && error.response.data.message) {
     return {
       error: error.response.data.message,
       code: error.response.status,

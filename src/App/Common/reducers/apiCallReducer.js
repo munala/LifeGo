@@ -13,6 +13,7 @@ const initialState = {
   others: 0,
   loader: 0,
   single: 0,
+  searchResults: 0,
 };
 
 const actionTypeEndsInSuccess = actionType => actionType.substring(actionType.length - 8) === '_SUCCESS';

@@ -58,10 +58,10 @@ const ProfileThumbnail = ({
 
 ProfileThumbnail.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     friends: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
-    })).isRequired,
+    })),
   }).isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,

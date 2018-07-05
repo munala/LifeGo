@@ -55,19 +55,6 @@ describe('Auth actions', () => {
 
     expect(action).toEqual(expectedAction);
   });
-  it('should create a SEARCH_USERS action', () => {
-    const data = {
-      users: [],
-    };
-    const expectedAction = {
-      ...data,
-      type: types.SEARCH_USERS,
-    };
-
-    const action = profileActions.searchUsersSuccess((data));
-
-    expect(action).toEqual(expectedAction);
-  });
   it('should create a UPDATE_PROFILE_SUCCESS action', () => {
     const data = {
       profile: {
@@ -275,25 +262,6 @@ describe('Async calls', () => {
         const actions = store.getActions();
         expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
         expect(actions[1].type).toEqual(types.REMOVE_FRIEND);
-        done();
-      });
-    },
-  );
-  it(
-    'SEARCH_USERS when logging in',
-    (done) => {
-      const expectedActions = [
-        { type: types.BEGIN_API_CALL },
-        {
-          type: types.SEARCH_USERS,
-          users: [],
-        },
-      ];
-
-      const store = mockStore({ searchUsers: [], expectedActions });
-      store.dispatch(profileActions.searchUsers('oliver')).then(() => {
-        const actions = store.getActions();
-        expect(actions[0].type).toEqual(types.SEARCH_USERS);
         done();
       });
     },

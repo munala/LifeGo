@@ -7,7 +7,8 @@
   font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   font-size: 14px;
   min-width: 500px;
-  width: 100%;
+  width: calc(100% - 20px);
+  flex-shrink: 0;
 }
 
 .bucketlist-name {
@@ -215,6 +216,7 @@
 
 .loading-indicator {
   column-count: 4;
+  width: calc(100% - 20px);
 }
 
 .loading-item {

@@ -16,17 +16,10 @@ describe('Profile reducer', () => {
     expect(newState).toEqual({
       name: 'oliver',
       id: 1,
+      followers: [],
+      friends: [],
       searchUsers: [],
       otherProfile: {},
-    });
-  });
-
-  it('should searchUsers', () => {
-    const action = actions.searchUsersSuccess({ users: [{ name: 'oliver', id: 2 }] });
-    const newState = profileReducer(initialState, action);
-    expect(newState).toEqual({
-      ...initialState,
-      searchUsers: [{ name: 'oliver', id: 2 }],
     });
   });
 

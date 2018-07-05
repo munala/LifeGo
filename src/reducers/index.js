@@ -9,6 +9,7 @@ import otherProfile from '../App/Profile/otherProfileReducer';
 import conversations from '../App/Chat/reducer';
 import notifications from '../App/Notifications/reducer';
 import alerts from '../App/UserAlerts/reducer';
+import searchResults from '../App/SearchResults/reducer';
 
 const rootReducer = combineReducers({
   data,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   conversations,
   notifications,
   alerts,
+  searchResults,
 });
 
 export default rootReducer;

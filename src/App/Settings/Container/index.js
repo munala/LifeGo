@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import * as userActions from '../actions';
+import { logout } from '../../Auth/actions';
 import Settings from '../Component';
 
 const mapStateToProps = ({
@@ -18,6 +19,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     ...userActions,
+    logout,
   }, dispatch),
 });
 

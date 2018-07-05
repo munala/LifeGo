@@ -55,6 +55,7 @@ class BaseClass extends Component {
     } else {
       this.setState({
         error,
+        open: true,
         errors: {
           email: error.includes('email') || error.includes('Email'),
           password: error.includes('password') || error.includes('Unauthorised'),
@@ -78,6 +79,7 @@ class BaseClass extends Component {
       this.setState({ errors: {}, settings: userSettings });
     } else {
       this.setState({
+        open: true,
         error: error === 'Unauthorised' ? 'Wrong password' : error,
         errors: {
           ...this.state.errors,
@@ -98,11 +100,14 @@ class BaseClass extends Component {
       password,
     });
 
+    this.setState({ saving: false });
+
     if (!error) {
-      localStorage.removeItem('token');
+      this.props.actions.logout();
       this.props.history.push('login');
     } else {
       this.setState({
+        open: true,
         error: error === 'Unauthorised' ? 'Wrong password' : error,
         deleteMode: true,
         errors: {
@@ -111,14 +116,13 @@ class BaseClass extends Component {
         },
       });
     }
-
-    this.setState({ saving: false });
   }
 
   deleteAccount = async () => {
     const { email, password } = this.state.settings;
     if (!email || !password) {
       this.setState({
+        open: true,
         error: 'Fill the highlighted fields first',
         errors: {
           email: !email,
@@ -138,6 +142,13 @@ class BaseClass extends Component {
       showDialog: false,
       deleteMode: false,
       settings: userSettings,
+    });
+  }
+
+  closeSnackBar = () => {
+    this.setState({
+      open: false,
+      error: '',
     });
   }
 }

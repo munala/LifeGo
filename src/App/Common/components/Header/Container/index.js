@@ -9,11 +9,13 @@ import { getProfile } from '../../../../Profile/actions';
 import { getNotifications } from '../../../../Notifications/actions';
 import { getConversations } from '../../../../Chat/actions';
 import { getAlerts } from '../../../../UserAlerts/actions';
+import { searchUsers, clearSearch } from '../../../../SearchResults/actions';
 import { styles } from '../styles';
 
 const mapStateToProps = ({
   loggedIn,
   profile,
+  searchResults: { users },
   currentApiCalls: { profile: currentApiCalls },
   ...state
 }) => {
@@ -65,6 +67,7 @@ const mapStateToProps = ({
     loggedIn,
     profile,
     counts,
+    users,
     currentApiCalls,
   });
 };
@@ -76,6 +79,8 @@ const mapDispatchToProps = dispatch => ({
     getNotifications,
     getConversations,
     getAlerts,
+    searchUsers,
+    clearSearch,
   }, dispatch),
 });
 
