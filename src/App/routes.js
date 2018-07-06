@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -19,10 +19,10 @@ import './styles.css';
 const ProtectedRoute = ({
   loggedIn,
   props,
-  Component,
+  Component: Comp,
 }) => (
   loggedIn ?
-    <Component {...props} /> :
+    <Comp {...props} /> :
     <Redirect to={{
       pathname: '/login',
       state: { login: true },
@@ -40,32 +40,52 @@ ProtectedRoute.defaultProps = {
   props: {},
 };
 
-const Routes = ({ loggedIn }) => (
-  <Router>
-    <div className="app-container">
-      <Header avatarUrl={icon} to="/" menuIconClick={() => {}} />
-      <div className="app-body">
-        <SideMenu
-          activeItem="home"
-        />
-        <div className="app-content" >
-          <Switch>
-            <Route exact path="/" render={() => <Redirect from="/" to={loggedIn ? '/home' : '/explore'} />} />
-            <Route path="/login" component={Auth} />
-            <Route path="/explore" component={Explore} />
-            <Route exact path="/home" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Home} />} />
-            <Route path="/lists/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SingleList} />} />
-            <Route exact path="/profile" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
-            <Route path="/profile/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
-            <Route path="/settings" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Settings} />} />
-            <Route path="/search" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SearchResults} />} />
-            <Route component={NotFound} />
-          </Switch>
+class Routes extends Component {
+  state = {
+    showMenu: true,
+  }
+
+  toggleMenu = () => {
+    this.setState({
+      showMenu: !this.state.showMenu,
+    });
+  }
+
+  render() {
+    const { loggedIn } = this.props;
+    const { showMenu } = this.state;
+
+    return (
+      <Router>
+        <div className="app-container">
+          <Header avatarUrl={icon} to="/" menuIconClick={this.toggleMenu} />
+          <div className="app-body">
+            {
+              showMenu &&
+              <SideMenu
+                activeItem="home"
+              />
+            }
+            <div className="app-content" >
+              <Switch>
+                <Route exact path="/" render={() => <Redirect from="/" to={loggedIn ? '/home' : '/explore'} />} />
+                <Route path="/login" component={Auth} />
+                <Route path="/explore" component={Explore} />
+                <Route exact path="/home" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Home} />} />
+                <Route path="/lists/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SingleList} />} />
+                <Route exact path="/profile" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
+                <Route path="/profile/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
+                <Route path="/settings" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Settings} />} />
+                <Route path="/search" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SearchResults} />} />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </Router>
-);
+      </Router>
+    );
+  }
+}
 
 Routes.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
