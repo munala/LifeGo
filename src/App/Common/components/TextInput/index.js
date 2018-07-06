@@ -39,6 +39,7 @@ const TextInput = ({
     <TextField
       name={name}
       type={name === 'password' ? 'password' : 'text'}
+      autoComplete={name === 'password' ? 'current_password' : 'text'}
       label={label || name || ''}
       select={select}
       className={classes.textField}

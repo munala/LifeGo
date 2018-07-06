@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import avatar from '../../../../assets/images/user.png';
 import { setTime } from '../../../../utils';
+import styles from './styles';
 import './styles.css';
 
 const NotificationThumbnail = ({
@@ -24,10 +25,10 @@ const NotificationThumbnail = ({
       className="notification-thumbnail"
       onMouseEnter={hoverNotification}
       onMouseLeave={hoverNotification}
-      style={notification.read !== true ? { backgroundColor: '#f0f0f0' } : {}}
+      style={notification.read !== true ? styles.readBackground : {}}
     >
       <Avatar
-        style={{ display: 'flex', height: 40, width: 40 }}
+        style={styles.notificationAvatar}
         src={person.pictureUrl || avatar}
       />
       <div className="notification-actions">

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RaisedButton from '../../Common/components/RaisedButton';
+import styles from '../styles';
 import '../styles.css';
 
 const DeleteAccountField = ({
@@ -17,7 +18,7 @@ const DeleteAccountField = ({
   </div> :
   <RaisedButton
     label="Delete account"
-    style={{ width: 200, backgroundColor: 'red' }}
+    style={styles.deleteButton}
     onClick={() => toggleMode('deleteMode', true)}
   />);
 

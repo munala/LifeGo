@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
 
 import { setLikeColor } from '../../../../../utils';
+import styles from '../styles';
 import '../styles.css';
 
 const ButtonRow = ({
@@ -40,7 +41,7 @@ const ButtonRow = ({
     >
       <Icon
         className="icon-color"
-        style={{ fontSize: 20 }}
+        style={styles.twenty}
       >
         list
       </Icon>
@@ -57,7 +58,7 @@ const ButtonRow = ({
     >
       <Icon
         className="icon-color"
-        style={{ fontSize: 20 }}
+        style={styles.twenty}
       >
         comment
       </Icon>

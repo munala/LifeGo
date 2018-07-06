@@ -11,6 +11,7 @@ describe('UserThumbnail tests', () => {
       removeFriend={() => {}}
       goToProfile={() => {}}
       alert={{}}
+      deleteAlert={() => {}}
     />);
 
     expect(wrapper).toMatchSnapshot();

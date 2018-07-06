@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Avatar from '../../Common/components/Avatar';
 import avatar from '../../../assets/images/user.png';
+import styles from '../styles';
 import '../styles.css';
 
 class NewConversation extends Component {
@@ -40,11 +41,7 @@ class NewConversation extends Component {
     >
       <Avatar
         src={this.props.setPictureUrl(conversation) || avatar}
-        style={{
-          display: 'flex',
-          width: 40,
-          height: 40,
-        }}
+        style={styles.newConversationAvatar}
         onClick={() => this.props.selectConversation(conversation)}
       />
       <div
@@ -64,11 +61,7 @@ class NewConversation extends Component {
     >
       <Avatar
         src={user.pictureUrl || avatar}
-        style={{
-          display: 'flex',
-          width: 40,
-          height: 40,
-        }}
+        style={styles.resultsAvatar}
       />
       <div className="chat-item-user new-conversation-user" >
         {user.displayName}
@@ -88,14 +81,16 @@ class NewConversation extends Component {
         <div className="chat-header" >
           <Icon
             onClick={closeNewConversation}
-            style={{ color: '#777', cursor: 'pointer' }}
-          >chevron_left
+            style={styles.headerIcons}
+          >
+            chevron_left
           </Icon>
           <div className="chat-header-title">New Message</div>
           <Icon
             onClick={onClose}
-            style={{ color: '#777', cursor: 'pointer' }}
-          >close
+            style={styles.headerIcons}
+          >
+            close
           </Icon>
         </div>
         <div className="search-input-container new-conversation-body">

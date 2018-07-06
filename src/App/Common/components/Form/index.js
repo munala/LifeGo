@@ -10,6 +10,7 @@ import PhotoField from './PhotoField';
 import LocationField from './LocationField';
 import BaseClass, { initialBucketlist } from './BaseClass';
 import propTypes from './propTypes';
+import styles from './styles';
 import './styles.css';
 
 class Form extends BaseClass {
@@ -59,7 +60,7 @@ class Form extends BaseClass {
               name="name"
               placeholder="name of your bucketlist"
               value={bucketlist.name || ''}
-              style={{ display: 'flex', width: 460 }}
+              style={styles.input}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'name' })}
               error={error}
             />
@@ -68,7 +69,7 @@ class Form extends BaseClass {
               placeholder="tell people more about your bucketlist"
               value={bucketlist.description || ''}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'description' })}
-              style={{ display: 'flex', width: 460 }}
+              style={styles.input}
               multiline
               rows={4}
               rowsMax={4}
@@ -84,7 +85,7 @@ class Form extends BaseClass {
               select
               label="select category"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'category' })}
-              style={{ display: 'flex', width: 460 }}
+              style={styles.input}
             >
               {categories.map(category => (
                 <MenuItem key={category} value={category}>
@@ -108,7 +109,7 @@ class Form extends BaseClass {
               select
               label="privacy"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'privacy' })}
-              style={{ display: 'flex', width: 460 }}
+              style={styles.input}
             >
               {['everyone', 'friends', 'no one'].map(setting => (
                 <MenuItem key={setting} value={setting}>

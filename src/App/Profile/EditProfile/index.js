@@ -4,20 +4,8 @@ import PropTypes from 'prop-types';
 
 import SnackBarComponent from '../../Common/components/SnackBarComponent';
 import IconLabelButton from '../../Common/components/IconLabelButton';
+import styles from '../styles';
 import '../styles.css';
-
-const inputStyle = {
-  display: 'flex',
-  width: '100%',
-  margin: 7.5,
-};
-
-const cancelStyle = {
-  display: 'flex',
-  margin: 7.5,
-  backgroundColor: '#f1f1f1',
-  color: '#777',
-};
 
 class EditProfile extends Component {
   state = {
@@ -90,7 +78,7 @@ class EditProfile extends Component {
           <TextField
             label="First name"
             placeholder="enter first name"
-            style={inputStyle}
+            style={styles.inputStyle}
             value={firstName}
             error={touched && !firstName}
             onChange={({ target: { value } }) => this.onChange({ name: 'firstName', value })}
@@ -100,7 +88,7 @@ class EditProfile extends Component {
             placeholder="enter last name"
             error={touched && !lastName}
             value={lastName}
-            style={inputStyle}
+            style={styles.inputStyle}
             onChange={({ target: { value } }) => this.onChange({ name: 'lastName', value })}
           />
           <div className="profile-input-row">
@@ -112,7 +100,7 @@ class EditProfile extends Component {
             <IconLabelButton
               label="cancel"
               name="close"
-              style={cancelStyle}
+              style={styles.cancelStyle}
               onClick={() => this.props.toggleProfileMode(false)}
             />
           </div>

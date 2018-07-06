@@ -38,10 +38,18 @@ class AuthComponent extends BaseClass {
       history.push('/home');
     }
 
-    return ({
-      ...state,
-      login: location.state && location.state.login,
-    });
+    return state;
+  }
+
+  componentDidUpdate = ({ location }) => {
+    const { location: { state } } = this.props;
+    if (location.state !== state) {
+      if (state && state.login !== this.state.login) {
+        this.setState({
+          login: state.login,
+        });
+      }
+    }
   }
 
   render() {
@@ -67,7 +75,9 @@ class AuthComponent extends BaseClass {
       <div className="auth-container">
         {
           currentApiCalls > 0 &&
-          <div className="progress"><LinearProgress color="error" /></div>
+          <div className="progress">
+            <LinearProgress color="error" />
+          </div>
         }
 
         <Form
@@ -83,6 +93,7 @@ class AuthComponent extends BaseClass {
           action={this.action}
           socialLogin={this.socialLogin}
           toggleReset={this.toggleReset}
+          toggleMode={this.toggleMode}
           onEmailChange={this.onEmailChange}
         />
 

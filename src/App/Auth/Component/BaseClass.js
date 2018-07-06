@@ -30,7 +30,7 @@ class BaseClass extends Component {
       } = this.state;
 
       if (resetMode) {
-        this.resetPassword();
+        await this.resetPassword();
       } else {
         const user = loginMode ?
           loginUser :
@@ -107,11 +107,15 @@ class BaseClass extends Component {
       const response = await this.props.actions.resetPassword(resetEmail);
 
       const { error, message } = response;
-      const responseMessage = error ? 'wrong email' : message;
 
-      this.popSnackBar(responseMessage, true);
+      if (error) {
+        this.popSnackBar(error, false);
+      } else {
+        this.popSnackBar(message, true);
+      }
 
       this.setState({ submitting: false });
+      return true;
     }
 
     socialLogin = async (data) => {
@@ -137,13 +141,6 @@ class BaseClass extends Component {
       }
     }
 
-    resetPassword = () => {
-      this.props.actions.resetPassword(this.state.resetEmail);
-      this.setState({
-        resetEmail: '',
-      });
-    }
-
     popSnackBar = (message, success) => {
       this.setState({
         message: {
@@ -161,7 +158,10 @@ class BaseClass extends Component {
     closeSnackBar = () => {
       this.setState({
         open: false,
-        message: '',
+        message: {
+          content: '',
+          success: true,
+        },
       });
     }
 
@@ -170,6 +170,10 @@ class BaseClass extends Component {
       this.setState({
         resetMode: !resetMode,
       });
+    }
+
+    toggleMode = () => {
+      this.setState({ login: !this.state.login });
     }
 
     validate = async (user, mode) => {

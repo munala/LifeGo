@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RaisedButton from '../../Common/components/RaisedButton';
+import styles from '../styles';
 import '../styles.css';
 
 const ChangeEmailField = ({
@@ -17,7 +18,7 @@ const ChangeEmailField = ({
   </div> :
   <RaisedButton
     label="Change email"
-    style={{ width: 200 }}
+    style={styles.raisedButton}
     onClick={() => toggleMode('emailMode', true)}
   />);
 

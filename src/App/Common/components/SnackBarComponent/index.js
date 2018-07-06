@@ -4,7 +4,9 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+
 import FlatButton from '../FlatButton';
+import styles from './styles';
 
 const SnackbarComponent = ({
   open,
@@ -25,13 +27,13 @@ const SnackbarComponent = ({
   >
     <SnackbarContent
       message={content}
-      style={success ? {} : { backgroundColor: 'red' }}
+      style={success ? {} : styles.error}
       action={[
         undo ?
           <FlatButton
             key="undo"
             label="undo"
-            style={{ color: 'orange' }}
+            style={styles.warning}
             onClick={closeSnackBar}
           /> :
           <IconButton

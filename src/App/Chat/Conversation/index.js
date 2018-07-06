@@ -4,11 +4,10 @@ import Icon from '@material-ui/core/Icon';
 import BaseClass from './BaseClass';
 import Avatar from '../../Common/components/Avatar';
 import NewInput from '../../Common/components/NewInput';
-import Dialog from '../../Common/components/Dialog';
-
+import MessageRow from '../MessageRow';
 import propTypes from './propTypes';
 import avatar from '../../../assets/images/user.png';
-import { setTime } from '../../../utils';
+import styles from '../styles';
 import '../styles.css';
 
 class Conversation extends BaseClass {
@@ -25,63 +24,24 @@ class Conversation extends BaseClass {
   }
 
   renderMessages = messages => messages.map((message, i) => {
-    const { createdAt, time } = setTime(message);
-
     const { profile } = this.props;
 
     const { hoveredMessage, selectedMessage, showDialog } = this.state;
 
-    const dateTime = `${createdAt}${time}  ${
-      message.senderId === profile.id ? `✔${message.read ? '✔' : ''}` : ''
-    }`;
+    const messageRowProps = {
+      message,
+      profile,
+      hoveredMessage,
+      showDialog,
+      selectedMessage,
+      hoverMessage: this.hoverMessage,
+      deleteMessage: this.deleteMessage,
+      setStyle: this.setStyle,
+      closeDialog: this.closeDialog,
+      delete: this.delete,
+    };
 
-    return (
-      <div
-        key={message.id}
-        onMouseEnter={() => this.hoverMessage(message)}
-        onMouseLeave={() => this.hoverMessage(message)}
-        className={`message-container-content${
-          message.senderId === profile.id ? ' message-container-sender' : ''
-        }`}
-      >
-        <div className={`message-top-content${
-          message.senderId === profile.id ? ' message-top-sender' : ''
-        }`}
-        >
-          {
-            hoveredMessage.id === message.id && message.senderId === profile.id ?
-              <i
-                className="material-icons message-delete-icon"
-                onClick={() => this.deleteMessage(message)}
-              >delete
-              </i> :
-              <div className="message-delete-icon" />
-          }
-          <div style={this.setStyle(message, profile)} className="message-content" >
-            {message.content}
-          </div>
-          <Avatar
-            src={message.pictureUrl || avatar}
-            style={{
-              display: 'flex',
-              width: 30,
-              height: 30,
-              margin: 5,
-            }}
-          />
-        </div>
-        <div className="message-time">{dateTime}</div>
-        {
-          showDialog && selectedMessage.id === message.id &&
-          <Dialog
-            type="message"
-            message="Are you sure you want to delete this message?"
-            onConfirm={() => this.delete(message)}
-            onCancel={this.closeDialog}
-          />
-        }
-      </div>
-    );
+    return <MessageRow key={message.id} {...messageRowProps} />;
   })
 
   render() {
@@ -99,18 +59,14 @@ class Conversation extends BaseClass {
         <div className="chat-header" >
           <Icon
             onClick={() => selectConversation(conversation)}
-            style={{ color: '#777', cursor: 'pointer' }}
-          >chevron_left
+            style={styles.arrowBack}
+          >
+            chevron_left
           </Icon>
           <div className="conversation-header">
             <Avatar
               src={pictureUrl || avatar}
-              style={{
-                display: 'flex',
-                width: 40,
-                height: 40,
-                margin: 10,
-              }}
+              style={styles.messageHeaderAvatar}
             />
             <div className="chat-header-title" onClick={this.goToProfile}>{name}</div>
           </div>

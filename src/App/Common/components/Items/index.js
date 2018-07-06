@@ -9,9 +9,8 @@ import NewInput from '../NewInput';
 import CheckBox from '../CheckBox';
 import BaseClass from './BaseClass';
 import propTypes from './propTypes';
+import styles from './styles';
 import './styles.css';
-
-const ITEM_HEIGHT = 48;
 
 class Items extends BaseClass {
   state = {
@@ -62,7 +61,7 @@ class Items extends BaseClass {
               aria-haspopup="true"
               onClick={event => this.handleClick({ event, selectedItem: item })}
             >
-              <MoreVertIcon style={{ color: '#444' }} />
+              <MoreVertIcon style={styles.darkGrey} />
             </IconButton>
           }
           {
@@ -72,13 +71,7 @@ class Items extends BaseClass {
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
-              PaperProps={{
-              style: {
-                maxHeight: ITEM_HEIGHT * 4.5,
-                paddingLeft: 10,
-                paddingRight: 10,
-              },
-            }}
+              PaperProps={{ style: styles.menu }}
             >
               {menuItems.map(menuItem => (
                 <MenuItem key={menuItem} onClick={() => this.selectItem({ menuItem })}>

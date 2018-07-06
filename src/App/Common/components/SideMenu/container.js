@@ -13,12 +13,15 @@ const mapStateToProps = ({
   const loggedOutMenuItems = {
     top: [
       {
-        to: '/',
+        to: '/explore',
         icon: 'explore',
         text: 'Explore',
       },
       {
-        to: '/login',
+        to: {
+          pathname: '/login',
+          state: { params: { login: false } },
+        },
         icon: 'add',
         text: 'Join LifeGo',
       },

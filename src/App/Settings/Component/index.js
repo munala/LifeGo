@@ -11,9 +11,8 @@ import ChangePasswordField from '../ChangePasswordField';
 import DeleteAccountField from '../DeleteAccountField';
 import Dialog from '../../Common/components/Dialog';
 import Switch from '../../Common/components/Switch';
+import styles from '../styles';
 import '../styles.css';
-
-const privacyStyle = { display: 'flex', width: 230, margin: 5 };
 
 class Settings extends BaseClass {
   state = {
@@ -52,7 +51,7 @@ class Settings extends BaseClass {
         value={value}
         onChange={({ target: { value: text } }) => this.onChange(text, field)}
         placeholder={`type ${field === 'email' ? 'email' : displayName}`}
-        style={{ margin: 5 }}
+        style={styles.marginFive}
       />
     );
   })
@@ -112,7 +111,7 @@ class Settings extends BaseClass {
           select
           label="Who can see your lists?"
           onChange={({ target: { value } }) => this.togglePrivacy(value)}
-          style={privacyStyle}
+          style={styles.privacyStyle}
         >
           {['everyone', 'friends', 'no one'].map(setting => (
             <MenuItem key={setting} value={setting}>

@@ -5,6 +5,7 @@ import Avatar from '../Avatar';
 import OutlinedButton from '../OutlinedButton';
 import RaisedButton from '../RaisedButton';
 import avatar from '../../../../assets/images/user.png';
+import styles from './styles';
 import './styles.css';
 
 const isFriend = ({ user, profile: { friends } }) => friends
@@ -24,7 +25,7 @@ const ProfileThumbnail = ({
       className="profile-thumbnail"
     >
       <Avatar
-        style={{ display: 'flex', height: 60, width: 60 }}
+        style={styles.notificationAvatar}
         src={user.pictureUrl || avatar}
         onClick={goToProfile}
       />

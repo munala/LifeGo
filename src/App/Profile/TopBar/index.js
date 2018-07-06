@@ -9,19 +9,8 @@ import IconLabelButton from '../../Common/components/IconLabelButton';
 import Loading from '../Loading';
 import propTypes from './propTypes';
 import avatar from '../../../assets/images/user.png';
+import styles from '../styles';
 import '../styles.css';
-
-const styles = {
-  inActive: {
-    display: 'flex',
-    backgroundColor: '#eee',
-    color: '#777',
-    boxShadow: 'none',
-  },
-  active: {
-    display: 'flex',
-  },
-};
 
 class TopBar extends BaseClass {
   state = {
@@ -122,12 +111,7 @@ class TopBar extends BaseClass {
             <Avatar
               src={selectedProfile.pictureUrl || avatar}
               onClick={this.handleClick}
-              style={{
-                display: 'flex',
-                width: 120,
-                height: 120,
-                flexShrink: 0,
-              }}
+              style={styles.profileAvatar}
             />
           </div>
           <div className="profile-details">
@@ -145,12 +129,7 @@ class TopBar extends BaseClass {
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={() => this.openPhotoOptions({ currentTarget: null })}
-          PaperProps={{
-            style: {
-              paddingLeft: 10,
-              paddingRight: 10,
-            },
-          }}
+          PaperProps={{ style: styles.menu }}
         >
           <MenuItem onClick={() => {}}>
             <label

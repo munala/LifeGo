@@ -93,7 +93,8 @@ class Card extends Component {
         key={bucketlist.id}
         className="card"
       >
-        <div onClick={
+        <div
+          onClick={
             selected ?
             () => {} :
             () => selectBucketlist(bucketlist)

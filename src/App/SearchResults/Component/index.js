@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ProfileThumbnail from '../../Common/components/ProfileThumbnail';
 import Masonry from '../../Common/components/Masonry';
+import styles from '../styles';
 import '../styles.css';
 
 class SearchResults extends Component {
@@ -98,7 +99,7 @@ class SearchResults extends Component {
         <div className="search-progress">
           <CircularProgress
             size={50}
-            style={{ margin: 20 }}
+            style={styles.marginTwenty}
           />
         </div>
       );

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Avatar from '../../Common/components/Avatar';
 import avatar from '../../../assets/images/user.png';
+import styles from '../styles';
 import '../styles.css';
 
 const SearchDropDwon = ({
@@ -22,7 +23,7 @@ const SearchDropDwon = ({
               onClick={() => onSelect(user.id)}
             >
               <Avatar
-                style={{ display: 'flex', height: 40, width: 40 }}
+                style={styles.searchAvatar}
                 src={user.pictureUrl || avatar}
               />
               <div className="search-dropdown-display-name">{user.displayName}</div>

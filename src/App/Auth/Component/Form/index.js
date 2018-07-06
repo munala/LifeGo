@@ -5,6 +5,7 @@ import TextInput from '../../../Common/components/TextInput';
 import RaisedButton from '../../../Common/components/RaisedButton';
 import FlatButton from '../../../Common/components/FlatButton';
 import SocialButtons from './SocialButtons';
+import styles from '../../styles';
 import '../../styles.css';
 
 const Form = ({
@@ -20,6 +21,7 @@ const Form = ({
   resetEmail,
   onEmailChange,
   toggleReset,
+  toggleMode,
 }) => {
   const resetLabel = resetMode && 'reset password';
 
@@ -29,38 +31,44 @@ const Form = ({
 
   return (
     <div className="login-form-container ">
-      {
-      Object.keys(formUser).map(key => (
-        <TextInput
-          key={key}
-          name={key}
-          value={formUser[key]}
-          onChange={resetMode ? onEmailChange : onChange}
-          invalid={invalid}
-          style={{ marginBottom: 10, width: 480 }}
-          disabled={touched && !formUser[key]}
-        />
-      ))
-    }
-
+      <form>
+        {
+          Object.keys(formUser).map(key => (
+            <TextInput
+              key={key}
+              name={key}
+              value={formUser[key]}
+              onChange={resetMode ? onEmailChange : onChange}
+              invalid={invalid}
+              style={styles.resetEmail}
+              disabled={touched && !formUser[key]}
+            />
+          ))
+        }
+      </form>
       <div>
         <RaisedButton
           onClick={action}
           disabled={submitting}
-          style={{ width: '100%' }}
+          style={styles.fullWidth}
           label={resetLabel || (loginMode ? 'login' : 'register')}
+        />
+        <FlatButton
+          onClick={toggleMode}
+          disabled={submitting}
+          style={styles.fullWidth}
+          label={loginMode ? 'register' : 'login'}
         />
         {
           loginMode &&
           <FlatButton
             onClick={toggleReset}
             disabled={submitting}
-            style={{ width: '100%' }}
+            style={styles.fullWidth}
             label={!resetMode ? 'reset password' : 'cancel'}
           />
         }
       </div>
-
       {
         !resetMode &&
         <div>
@@ -88,6 +96,7 @@ Form.propTypes = {
   socialLogin: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   toggleReset: PropTypes.func.isRequired,
+  toggleMode: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
 };
 

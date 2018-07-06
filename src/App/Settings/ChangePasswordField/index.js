@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RaisedButton from '../../Common/components/RaisedButton';
+import styles from '../styles';
 import '../styles.css';
 
 const ChangePasswordField = ({
@@ -17,7 +18,7 @@ const ChangePasswordField = ({
   </div> :
   <RaisedButton
     label="Change password"
-    style={{ width: 200 }}
+    style={styles.raisedButton}
     onClick={() => toggleMode('passwordMode', true)}
   />);
 

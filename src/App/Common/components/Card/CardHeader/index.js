@@ -7,9 +7,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import Avatar from '../../Avatar';
 import avatar from '../../../../../assets/images/user.png';
+import styles from '../styles';
 import '../styles.css';
-
-const ITEM_HEIGHT = 48;
 
 class CardHeader extends Component {
   state = {
@@ -53,7 +52,6 @@ class CardHeader extends Component {
       <div className="bucketlist-header">
         <Avatar
           className="bucketlist-avatar"
-          style={{ border: '1px solid #eee' }}
           src={bucketlist.userPictureUrl || avatar}
         />
         <div className="name-time">
@@ -76,7 +74,7 @@ class CardHeader extends Component {
                 aria-haspopup="true"
                 onClick={this.handleClick}
               >
-                <MoreVertIcon style={{ color: '#444' }} />
+                <MoreVertIcon style={styles.darkGrey} />
               </IconButton>
             }
             <Menu
@@ -84,13 +82,7 @@ class CardHeader extends Component {
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
-              PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    paddingLeft: 10,
-                    paddingRight: 10,
-                  },
-                }}
+              PaperProps={{ style: styles.menu }}
             >
               {menuItems.map(item => (
                 <MenuItem key={item} onClick={() => this.selectItem(item)}>

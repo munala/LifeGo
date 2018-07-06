@@ -6,6 +6,7 @@ import OutlinedButton from '../OutlinedButton';
 import FlatButton from '../FlatButton';
 import RaisedButton from '../RaisedButton';
 import avatar from '../../../../assets/images/user.png';
+import styles from './styles';
 import './styles.css';
 
 const isFriend = ({ person, profile: { friends } }) => friends
@@ -25,10 +26,10 @@ const UserThumbnail = ({
   return (
     <div
       className="user-thumbnail"
-      style={alert.read !== true ? { backgroundColor: '#f0f0f0' } : {}}
+      style={alert.read !== true ? styles.readBackground : {}}
     >
       <Avatar
-        style={{ display: 'flex', height: 60, width: 60 }}
+        style={styles.notificationAvatar}
         src={person.pictureUrl || avatar}
         onClick={goToProfile}
       />
@@ -54,7 +55,7 @@ const UserThumbnail = ({
           }
           <FlatButton
             onClick={() => deleteAlert(alert)}
-            style={{ color: 'grey', backgroundColor: '#eee' }}
+            style={styles.ignore}
             label="Ignore"
           />
         </div>

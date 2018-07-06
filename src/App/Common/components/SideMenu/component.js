@@ -17,14 +17,14 @@ const SideMenu = ({
         {top.map(item => (
           <Link className="side-menu-item" key={item.icon} to={item.to}>
             <Icon
-              style={{ color: item.to === path ? '#00bcd4' : '#888' }}
+              style={{ color: (item.to.pathname || item.to) === path ? '#00bcd4' : '#888' }}
             >
               {item.icon}
             </Icon>
 
             <div
               className="item-title"
-              style={{ color: item.to === path ? '#00bcd4' : '#3F3F3F' }}
+              style={{ color: (item.to.pathname || item.to) === path ? '#00bcd4' : '#3F3F3F' }}
             >
               {item.text}
             </div>

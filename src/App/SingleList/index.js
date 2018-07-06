@@ -5,6 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Form from '../Common/components/Form';
 import Dialog from '../Common/components/Dialog';
 import Card from '../Common/components/Card';
+import styles from './styles';
 import './styles.css';
 
 class SingleList extends Component {
@@ -99,13 +100,13 @@ class SingleList extends Component {
                 <div className="loading-header">
                   <div className="loading-avatar" />
                   <div className="loading-details">
-                    <div className="loading-detail" style={{ width: 200 }} />
-                    <div className="loading-detail" style={{ width: 150 }} />
+                    <div className="loading-detail" style={styles.loadingDetail} />
+                    <div className="loading-detail" style={styles.loadingDetailBottom} />
                   </div>
                 </div>
                 <div className="loading-body-details">
-                  <div className="loading-body-detail" style={{ width: 300 }} />
-                  <div className="loading-body-detail" style={{ width: 200 }} />
+                  <div className="loading-body-detail" style={styles.loadingBodyDetail} />
+                  <div className="loading-body-detail" style={styles.loadingBodyDetailDetail} />
                 </div>
                 <div className="loading-image" />
               </div>
