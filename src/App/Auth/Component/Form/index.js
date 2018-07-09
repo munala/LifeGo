@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
 
-import TextInput from '../../../Common/components/TextInput';
 import RaisedButton from '../../../Common/components/RaisedButton';
 import FlatButton from '../../../Common/components/FlatButton';
 import SocialButtons from './SocialButtons';
@@ -34,12 +34,12 @@ const Form = ({
       <form>
         {
           Object.keys(formUser).map(key => (
-            <TextInput
+            <TextField
               key={key}
               name={key}
+              label={key}
               value={formUser[key]}
               onChange={resetMode ? onEmailChange : onChange}
-              invalid={invalid}
               style={styles.resetEmail}
               disabled={touched && !formUser[key]}
             />

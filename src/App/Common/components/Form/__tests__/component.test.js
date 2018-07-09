@@ -34,13 +34,13 @@ describe('Form tests', () => {
   });
 
   it('handles text change', () => {
-    const inputs = wrapper.find('WithStyles(TextInput)');
+    const inputs = wrapper.find('TextField');
     inputs.first().props().onChange({ target: { value: 'value' } });
     expect(wrapper.instance().state.bucketlist.name).toEqual('value');
   });
 
   it('handles submitting', () => {
-    const inputs = wrapper.find('WithStyles(TextInput)');
+    const inputs = wrapper.find('TextField');
     inputs.first().props().onChange({ target: { value: 'value' } });
 
     const buttons = wrapper.find('WithStyles(FlatButton)');
@@ -51,7 +51,7 @@ describe('Form tests', () => {
   });
 
   it('handles  photos', () => {
-    const inputs = wrapper.find('WithStyles(TextInput)');
+    const inputs = wrapper.find('TextField');
     inputs.first().props().onChange({ target: { value: 'value' } });
     const photoField = wrapper.find('PhotoField');
 

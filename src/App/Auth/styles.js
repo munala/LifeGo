@@ -1,7 +1,8 @@
 export default {
   resetEmail: {
-    marginBottom: 10,
-    width: 480,
+    alignSelf: 'center',
+    margin: 10,
+    width: 'calc(100% - 20px)',
   },
   fullWidth: {
     width: '100%',

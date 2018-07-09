@@ -42,7 +42,17 @@ ProtectedRoute.defaultProps = {
 
 class Routes extends Component {
   state = {
-    showMenu: true,
+    showMenu: false,
+  }
+  componentDidMount = () => {
+    window.addEventListener('resize', this.updateDimensions);
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  updateDimensions = () => {
+    this.setState({
+      showMenu: window.outerWidth > 1024,
+    });
   }
 
   toggleMenu = () => {

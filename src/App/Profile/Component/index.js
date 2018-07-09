@@ -81,6 +81,11 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
+  profile: PropTypes.shape({
+    friends: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })).isRequired,
+  }).isRequired,
   actions: PropTypes.shape({
     loadOtherBucketlists: PropTypes.func.isRequired,
     getOtherProfile: PropTypes.func.isRequired,

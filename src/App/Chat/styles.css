@@ -239,7 +239,7 @@
   width: 48px;
 }
 
-.search-input-container {
+.search-user-container {
   display: flex;
   align-self: stretch;
   flex-direction: column;
@@ -267,4 +267,8 @@
 .recent-label {
   margin-top: 20px;
   flex-shrink: 0;
+}
+
+.new-chat-container {
+  width: 100%;
 }

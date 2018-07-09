@@ -1,10 +1,15 @@
 .single-container {
   display: flex;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top:0px;
+  bottom: 0px;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  min-width: 500px;
-  max-width: 500px;
+  width: 100%;
+  max-width: 480px;
   margin: auto;
   overflow: scroll;
   outline: none !important;
@@ -35,8 +40,8 @@
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-  min-width: 500px;
-  max-width: 500px;
+  width: 100%;
+  max-width: 480px;
 }
 
 .error-icon {

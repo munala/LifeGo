@@ -9,7 +9,6 @@ export const styles = theme => ({
     fontSize: 20,
     backgroundColor: '#E5E5E5',
     height: 48,
-    maxWidth: 720,
     borderRadius: 4,
     paddingLeft: 12,
   },
@@ -21,12 +20,18 @@ export const styles = theme => ({
 
 export const otherStyles = {
   avatar: {
-    marginLeft: 24,
     height: 48,
     width: 48,
     cursor: 'pointer',
   },
   signIn: {
     marginRight: 24,
+  },
+  chatModal: {
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
   },
 };

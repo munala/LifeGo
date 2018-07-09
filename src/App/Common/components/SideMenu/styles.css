@@ -63,3 +63,16 @@
   display: flex;
   color: #828282;
 }
+
+
+@media screen and (max-width: 1024px) {
+  .side-menu-container {
+    display: flex;
+    position: absolute;
+    margin-top: -10px;
+    height: calc(100% - 64px);
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 0px 3px 3px 0px;
+  }
+}

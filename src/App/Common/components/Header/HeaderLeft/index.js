@@ -42,9 +42,9 @@ const HeaderLeft = ({
     <div className={loggedIn ? 'vr' : 'vr-hidden'} />
 
     {
-      loggedIn &&
-      <Link to={to} className="header-title">{title}</Link>
-    }
+        loggedIn &&
+        <Link to={to} className="header-title">{title}</Link>
+      }
 
     <div className="search-input-container">
       <TextField

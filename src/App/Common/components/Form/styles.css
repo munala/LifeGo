@@ -1,16 +1,16 @@
 .form-container{
-  overflow: scroll;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin:auto;
   justify-content: space-between;
   align-items: stretch;
   padding: 0px;
   border-radius: 4px;
+  width: 100%;
   max-width: 500px;
-  min-width: 500px;
   background-color: #fff;
   outline:0;
+  overflow: scroll;
 }
 
 .input-wrapper {
@@ -142,7 +142,9 @@
   align-self: stretch;
   margin-top: 20px;
   margin-bottom: 10px;
-  width:460px;
+  justify-content: center;
+  align-self: center;
+  width: calc(100% - 40px);
 }
 
 .location-icon {
@@ -154,13 +156,14 @@
 }
 
 .location-input{
-  margin-left: 20px;
-  min-width: 460px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
   border-width: 0px;
   font-size: 1rem;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   background-color: transparent;
-  display: flex;
   padding-bottom: 6px;
   border-bottom: 1px solid #949494;
 }

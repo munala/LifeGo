@@ -94,7 +94,9 @@ class Masonry extends BaseClass {
 
   renderCards = ({ columnCount, currentApiCalls }) => { // eslint-disable-line react/prop-types
     const { bucketlists: bucks, mode } = this.state;
-    const { profile, actions } = this.props;
+    const {
+      profile, actions,
+    } = this.props;
 
     const cols = bucks.length <= columnCount ? bucks.length : columnCount;
 
@@ -105,7 +107,11 @@ class Masonry extends BaseClass {
     }
 
     return (
-      <div style={{ columnCount, overflow: 'scroll' }}>
+      <div
+        className="masonry-grid"
+        style={{ columnCount, overflow: 'scroll' }}
+        onScroll={this.onScroll}
+      >
         {bucketlists.map(bucketlist => (
           <Card
             key={bucketlist.id}
@@ -132,8 +138,8 @@ class Masonry extends BaseClass {
     const {
       profile,
       actions,
-      data: { bucketlists, newBucketlists: { length: totalNew } },
       location: { pathname },
+      data: { bucketlists, newBucketlists: { length: totalNew } },
       currentApiCalls,
       fromProfile,
     } = this.props;
@@ -141,7 +147,7 @@ class Masonry extends BaseClass {
     const [bucketlist] = bucketlists.filter(buck => buck.id === selectedBucketlist.id);
 
     return (
-      <div className="stack-grid" onScroll={this.onScroll}>
+      <div className="stack-grid">
         {
           totalNew > 0 &&
           <div
@@ -197,7 +203,6 @@ class Masonry extends BaseClass {
           save={this.save}
           profile={profile}
         />
-        {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
         {currentApiCalls === 0 && bucketlists.length === 0 && !fromProfile && <EmptyState />}
         {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}
         <SnackBarComponent
@@ -209,6 +214,7 @@ class Masonry extends BaseClass {
           closeSnackBar={this.cancel}
           undo="undo"
         />
+        {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
       </div>
     );
   }

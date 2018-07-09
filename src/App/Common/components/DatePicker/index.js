@@ -10,13 +10,13 @@ const styles = theme => ({
     alignSelf: 'stretch',
     flexDirection: 'column',
     alignItems: 'stretch',
-    paddingLeft: 10,
     marginTop: 5,
   },
   textField: {
-    width: 460,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    display: 'flex',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 'calc(100% - 40px)',
   },
 });
 

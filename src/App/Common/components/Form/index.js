@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 import categories from './categories';
-import TextInput from '../TextInput';
 import FlatButton from '../FlatButton';
 import DatePicker from '../DatePicker';
 import PhotoField from './PhotoField';
@@ -50,12 +50,13 @@ class Form extends BaseClass {
     return (
       <Modal
         open={open}
+        style={styles.formModal}
         onClose={onClose}
       >
         <div className="form-container">
           <div className="form-title">{`${this.props.bucketlist.name ? 'Edit' : 'Add'} bucketlist`}</div>
           <div className="input-wrapper">
-            <TextInput
+            <TextField
               autoFocus
               name="name"
               placeholder="name of your bucketlist"
@@ -64,7 +65,7 @@ class Form extends BaseClass {
               onChange={({ target: { value } }) => this.onChange({ value, type: 'name' })}
               error={error}
             />
-            <TextInput
+            <TextField
               name="description"
               placeholder="tell people more about your bucketlist"
               value={bucketlist.description || ''}
@@ -79,7 +80,7 @@ class Form extends BaseClass {
               onChange={({ target: { value } }) => this.onChange({ value, type: 'dueDate' })}
               defaultValue={bucketlist.dueDate || ''}
             />
-            <TextInput
+            <TextField
               name="category"
               value={bucketlist.category || ''}
               select
@@ -92,7 +93,7 @@ class Form extends BaseClass {
                   {category}
                 </MenuItem>
               ))}
-            </TextInput>
+            </TextField>
             <LocationField
               bucketlist={bucketlist}
               onChange={this.onChange}
@@ -103,7 +104,7 @@ class Form extends BaseClass {
               imageUrl={imageUrl}
               removePhoto={this.removePhoto}
             />
-            <TextInput
+            <TextField
               name="privacy"
               value={bucketlist.privacy || ''}
               select
@@ -116,7 +117,7 @@ class Form extends BaseClass {
                   {setting}
                 </MenuItem>
               ))}
-            </TextInput>
+            </TextField>
 
           </div>
           <div className="actions">

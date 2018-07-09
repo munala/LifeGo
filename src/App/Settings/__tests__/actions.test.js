@@ -16,7 +16,7 @@ jest.mock('../api', (() => ({
 })));
 
 describe('Auth actions', () => {
-  it('should create a GET_PROFILE_SUCCESS action', () => {
+  it('should create a GET_PROFILE_SETTINGS_SUCCESS action', () => {
     const data = {
       profile: {
         name: 'oliver',
@@ -27,12 +27,11 @@ describe('Auth actions', () => {
 
     const expectedAction = {
       ...data,
-      type: types.GET_PROFILE_SUCCESS,
+      type: types.GET_PROFILE_SETTINGS_SUCCESS,
       message: '',
-      screen: 'settings',
     };
 
-    const action = settingsActions.getProfileSuccess((data));
+    const action = settingsActions.getProfileSuccess(data);
 
     expect(action).toEqual(expectedAction);
   });
@@ -120,12 +119,12 @@ const mockStore = configureMockStore(middleware);
 
 describe('Async calls', () => {
   it(
-    'GET_PROFILE_SUCCESS when logging in',
+    'GET_PROFILE_SETTINGS_SUCCESS when logging in',
     (done) => {
       const expectedActions = [
         { type: types.BEGIN_API_CALL },
         {
-          type: types.GET_PROFILE_SUCCESS,
+          type: types.GET_PROFILE_SETTINGS_SUCCESS,
           body: {
             name: 'oliver',
             email: 'login',
@@ -137,7 +136,7 @@ describe('Async calls', () => {
       store.dispatch(settingsActions.getProfile()).then(() => {
         const actions = store.getActions();
         expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
-        expect(actions[1].type).toEqual(types.GET_PROFILE_SUCCESS);
+        expect(actions[1].type).toEqual(types.GET_PROFILE_SETTINGS_SUCCESS);
         done();
       });
     },

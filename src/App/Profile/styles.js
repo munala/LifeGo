@@ -1,7 +1,7 @@
 export default {
   inputStyle: {
     display: 'flex',
-    width: '100%',
+    width: 'calc(100% - 15px)',
     margin: 7.5,
   },
   cancelStyle: {

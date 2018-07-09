@@ -92,7 +92,10 @@ export default (state = initialState, action) => {
         ...state,
         [action.dataType]: {
           ...state[action.dataType],
-          bucketlist: action.bucketlist,
+          bucketlist: {
+            ...state[action.dataType].bucketlist,
+            ...action.bucketlist,
+          },
         },
       };
 
