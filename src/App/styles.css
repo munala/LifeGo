@@ -4,7 +4,6 @@
 }
 
 .app-container {
-  height: 100%;
   display: flex;
   flex-grow:1;
   flex-direction: column;
@@ -56,5 +55,11 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .app-content {
+    margin-bottom: 48px;
   }
 }

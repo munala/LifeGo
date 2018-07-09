@@ -26,7 +26,8 @@ const HeaderRight = ({
   if (loggedIn) {
     return (
       <div className="right">
-        {
+        <div className="right-icons">
+          {
           Object.keys(counts).map(key => (
             <Badge
               key={key}
@@ -48,6 +49,7 @@ const HeaderRight = ({
             </Badge>
           ))
         }
+        </div>
 
         <Avatar
           src={pictureUrl || avatar}

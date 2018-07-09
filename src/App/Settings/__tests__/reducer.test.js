@@ -9,7 +9,15 @@ const initialState = {
 
 describe('Settings reducer', () => {
   it('should getProfile', () => {
-    const action = actions.getProfileSuccess({ profile: { name: 'oliver', id: 1 } });
+    const data = {
+      profile: {
+        id: 1,
+        name: 'oliver',
+      },
+      message: '',
+      screen: 'settings',
+    };
+    const action = actions.getProfileSuccess(data);
     const newState = profileReducer(initialState, action);
 
     expect(newState).toEqual({

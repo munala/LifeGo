@@ -20,9 +20,12 @@ class SingleList extends Component {
   }
 
   getBucketlist = async () => {
-    const { match: { params: { id } } } = this.props;
-    const { error } = await this.props.actions.getBucketlist(id);
-    this.setState({ error });
+    const { bucketlist, match: { params: { id } } } = this.props;
+
+    if (!bucketlist.id || bucketlist.id !== id) {
+      const { error } = await this.props.actions.getBucketlist(id);
+      this.setState({ error: error || '' });
+    }
   }
 
   openModal = () => {
@@ -38,12 +41,20 @@ class SingleList extends Component {
   }
 
   deleteBucketlist = () => {
-    this.setState({ showDialog: true });
+    this.setState({
+      showDialog: true,
+    });
   }
 
   delete = async () => {
-    const { bucketlist, actions: { deleteBucketlist }, history: { goBack } } = this.props;
+    const {
+      bucketlist,
+      actions: { deleteBucketlist },
+      history: { goBack },
+    } = this.props;
+
     const { error } = await deleteBucketlist(bucketlist);
+
     if (!error) {
       goBack();
     }
@@ -62,7 +73,6 @@ class SingleList extends Component {
     };
 
     const { actions: { updateBucketlist } } = this.props;
-
 
     const { error } = await updateBucketlist(bucketlist);
 
@@ -137,6 +147,7 @@ class SingleList extends Component {
           }
           <Form
             bucketlist={bucketlist}
+            profile={profile}
             open={showEditModal}
             onClose={this.closeModal}
             save={this.save}

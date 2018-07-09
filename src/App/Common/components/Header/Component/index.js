@@ -9,6 +9,7 @@ import UserAlerts from '../../../../UserAlerts/Container';
 import HeaderLeft from '../HeaderLeft';
 import HeaderRight from '../HeaderRight';
 import propTypes from './propTypes';
+import { otherStyles } from '../styles';
 import '../styles.css';
 
 class Header extends BaseClass {
@@ -145,6 +146,7 @@ class Header extends BaseClass {
         {this.renderPanels()}
 
         <Modal
+          style={otherStyles.chatModal}
           open={selectedPanel === 'conversations'}
           onClose={() => this.selectPanel({
             event: { target: null },

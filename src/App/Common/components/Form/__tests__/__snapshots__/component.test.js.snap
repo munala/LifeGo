@@ -4,6 +4,15 @@ exports[`Form tests renders without crashing 1`] = `
 <WithStyles(Modal)
   onClose={[Function]}
   open={true}
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+    }
+  }
 >
   <div
     className="form-container"
@@ -16,31 +25,39 @@ exports[`Form tests renders without crashing 1`] = `
     <div
       className="input-wrapper"
     >
-      <WithStyles(TextInput)
+      <TextField
         autoFocus={true}
         error={false}
         name="name"
         onChange={[Function]}
         placeholder="name of your bucketlist"
+        required={false}
+        select={false}
         style={
           Object {
+            "alignSelf": "center",
             "display": "flex",
-            "width": 460,
+            "justifyContent": "center",
+            "width": "calc(100% - 40px)",
           }
         }
         value=""
       />
-      <WithStyles(TextInput)
+      <TextField
         multiline={true}
         name="description"
         onChange={[Function]}
         placeholder="tell people more about your bucketlist"
+        required={false}
         rows={4}
         rowsMax={4}
+        select={false}
         style={
           Object {
+            "alignSelf": "center",
             "display": "flex",
-            "width": 460,
+            "justifyContent": "center",
+            "width": "calc(100% - 40px)",
           }
         }
         value=""
@@ -50,15 +67,18 @@ exports[`Form tests renders without crashing 1`] = `
         label="due date"
         onChange={[Function]}
       />
-      <WithStyles(TextInput)
+      <TextField
         label="select category"
         name="category"
         onChange={[Function]}
+        required={false}
         select={true}
         style={
           Object {
+            "alignSelf": "center",
             "display": "flex",
-            "width": 460,
+            "justifyContent": "center",
+            "width": "calc(100% - 40px)",
           }
         }
         value=""
@@ -183,7 +203,7 @@ exports[`Form tests renders without crashing 1`] = `
         >
           Other
         </WithStyles(MenuItem)>
-      </WithStyles(TextInput)>
+      </TextField>
       <LocationField
         bucketlist={
           Object {
@@ -212,15 +232,18 @@ exports[`Form tests renders without crashing 1`] = `
         imageUrl=""
         removePhoto={[Function]}
       />
-      <WithStyles(TextInput)
+      <TextField
         label="privacy"
         name="privacy"
         onChange={[Function]}
+        required={false}
         select={true}
         style={
           Object {
+            "alignSelf": "center",
             "display": "flex",
-            "width": 460,
+            "justifyContent": "center",
+            "width": "calc(100% - 40px)",
           }
         }
         value="everyone"
@@ -243,7 +266,7 @@ exports[`Form tests renders without crashing 1`] = `
         >
           no one
         </WithStyles(MenuItem)>
-      </WithStyles(TextInput)>
+      </TextField>
     </div>
     <div
       className="actions"

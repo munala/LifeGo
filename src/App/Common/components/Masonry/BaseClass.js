@@ -31,8 +31,8 @@ class BaseClass extends Component {
       () => {
         this.setState({ snackOpen: true });
         this.selectBucketlist(bucketlist);
-        this.timeout = setTimeout(() => {
-          deleteBucketlist(bucketlist);
+        this.timeout = setTimeout(async () => {
+          await deleteBucketlist(bucketlist);
           this.setState(
             { snackOpen: false },
             () => {

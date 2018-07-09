@@ -93,7 +93,7 @@ class NewConversation extends Component {
             close
           </Icon>
         </div>
-        <div className="search-input-container new-conversation-body">
+        <div className="search-user-container new-conversation-body">
           <div className="recipient-label">Send message to:</div>
           <TextField
             autoFocus

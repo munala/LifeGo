@@ -21,7 +21,7 @@ export const changeUsernameSuccess = (message, screen) => ({
 });
 
 export const getProfileSuccess = ({ profile, screen }) => ({
-  type: types.GET_PROFILE_SUCCESS,
+  type: types.GET_PROFILE_SETTINGS_SUCCESS,
   profile,
   message: '',
   screen,
