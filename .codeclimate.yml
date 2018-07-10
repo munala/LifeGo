@@ -5,3 +5,6 @@ engines:
 ratings:
    paths:
    - "src/**/*.js"
+
+exclude_paths:
+- "**/__tests__/"
