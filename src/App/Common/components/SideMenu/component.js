@@ -6,6 +6,7 @@ import Icon from '@material-ui/core/Icon';
 import './styles.css';
 
 const SideMenu = ({
+  toggeSideMenu,
   menuItems: { top, bottom },
   activeItem,
   location: { pathname },
@@ -15,7 +16,12 @@ const SideMenu = ({
     <div className="side-menu-container" >
       <div className="side-menu-items">
         {top.map(item => (
-          <Link className="side-menu-item" key={item.icon} to={item.to}>
+          <Link
+            className="side-menu-item"
+            onClick={toggeSideMenu}
+            key={item.icon}
+            to={item.to}
+          >
             <Icon
               style={{ color: (item.to.pathname || item.to) === path ? '#00bcd4' : '#888' }}
             >
@@ -34,7 +40,12 @@ const SideMenu = ({
         <div className="divider" />
 
         {bottom.map(item => (
-          <Link className="side-menu-item" key={item.text} to={item.to}>
+          <Link
+            className="side-menu-item"
+            onClick={toggeSideMenu}
+            key={item.text}
+            to={item.to}
+          >
             <div
               className="item-title-bottom"
               style={{ color: item.to === path ? '#00bcd4' : '#3F3F3F' }}
@@ -58,6 +69,7 @@ SideMenu.propTypes = {
     pathname: PropTypes.string.isRequired,
   }).isRequired,
   activeItem: PropTypes.string.isRequired,
+  toggeSideMenu: PropTypes.func.isRequired,
 };
 
 export default SideMenu;

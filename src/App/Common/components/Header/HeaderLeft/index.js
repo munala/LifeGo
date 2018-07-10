@@ -42,9 +42,9 @@ const HeaderLeft = ({
     <div className={loggedIn ? 'vr' : 'vr-hidden'} />
 
     {
-        loggedIn &&
-        <Link to={to} className="header-title">{title}</Link>
-      }
+      loggedIn &&
+      <Link to={to} className="header-title">{title}</Link>
+    }
 
     <div className="search-input-container">
       <TextField
@@ -57,7 +57,6 @@ const HeaderLeft = ({
        }}
         InputProps={{
           disableUnderline: true,
-          style: { flex: 1 },
           startAdornment: (
             <InputAdornment position="start">
               <Icon onClick={menuIconClick} className="menu-icon">search</Icon>
