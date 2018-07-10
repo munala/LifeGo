@@ -7,11 +7,6 @@ import EditProfile from '../EditProfile';
 import '../styles.css';
 
 class Profile extends Component {
-  state = {
-    stat: 'lists',
-    editProfileMode: false,
-  }
-
   static getDerivedStateFromProps = ({
     profile: { id: profileId },
     match: { params: { id } },
@@ -29,6 +24,11 @@ class Profile extends Component {
     }
 
     return state;
+  }
+
+  state = {
+    stat: 'lists',
+    editProfileMode: false,
   }
 
   componentDidMount = async () => {

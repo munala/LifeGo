@@ -8,14 +8,6 @@ import styles from '../styles';
 import '../styles.css';
 
 class EditProfile extends Component {
-  state = {
-    open: false,
-    error: '',
-    touched: false,
-    firstName: this.props.profile.id ? this.props.profile.displayName.split(' ')[0] : '',
-    lastName: this.props.profile.id ? this.props.profile.displayName.split(' ')[1] : '',
-  }
-
   static getDerivedStateFromProps = ({ profile }, state) => {
     if (JSON.stringify(profile) !== JSON.stringify(state.profile)) {
       return ({
@@ -26,6 +18,14 @@ class EditProfile extends Component {
       });
     }
     return state;
+  }
+
+  state = {
+    open: false,
+    error: '',
+    touched: false,
+    firstName: this.props.profile.id ? this.props.profile.displayName.split(' ')[0] : '',
+    lastName: this.props.profile.id ? this.props.profile.displayName.split(' ')[1] : '',
   }
 
   onChange = ({ name, value }) => {
