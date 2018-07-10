@@ -57,6 +57,7 @@ const HeaderLeft = ({
        }}
         InputProps={{
           disableUnderline: true,
+          style: { flex: 1 },
           startAdornment: (
             <InputAdornment position="start">
               <Icon onClick={menuIconClick} className="menu-icon">search</Icon>
