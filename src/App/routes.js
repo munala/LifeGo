@@ -52,6 +52,7 @@ class Routes extends Component {
   updateDimensions = () => {
     this.setState({
       showMenu: window.outerWidth > 1024,
+      width: window.outerWidth,
     });
   }
 
@@ -63,7 +64,7 @@ class Routes extends Component {
 
   render() {
     const { loggedIn } = this.props;
-    const { showMenu } = this.state;
+    const { showMenu, width } = this.state;
 
     return (
       <Router>
@@ -74,7 +75,7 @@ class Routes extends Component {
               showMenu &&
               <SideMenu
                 activeItem="home"
-                toggeSideMenu={showMenu ? () => {} : this.toggleMenu}
+                toggeSideMenu={width > 1024 ? () => {} : this.toggleMenu}
               />
             }
             <div className="app-content" >

@@ -9,6 +9,7 @@ machine:
     version: 8.4.0
   environment:
     NODE_ENV: 'test'
+    CC_TEST_REPORTER_ID: d30f63e13333b77a87adeef09d79815325838d52de8e70a212c1cddaf85bc4c5
 
 dependencies:
   pre:
@@ -16,10 +17,20 @@ dependencies:
     - sudo chown -R $USER:$GROUP coverage
     - sudo chmod -R 755 coverage
 
+  post:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
+
   override:
     - npm install
     - npm install -g coveralls
 
 test:
+  pre:
+    - ./cc-test-reporter before-build
+
+  post:
+    - ./cc-test-reporter after-build --exit-code $EXIT_CODE
+
   override:
     - npm run coverage
