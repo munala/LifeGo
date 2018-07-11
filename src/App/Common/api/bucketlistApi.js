@@ -24,7 +24,7 @@ const BucketlistService = {
 
   getBucketlist: async id => sendRequest({
     method: 'get',
-    url: `${bucketlistUrl}/${id}`,
+    url: `${bucketlistUrl}${id}`,
   }),
 
   getBucketlists: async (offset, limit, name) => sendRequest({
