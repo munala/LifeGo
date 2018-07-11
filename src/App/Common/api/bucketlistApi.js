@@ -37,7 +37,7 @@ const BucketlistService = {
     url: `${bucketlistUrl}all?offset=${offset}&limit=${limit}&q=${name}`,
   }),
 
-  getOtherBucketlists: async (id, offset, limit, name) => sendRequest({
+  getOtherBucketlists: async (offset, limit, name, id) => sendRequest({
     method: 'get',
     url: `${bucketlistUrl}other/${id}?offset=${offset}&limit=${limit}&q=${name}`,
   }),

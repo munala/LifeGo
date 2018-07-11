@@ -23,6 +23,7 @@ class Masonry extends BaseClass {
     showAddModal: false,
     snackOpen: false,
     deleting: false,
+    saving: false,
   }
 
   static getDerivedStateFromProps = ({
@@ -132,7 +133,7 @@ class Masonry extends BaseClass {
 
   render() {
     const {
-      selectedBucketlist, mode, showAddModal, bucketlist: bucketList, snackOpen,
+      selectedBucketlist, mode, showAddModal, bucketlist: bucketList, snackOpen, saving,
     } = this.state;
 
     const {
@@ -198,10 +199,11 @@ class Masonry extends BaseClass {
         </Modal>
         <Form
           bucketlist={bucketList}
+          profile={profile}
+          saving={saving}
           open={showAddModal}
           onClose={this.closeModal}
           save={this.save}
-          profile={profile}
         />
         {currentApiCalls === 0 && bucketlists.length === 0 && !fromProfile && <EmptyState />}
         {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}

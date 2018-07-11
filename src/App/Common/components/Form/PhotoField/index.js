@@ -26,7 +26,7 @@ const PhotoField = ({
           {imageUrl ? 'change' : 'add'}
         </label>
         <input id="file-upload" className="inputfile" type="file" onChange={changePhoto} />
-        {imageUrl && <a href="#" className="photo-input-label" onClick={removePhoto}>remove</a>}
+        {imageUrl && <div className="photo-input-label" onClick={removePhoto}>remove</div>}
       </div>
     </div>
   </div>

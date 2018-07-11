@@ -15,9 +15,8 @@ import './styles.css';
 
 class Form extends BaseClass {
   state = {
-    disabled: true,
     bucketlist: this.props.bucketlist,
-    saving: false,
+    uploading: false,
     error: false,
     image: null,
     imageUrl: this.props.bucketlist.pictureUrl || '',
@@ -40,10 +39,10 @@ class Form extends BaseClass {
     } = this.props;
 
     const {
-      error, disabled, saving, imageUrl,
+      error, imageUrl, uploading,
     } = this.state;
 
-    const { bucketlist } = this.state;
+    const { bucketlist, saving } = this.state;
 
     bucketlist.privacy = bucketlist.privacy || profile.privacy;
 
@@ -62,6 +61,7 @@ class Form extends BaseClass {
               placeholder="name of your bucketlist"
               value={bucketlist.name || ''}
               style={styles.input}
+              disabled={saving}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'name' })}
               error={error}
             />
@@ -70,6 +70,7 @@ class Form extends BaseClass {
               placeholder="tell people more about your bucketlist"
               value={bucketlist.description || ''}
               onChange={({ target: { value } }) => this.onChange({ value, type: 'description' })}
+              disabled={saving}
               style={styles.input}
               multiline
               rows={4}
@@ -86,6 +87,7 @@ class Form extends BaseClass {
               select
               label="select category"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'category' })}
+              disabled={saving}
               style={styles.input}
             >
               {categories.map(category => (
@@ -111,6 +113,7 @@ class Form extends BaseClass {
               label="privacy"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'privacy' })}
               style={styles.input}
+              disabled={saving}
             >
               {['everyone', 'friends', 'no one'].map(setting => (
                 <MenuItem key={setting} value={setting}>
@@ -125,12 +128,13 @@ class Form extends BaseClass {
               label="cancel"
               style={{ color: 'grey' }}
               onClick={onClose}
+              disabled={saving}
             />
             <FlatButton
-              label={bucketList ? 'save' : 'add'}
+              label={uploading ? 'uploading...' : `${saving ? 'saving...' : `${bucketList ? 'save' : 'add'}`}`}
               keyboardFocused
               onClick={this.onSave}
-              disabled={saving || disabled}
+              disabled={saving || !bucketlist.name}
             />
           </div>
         </div>

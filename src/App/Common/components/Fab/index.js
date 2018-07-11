@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 const styles = theme => ({
   root: {
     position: 'absolute',
-    bottom: window.outerWidth <= 1024 ? 48 : 0,
+    bottom: window.outerWidth <= 1024 ? 64 : 0,
     right: 0,
   },
   fab: {
