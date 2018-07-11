@@ -67,7 +67,7 @@ class TopBar extends BaseClass {
           className={`profile-stat${stat === 'lists' ? ' profile-stat-active' : ''}`}
           onClick={() => this.props.selectStat({ stat: 'lists' })}
         >
-          <div className="profile-stat-label">{data.count}</div>
+          <div className="profile-stat-label">{data.bucketlists.length}</div>
           <div className="profile-stat-value">Lists</div>
         </div>
         <div

@@ -24,6 +24,10 @@
   flex-shrink: 0;
 }
 
+.content-details {
+  width: 100%;
+}
+
 .profile-top-row {
   display: flex;
   background-color: #f7f7f7;
@@ -203,6 +207,7 @@
   align-items: center;
   color: #777;
   font-size: 20px;
+  padding: 20px;
 }
 
 .edit-profile-container {

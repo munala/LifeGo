@@ -8,22 +8,22 @@ class BaseClass extends Component {
     const bucketlist = { ...this.state.bucketlist };
     bucketlist[type] = value || null;
 
-    const disabled = !bucketlist.name && bucketlist[type] === this.props.bucketlist[type];
-
     this.setState({
       bucketlist,
-      disabled,
     });
   }
 
   onSave = async () => {
-    const { image, bucketlist } = this.state;
+    const { image, bucketlist: buck } = this.state;
+    const bucketlist = { ...buck };
     if (image) {
+      this.setState({ uploading: true });
       const { url: pictureUrl } = await this.uploadImage(image);
+      this.setState({ uploading: false });
       bucketlist.pictureUrl = pictureUrl;
     }
 
-    this.props.save(bucketlist);
+    this.props.save((bucketlist));
     this.setState({ bucketlist: initialBucketlist });
   }
 
@@ -55,6 +55,10 @@ class BaseClass extends Component {
     this.setState({
       image: null,
       imageUrl: '',
+      bucketlist: {
+        ...this.state.bucketlist,
+        pictureUrl: null,
+      },
     });
   }
 

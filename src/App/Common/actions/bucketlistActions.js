@@ -92,169 +92,131 @@ export const loadMore = () => dispatch => dispatch({
   dataType: 'allData',
 });
 
+const load = async ({
+  id,
+  offset,
+  limit,
+  search,
+  dispatch,
+  screen,
+  dataType,
+  serviceCall,
+  action,
+}) => {
+  dispatch(apiCallActions.beginApiCall({ screen }));
+
+  const response = await serviceCall(
+    offset,
+    limit,
+    search,
+    id,
+  );
+
+  if (response.error) {
+    dispatch(apiCallActions.apiCallError({
+      screen,
+      error: response.error,
+    }));
+
+    dispatch(apiCallActions.resetError());
+  }
+
+  const actionCreator = action || loadBucketlistsSuccess;
+
+  dispatch(actionCreator({
+    data: response,
+    dataType,
+    screen,
+  }));
+
+  dispatch(apiCallActions.resetMessage());
+
+  return response;
+};
+
 export const loadMoreBucketlists = (
   dataType,
   offset = 0,
   limit = 50,
   search = '',
 ) => async (dispatch) => {
-  const action =
+  const serviceCall =
     dataType === 'allData'
       ? BucketlistService.getAllBucketlists
       : BucketlistService.getBucketlists;
 
-  dispatch(apiCallActions.beginApiCall({ screen: 'loader' }));
+  const action = loadMore;
 
-  const response = await action(offset, limit, search);
-
-  if (!response.error) {
-    dispatch(loadMore({
-      data: response,
-      dataType,
-    }));
-
-    return;
-  }
-
-  dispatch(apiCallActions.apiCallError({
+  return load({
+    offset,
+    limit,
+    search,
+    dispatch,
+    dataType,
+    serviceCall,
+    action,
     screen: 'loader',
-    error: '',
-  }));
+  });
 };
 
 export const explore = (
   offset = 0,
   limit = 50,
   search = '',
-) => async (dispatch) => {
-  dispatch(apiCallActions.beginApiCall({ screen: 'explore' }));
-
-  const response = await BucketlistService.explore(
-    offset,
-    limit,
-    search,
-  );
-
-  if (response.error) {
-    dispatch(apiCallActions.apiCallError({
-      screen: 'explore',
-      error: response.error,
-    }));
-
-    dispatch(apiCallActions.resetError());
-
-    return;
-  }
-
-  dispatch(loadBucketlistsSuccess({
-    data: response,
-    dataType: 'exploreData',
-    screen: 'explore',
-  }));
-
-  dispatch(apiCallActions.resetMessage());
-};
+) => async dispatch => load({
+  offset,
+  limit,
+  search,
+  dispatch,
+  serviceCall: BucketlistService.explore,
+  screen: 'explore',
+  dataType: 'exploreData',
+});
 
 export const loadBucketlists = (
   offset = 0,
   limit = 50,
   search = '',
-) => async (dispatch) => {
-  dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
-
-  const response = await BucketlistService.getBucketlists(
-    offset,
-    limit,
-    search,
-  );
-
-  if (response.error) {
-    dispatch(apiCallActions.apiCallError({
-      screen: 'myBucketlists',
-      error: response.error,
-    }));
-
-    dispatch(apiCallActions.resetError());
-
-    return;
-  }
-
-  dispatch(loadBucketlistsSuccess({
-    data: response,
-    dataType: 'myData',
-    screen: 'myBucketlists',
-  }));
-
-  dispatch(apiCallActions.resetMessage());
-};
+) => async dispatch => load({
+  offset,
+  limit,
+  search,
+  dispatch,
+  serviceCall: BucketlistService.getBucketlists,
+  screen: 'myBucketlists',
+  dataType: 'myData',
+});
 
 export const loadAllBucketlists = (
   offset = 0,
   limit = 50,
   search = '',
-) => async (dispatch) => {
-  dispatch(apiCallActions.beginApiCall({ screen: 'allBucketlists' }));
-
-  const response = await BucketlistService.getAllBucketlists(
-    offset,
-    limit,
-    search,
-  );
-
-  if (response.error) {
-    dispatch(apiCallActions.apiCallError({
-      screen: 'allBucketlists',
-      error: response.error,
-    }));
-
-    dispatch(apiCallActions.resetError());
-
-    return;
-  }
-
-  dispatch(loadBucketlistsSuccess({
-    data: response,
-    dataType: 'allData',
-    screen: 'allBucketlists',
-  }));
-
-  dispatch(apiCallActions.resetMessage());
-};
+) => async dispatch => load({
+  offset,
+  limit,
+  search,
+  dispatch,
+  serviceCall: BucketlistService.getAllBucketlists,
+  screen: 'allBucketlists',
+  dataType: 'allData',
+});
 
 export const loadOtherBucketlists = (
   id,
   offset = 0,
   limit = 50,
   search = '',
-) => async (dispatch) => {
-  dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
+) => async dispatch => load({
+  id,
+  offset,
+  limit,
+  search,
+  dispatch,
+  serviceCall: BucketlistService.getOtherBucketlists,
+  screen: 'myBucketlists',
+  dataType: 'myData',
+});
 
-  const response = await BucketlistService.getOtherBucketlists(
-    id,
-    offset,
-    limit,
-    search,
-  );
-
-  if (response.error) {
-    dispatch(apiCallActions.apiCallError({
-      screen: 'myBucketlists',
-      error: response.error,
-    }));
-
-    dispatch(apiCallActions.resetError());
-
-    return;
-  }
-
-  dispatch(loadBucketlistsSuccess({
-    data: response,
-    dataType: 'myData',
-    screen: 'myBucketlists',
-  }));
-
-  dispatch(apiCallActions.resetMessage());
-};
 
 export const getBucketlist = id => async (dispatch) => {
   const response = await BucketlistService.getBucketlist(id);
@@ -304,11 +266,10 @@ export const saveBucketlist = bucketlist => async (dispatch) => {
 
 export const updateBucketlist = bucketlist => async (dispatch) => {
   const response = await BucketlistService.updateBucketlist(bucketlist);
-
   dispatch(apiCallActions.beginApiCall({ screen: 'myBucketlists' }));
 
   if (response.error) {
-    dispatch(apiCallActions.apiCallError({ ...response, screen: 'myBucketlists' }));
+    dispatch(apiCallActions.apiCallError({ error: response.error, screen: 'myBucketlists' }));
 
     dispatch(apiCallActions.resetError());
   } else {

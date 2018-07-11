@@ -15,9 +15,9 @@ class Card extends Component {
     liking: false,
   }
 
-  goToProfile = () => {
-    const { bucketlist, history } = this.props;
-    history.push(`profile/${bucketlist.id}`);
+  goToProfile = ({ id }) => {
+    const { history } = this.props;
+    history.push(`profile/${id}`);
   }
 
   like = async () => {

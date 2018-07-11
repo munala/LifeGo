@@ -4,6 +4,7 @@
   flex-grow: 1;
   font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   font-size: 14px;
+  width: 100%;
 }
 
 .bucketlist-name {

@@ -65,11 +65,15 @@ class BaseClass extends Component {
       dueDate: buck.dueDate || null,
     };
 
+    this.setState({ saving: true });
+
     const { actions: { updateBucketlist, saveBucketlist } } = this.props;
 
     const action = this.state.bucketlist.id ? updateBucketlist : saveBucketlist;
 
     const { error } = await action(bucketlist);
+
+    this.setState({ saving: false });
 
     if (!error) {
       this.closeModal();
