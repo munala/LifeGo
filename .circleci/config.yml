@@ -58,7 +58,8 @@ jobs:
     # This is based on your 1.0 configuration file or project settings
     - run: sudo mkdir coverage
     - run: sudo chown -R $USER:$GROUP coverage
-    - run: sudo chmod -R 755 coverage
+    - run: sudo chown -R $USER:$USER coverage
+    - run: sudo chmod -R 777 coverage
     # This is based on your 1.0 configuration file or project settings
     - run: npm install
     - run: npm install -g coveralls
