@@ -1,8 +1,6 @@
-import sendRequest from '../../utils/api';
-import { removeEmptyFields, generateQuery } from '../../utils';
+import { sendGraphQLRequest } from '../../utils/api';
+import { removeEmptyFields } from '../../utils';
 import { profileFields, responseMessageFields, userFields } from '../Common/fields';
-
-const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export default {
   getProfile: async () => {
@@ -11,13 +9,7 @@ export default {
       fields: profileFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   getOtherProfile: async (id) => {
@@ -29,13 +21,7 @@ export default {
       fields: profileFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   updateProfile: async ({
@@ -57,13 +43,7 @@ export default {
       fields: profileFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   addFriend: async (friend) => {
@@ -73,13 +53,7 @@ export default {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   removeFriend: async (friend) => {
@@ -89,13 +63,7 @@ export default {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   searchUsers: async (name) => {
@@ -105,12 +73,6 @@ export default {
       fields: userFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 };

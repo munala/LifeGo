@@ -1,12 +1,11 @@
-import sendRequest from '../../utils/api';
+import sendRequest, { sendGraphQLRequest } from '../../utils/api';
 import profileActions from '../Profile/api';
-import { removeEmptyFields, generateQuery } from '../../utils';
+import { removeEmptyFields } from '../../utils';
 import {
   responseMessageFields,
 } from '../Common/fields';
 
 const userUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
-const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 const { updateProfile, getProfile } = profileActions;
 
@@ -42,12 +41,6 @@ export default {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 };
