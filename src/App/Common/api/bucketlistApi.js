@@ -1,13 +1,10 @@
-import sendRequest from '../../../utils/api';
-import { generateQuery } from '../../../utils/';
+import { sendGraphQLRequest } from '../../../utils/api';
 import {
   itemFields,
   listFields,
   bucketlistFields,
   responseMessageFields,
 } from '../fields';
-
-const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 const getLists = async ({
   offset, limit, name, id, mutation,
@@ -26,13 +23,7 @@ const getLists = async ({
     fields: listFields,
   };
 
-  const query = generateQuery(queryData);
-
-  return sendRequest({
-    method: 'post',
-    url,
-    data: { query },
-  });
+  return sendGraphQLRequest(queryData);
 };
 
 const BucketlistService = {
@@ -43,13 +34,7 @@ const BucketlistService = {
       fields: bucketlistFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   deleteBucketlist: async (bucketlist) => {
@@ -59,13 +44,7 @@ const BucketlistService = {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   getBucketlist: async (id) => {
@@ -75,13 +54,7 @@ const BucketlistService = {
       fields: bucketlistFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   getBucketlists: async (offset, limit, name) => getLists({
@@ -109,13 +82,7 @@ const BucketlistService = {
       fields: bucketlistFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   addItem: async (bucketlist, item) => {
@@ -125,13 +92,7 @@ const BucketlistService = {
       fields: itemFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   updateItem: async (bucketlist, item) => {
@@ -146,13 +107,7 @@ const BucketlistService = {
       fields: itemFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   deleteItem: async (bucketlist, item) => {
@@ -165,13 +120,7 @@ const BucketlistService = {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 };
 

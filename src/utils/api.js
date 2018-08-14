@@ -1,9 +1,13 @@
 import axios from 'axios';
 
+import { generateQuery } from '.';
+
 const instance = axios.create();
 
 instance.defaults.headers.common['Content-Type'] = 'application/json';
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
+const graphqlUrl = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export const handleError = (error) => {
   if (error.response && error.response.data.message) {
@@ -33,7 +37,7 @@ export const handleError = (error) => {
   };
 };
 
-export default async ({ method, url, data }) => {
+const sendRequest = async ({ method, url, data }) => {
   instance.defaults.headers.common.token = localStorage.getItem('token');
 
   try {
@@ -56,3 +60,15 @@ export default async ({ method, url, data }) => {
     return handleError(error);
   }
 };
+
+export const sendGraphQLRequest = (queryData) => {
+  const query = generateQuery(queryData);
+
+  return sendRequest({
+    method: 'post',
+    url: graphqlUrl,
+    data: { query },
+  });
+};
+
+export default sendRequest;

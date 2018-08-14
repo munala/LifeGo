@@ -1,12 +1,9 @@
-import sendRequest from '../../utils/api';
-import { generateQuery } from '../../utils';
+import { sendGraphQLRequest } from '../../utils/api';
 import {
   messageFields,
   conversationFields,
   responseMessageFields,
 } from '../Common/fields';
-
-const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export default {
   getConversations: async () => {
@@ -15,13 +12,7 @@ export default {
       fields: conversationFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   sendMessage: async ({ senderId, receiverId, ...message }) => {
@@ -33,13 +24,7 @@ export default {
       fields: messageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   startConversation: async (conversation) => {
@@ -53,13 +38,7 @@ export default {
       fields: conversationFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   updateMessage: async (message) => {
@@ -76,13 +55,7 @@ export default {
       fields: messageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   deleteMessage: async (message) => {
@@ -97,13 +70,7 @@ export default {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   deleteConversation: async (conversation) => {
@@ -117,12 +84,6 @@ export default {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 };

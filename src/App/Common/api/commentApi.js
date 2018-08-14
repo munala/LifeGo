@@ -1,11 +1,8 @@
-import sendRequest from '../../../utils/api';
-import { generateQuery } from '../../../utils/';
+import { sendGraphQLRequest } from '../../../utils/api';
 import {
   commentFields,
   responseMessageFields,
 } from '../fields';
-
-const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export default {
   addComment: async (bucketlist, comment) => {
@@ -15,13 +12,7 @@ export default {
       fields: commentFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   updateComment: async (bucketlist, comment) => {
@@ -35,13 +26,7 @@ export default {
       fields: commentFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 
   deleteComment: async (bucketlist, comment) => {
@@ -54,12 +39,6 @@ export default {
       fields: responseMessageFields,
     };
 
-    const query = generateQuery(queryData);
-
-    return sendRequest({
-      method: 'post',
-      url,
-      data: { query },
-    });
+    return sendGraphQLRequest(queryData);
   },
 };
