@@ -7,12 +7,30 @@ import * as commonConstants from '../../Common/constants';
 const types = { ...settingsConstants, ...commonConstants };
 
 jest.mock('../api', (() => ({
-  updateProfile: () => Promise.resolve('dfknefenfiefnef'),
-  getProfile: () => Promise.resolve({}),
-  changePassword: () => Promise.resolve({ token: 'dfknefenfiefnef' }),
-  changeEmail: () => Promise.resolve({ token: 'dfknefenfiefnef' }),
-  changeUsername: () => Promise.resolve({ token: 'dfknefenfiefnef' }),
-  deleteAccount: () => Promise.resolve('dfknefenfiefnef'),
+  updateProfile: () => Promise.resolve({
+    data: {
+      updateProfile: {},
+    },
+  }),
+  getProfile: () => Promise.resolve({
+    data: {
+      getProfile: {},
+    },
+  }),
+  changePassword: () => Promise.resolve({
+    token: 'dfknefenfiefnef',
+  }),
+  changeEmail: () => Promise.resolve({
+    token: 'dfknefenfiefnef',
+  }),
+  changeUsername: () => Promise.resolve({
+    token: 'dfknefenfiefnef',
+  }),
+  deleteAccount: () => Promise.resolve({
+    data: {
+      deleteAccount: {},
+    },
+  }),
 })));
 
 describe('Auth actions', () => {

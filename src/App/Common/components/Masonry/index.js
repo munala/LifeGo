@@ -24,6 +24,7 @@ class Masonry extends BaseClass {
     snackOpen: false,
     deleting: false,
     saving: false,
+    message: {},
   }
 
   static getDerivedStateFromProps = ({
@@ -133,7 +134,7 @@ class Masonry extends BaseClass {
 
   render() {
     const {
-      selectedBucketlist, mode, showAddModal, bucketlist: bucketList, snackOpen, saving,
+      selectedBucketlist, mode, showAddModal, bucketlist: buck, snackOpen, saving, message,
     } = this.state;
 
     const {
@@ -145,7 +146,12 @@ class Masonry extends BaseClass {
       fromProfile,
     } = this.props;
 
-    const [bucketlist] = bucketlists.filter(buck => buck.id === selectedBucketlist.id);
+    const bucketList = {
+      ...buck,
+      privacy: buck ? (buck.privacy || profile.privacy || 'friends') : (profile.privacy || 'friends'),
+    };
+
+    const [bucketlist] = bucketlists.filter(list => list.id === selectedBucketlist.id);
 
     return (
       <div className="stack-grid">
@@ -209,12 +215,9 @@ class Masonry extends BaseClass {
         {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}
         <SnackBarComponent
           open={snackOpen}
-          message={{
-            content: `You have deleted ${bucketList && bucketList.name}`,
-            success: true,
-          }}
-          closeSnackBar={this.cancel}
-          undo="undo"
+          message={message}
+          closeSnackBar={message.undo ? this.cancel : this.closeSnackBar}
+          undo={message.undo}
         />
         {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
       </div>

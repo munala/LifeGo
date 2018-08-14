@@ -102,6 +102,7 @@ const load = async ({
   dataType,
   serviceCall,
   action,
+  mutation,
 }) => {
   dispatch(apiCallActions.beginApiCall({ screen }));
 
@@ -119,17 +120,17 @@ const load = async ({
     }));
 
     dispatch(apiCallActions.resetError());
+  } else {
+    const actionCreator = action || loadBucketlistsSuccess;
+
+    dispatch(actionCreator({
+      data: response.data[mutation],
+      dataType,
+      screen,
+    }));
+
+    dispatch(apiCallActions.resetMessage());
   }
-
-  const actionCreator = action || loadBucketlistsSuccess;
-
-  dispatch(actionCreator({
-    data: response,
-    dataType,
-    screen,
-  }));
-
-  dispatch(apiCallActions.resetMessage());
 
   return response;
 };
@@ -156,6 +157,7 @@ export const loadMoreBucketlists = (
     serviceCall,
     action,
     screen: 'loader',
+    mutation: dataType === 'allData' ? 'listAll' : 'list',
   });
 };
 
@@ -171,6 +173,7 @@ export const explore = (
   serviceCall: BucketlistService.explore,
   screen: 'explore',
   dataType: 'exploreData',
+  mutation: 'explore',
 });
 
 export const loadBucketlists = (
@@ -185,6 +188,7 @@ export const loadBucketlists = (
   serviceCall: BucketlistService.getBucketlists,
   screen: 'myBucketlists',
   dataType: 'myData',
+  mutation: 'list',
 });
 
 export const loadAllBucketlists = (
@@ -199,6 +203,7 @@ export const loadAllBucketlists = (
   serviceCall: BucketlistService.getAllBucketlists,
   screen: 'allBucketlists',
   dataType: 'allData',
+  mutation: 'listAll',
 });
 
 export const loadOtherBucketlists = (
@@ -215,6 +220,7 @@ export const loadOtherBucketlists = (
   serviceCall: BucketlistService.getOtherBucketlists,
   screen: 'myBucketlists',
   dataType: 'myData',
+  mutation: 'listOther',
 });
 
 
@@ -229,7 +235,7 @@ export const getBucketlist = id => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dispatch(getBucketlistSuccess({
-      bucketlist: response,
+      bucketlist: response.data.getBucketlist,
       screen: 'single',
       dataType: 'allData',
     }));
@@ -252,7 +258,7 @@ export const saveBucketlist = bucketlist => async (dispatch) => {
   } else {
     dataTypes.slice(0, 2).forEach((dataType) => {
       dispatch(createBucketlistSuccess({
-        bucketlist: response,
+        bucketlist: response.data.createBucketlist,
         screen: 'myBucketlists',
         dataType,
       }));
@@ -275,7 +281,7 @@ export const updateBucketlist = bucketlist => async (dispatch) => {
   } else {
     dataTypes.forEach((dataType) => {
       dispatch(updateBucketlistSuccess({
-        bucketlist: response,
+        bucketlist: response.data.updateBucketlist,
         screen: 'myBucketlists',
         dataType,
       }));
@@ -299,7 +305,7 @@ export const deleteBucketlist = bucketlist => async (dispatch) => {
   } else {
     dataTypes.forEach((dataType) => {
       dispatch(deleteBucketlistSuccess({
-        bucketlist, ...response, screen: 'myBucketlists', dataType,
+        bucketlist, ...response.data.deleteBucketlist, screen: 'myBucketlists', dataType,
       }));
     });
 
@@ -325,7 +331,7 @@ export const saveItem = (bucketlist, item) => async (dispatch) => {
     dataTypes.forEach((dataType) => {
       dispatch(createItemSuccess({
         bucketlist,
-        item: response,
+        item: response.data.createItem,
         dataType,
       }));
     });
@@ -351,7 +357,7 @@ export const updateItem = (bucketlist, item) => async (dispatch) => {
   } else {
     dataTypes.forEach((dataType) => {
       dispatch(updateItemSuccess({
-        bucketlist, item: { item, ...response }, dataType,
+        bucketlist, item: { item, ...response.data.updateItem }, dataType,
       }));
     });
 
@@ -376,7 +382,7 @@ export const deleteItem = (bucketlist, item) => async (dispatch) => {
   } else {
     dataTypes.forEach((dataType) => {
       dispatch(deleteItemSuccess({
-        bucketlist, item, ...response, dataType,
+        bucketlist, item, ...response.data, dataType,
       }));
     });
 

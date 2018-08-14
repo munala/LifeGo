@@ -5,12 +5,14 @@ import propTypes from './propTypes';
 
 class BaseClass extends Component {
   onChange = ({ target: { value } }) => {
-    this.setState({
-      message: {
-        ...this.state.message,
-        content: value,
-      },
-    });
+    if (!value.includes('\n')) {
+      this.setState({
+        message: {
+          ...this.state.message,
+          content: value,
+        },
+      });
+    }
   }
 
   onSubmit = async () => {

@@ -66,19 +66,19 @@ const UserThumbnail = ({
 
 UserThumbnail.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     friends: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   alert: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     read: PropTypes.bool,
     user: PropTypes.string,
     userPictureUrl: PropTypes.string,
   }).isRequired,
   person: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   addFriend: PropTypes.func.isRequired,
   removeFriend: PropTypes.func.isRequired,

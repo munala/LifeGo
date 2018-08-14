@@ -21,19 +21,19 @@ export const unlikeSuccess = (like, dataType) => ({
 });
 
 export const like = bucketlist => async (dispatch) => {
-  const response = await likeService.like(bucketlist, like);
+  const response = await likeService.like(bucketlist);
   if (response.error) {
     dispatch(apiCallActions.apiCallError(response.error));
     resetError(dispatch);
   } else {
     dataTypes.forEach((dataType) => {
-      dispatch(likeSuccess(bucketlist, response, dataType));
+      dispatch(likeSuccess(bucketlist, response.data.like, dataType));
     });
   }
 };
 
-export const unlike = likes => async (dispatch) => {
-  const response = await likeService.unlike(likes);
+export const unlike = (bucketlist, likes) => async (dispatch) => {
+  const response = await likeService.unlike(bucketlist, likes);
   if (response.error) {
     dispatch(apiCallActions.apiCallError(response.error));
     resetError(dispatch);

@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 export default {
   bucketlist: PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     createdAt: PropTypes.string,
     updatedAt: PropTypes.string,
     description: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
-      id: PropTypes.number,
+      id: PropTypes.string,
       createdAt: PropTypes.string,
       updatedAt: PropTypes.string,
       done: PropTypes.bool,
     })),
     comments: PropTypes.arrayOf(PropTypes.shape({
       content: PropTypes.string,
-      id: PropTypes.number,
+      id: PropTypes.string,
       createdAt: PropTypes.string,
       updatedAt: PropTypes.string,
     })),
@@ -26,7 +26,7 @@ export default {
     deleteComment: PropTypes.func.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     username: PropTypes.string,
     displayName: PropTypes.string,
     email: PropTypes.string,

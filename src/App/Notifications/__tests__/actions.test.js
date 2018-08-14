@@ -8,9 +8,13 @@ import * as commonConstants from '../../Common/constants';
 const types = { ...commonConstants, ...notificationConstants };
 
 jest.mock('../api', (() => ({
-  getNotifications: () => Promise.resolve('dfknefenfiefnef'),
-  markAsRead: () => Promise.resolve('dfknefenfiefnef'),
-  deleteNotification: () => Promise.resolve('dfknefenfiefnef'),
+  getNotifications: () => Promise.resolve({
+    data: {
+      getNotifications: [],
+    },
+  }),
+  markAsRead: () => Promise.resolve({ data: { markAsRead: {} } }),
+  deleteNotification: () => Promise.resolve({ data: { deleteNotification: {} } }),
 })));
 
 describe('Chat action creators', () => {

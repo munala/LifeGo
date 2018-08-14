@@ -26,7 +26,12 @@ export const clearSearchSuccess = () => ({
 export const searchUsers = name => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'searchResults' }));
   dispatch(clearSearchSuccess());
-  const { users, error } = await userService.searchUsers(name);
+  const {
+    data: {
+      searchUsers: users,
+      searchUsers: { error },
+    },
+  } = await userService.searchUsers(name);
 
   if (error) {
     dispatch(apiCallActions.apiCallError({ screen: 'searchResults', error }));
@@ -44,19 +49,22 @@ export const searchBucketlists = (
 ) => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'searchResults' }));
 
-  const { bucketlists, error } = await bucketlistService.getAllBucketlists(
+  const response = await bucketlistService.getAllBucketlists(
     offset,
     limit,
     search,
   );
 
-  if (error) {
-    dispatch(apiCallActions.apiCallError({ screen: 'searchResults', error }));
+  if (response.error) {
+    dispatch(apiCallActions.apiCallError({ screen: 'searchResults', error: response.error }));
   } else {
     dispatch(clearSearchSuccess());
-    dispatch(searchBucketlistsSuccess({ bucketlists, searchText: search }));
+    dispatch(searchBucketlistsSuccess({
+      bucketlists: response.data.listAll.bucketlists,
+      searchText: search,
+    }));
   }
-  return ({ bucketlists });
+  return ({ bucketlists: response.data.listAll.bucketlists });
 };
 
 export const clearSearch = () => (dispatch) => {

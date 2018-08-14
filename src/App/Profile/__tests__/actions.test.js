@@ -7,12 +7,36 @@ import * as commonConstants from '../../Common/constants';
 const types = { ...profileConstants, ...commonConstants };
 
 jest.mock('../api', (() => ({
-  getProfile: () => Promise.resolve('dfknefenfiefnef'),
-  getOtherProfile: () => Promise.resolve('dfknefenfiefnef'),
-  updateProfile: () => Promise.resolve('dfknefenfiefnef'),
-  searchUsers: () => Promise.resolve({ users: [] }),
-  addFriend: () => Promise.resolve('dfknefenfiefnef'),
-  removeFriend: () => Promise.resolve('dfknefenfiefnef'),
+  getProfile: () => Promise.resolve({
+    data: {
+      getProfile: {},
+    },
+  }),
+  getOtherProfile: () => Promise.resolve({
+    data: {
+      getOtherProfile: {},
+    },
+  }),
+  updateProfile: () => Promise.resolve({
+    data: {
+      updateProfile: {},
+    },
+  }),
+  searchUsers: () => Promise.resolve({
+    data: {
+      searchUsers: [],
+    },
+  }),
+  addFriend: () => Promise.resolve({
+    data: {
+      addFriend: {},
+    },
+  }),
+  removeFriend: () => Promise.resolve({
+    data: {
+      removeFriend: {},
+    },
+  }),
 })));
 
 describe('Auth actions', () => {
@@ -106,7 +130,10 @@ describe('Auth actions', () => {
       type: types.REMOVE_FRIEND,
     };
 
-    const action = profileActions.removeFriendSuccess({ message: data.message }, data.friend);
+    const action = profileActions.removeFriendSuccess({
+      message: data.message,
+      friend: data.friend,
+    });
 
     expect(action).toEqual(expectedAction);
   });

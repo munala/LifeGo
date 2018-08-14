@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 export default {
   profile: PropTypes.shape({
-    id: PropTypes.number,
-    userId: PropTypes.number,
+    id: PropTypes.string,
+    userid: PropTypes.string,
     username: PropTypes.string,
     displayName: PropTypes.string,
     email: PropTypes.string,

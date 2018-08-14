@@ -6,24 +6,15 @@ jest.mock('axios', () => ({
     post: (url, data) => new Promise((resolve) => {
       resolve({ data: { message: 'oliver' } });
     }),
-    get: (url, data) => new Promise((resolve) => {
-      resolve({ data: { message: 'oliver' } });
-    }),
-    put: (url, data) => new Promise((resolve) => {
-      resolve({ data: { message: 'oliver' } });
-    }),
-    delete: (url, data) => new Promise((resolve) => {
-      resolve({ data: { message: 'oliver' } });
-    }),
   }),
 }));
 
 describe('Likes API tests', () => {
   it('should return success response', async () => {
-    const likeResponse = await likeService.like({ id: 1 }, { content: 'message' });
+    const likeResponse = await likeService.like({ id: 1 }, { id: 1, content: 'message' });
     expect(likeResponse).toEqual({ message: 'oliver' });
 
-    const unlikeResponse = await likeService.unlike({ id: 1 });
+    const unlikeResponse = await likeService.unlike({ id: 1 }, { id: 1 });
     expect(unlikeResponse).toEqual({ message: 'oliver' });
   });
 });

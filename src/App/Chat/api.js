@@ -1,45 +1,128 @@
 import sendRequest from '../../utils/api';
+import { generateQuery } from '../../utils';
+import {
+  messageFields,
+  conversationFields,
+  responseMessageFields,
+} from '../Common/fields';
 
-const messageUrl = `${process.env.REACT_APP_API_HOST}/api/messages/`;
+const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export default {
-  sendMessage: async message => sendRequest({
-    method: 'post',
-    url: messageUrl,
-    data: message,
-  }),
+  getConversations: async () => {
+    const queryData = {
+      mutation: 'getConversations',
+      fields: conversationFields,
+    };
 
-  startConversation: async conversation => sendRequest({
-    method: 'post',
-    url: `${messageUrl}conversations`,
-    data: conversation,
-  }),
+    const query = generateQuery(queryData);
 
-  updateMessage: async message => sendRequest({
-    method: 'put',
-    url: `${messageUrl}${message.id}`,
-    data: {
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  sendMessage: async ({ senderId, receiverId, ...message }) => {
+    const args = message;
+
+    const queryData = {
+      args,
+      mutation: 'createMessage',
+      fields: messageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  startConversation: async (conversation) => {
+    const args = {
+      receiverId: conversation.receiverId,
+    };
+
+    const queryData = {
+      args,
+      mutation: 'startConversation',
+      fields: conversationFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  updateMessage: async (message) => {
+    const args = {
+      id: message.id,
+      read: message.read,
       content: message.content,
-    },
-  }),
+      conversationId: message.conversationId,
+    };
 
-  markAsRead: async message => sendRequest({
-    method: 'put',
-    url: `${messageUrl}mark_as_read/${message.id}`,
-  }),
+    const queryData = {
+      args,
+      mutation: 'updateMessage',
+      fields: messageFields,
+    };
 
-  deleteMessage: async message => sendRequest({
-    method: 'delete',
-    url: `${messageUrl}${message.id}`,
-  }),
+    const query = generateQuery(queryData);
 
-  getConversations: async () => sendRequest({
-    method: 'get',
-    url: `${messageUrl}conversations`,
-  }),
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 
-  deleteConversation: async conversation => sendRequest({
-    method: 'delete',
-    url: `${messageUrl}conversations/${conversation.id}`,
-  }),
+  deleteMessage: async (message) => {
+    const args = {
+      id: message.id,
+      conversationId: message.conversationId,
+    };
+
+    const queryData = {
+      args,
+      mutation: 'deleteMessage',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  deleteConversation: async (conversation) => {
+    const args = {
+      id: conversation.id,
+    };
+
+    const queryData = {
+      args,
+      mutation: 'deleteConversation',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 };

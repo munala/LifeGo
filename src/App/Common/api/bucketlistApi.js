@@ -1,71 +1,178 @@
 import sendRequest from '../../../utils/api';
+import { generateQuery } from '../../../utils/';
+import {
+  itemFields,
+  listFields,
+  bucketlistFields,
+  responseMessageFields,
+} from '../fields';
 
-const bucketlistUrl = `${process.env.REACT_APP_API_HOST}/api/bucketlists/`;
+const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
+
+const getLists = async ({
+  offset, limit, name, id, mutation,
+}) => {
+  const args = {
+    offset, limit, name,
+  };
+
+  if (mutation === 'listOther') {
+    args.id = id;
+  }
+
+  const queryData = {
+    args,
+    mutation,
+    fields: listFields,
+  };
+
+  const query = generateQuery(queryData);
+
+  return sendRequest({
+    method: 'post',
+    url,
+    data: { query },
+  });
+};
 
 const BucketlistService = {
-  saveBucketlist: async bucketlist => sendRequest({
-    method: 'post',
-    url: bucketlistUrl,
-    data: bucketlist,
+  saveBucketlist: async (bucketlist) => {
+    const queryData = {
+      args: bucketlist,
+      mutation: 'createBucketlist',
+      fields: bucketlistFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  deleteBucketlist: async (bucketlist) => {
+    const queryData = {
+      args: { id: bucketlist.id },
+      mutation: 'deleteBucketlist',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  getBucketlist: async (id) => {
+    const queryData = {
+      args: { id },
+      mutation: 'getBucketlist',
+      fields: bucketlistFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  getBucketlists: async (offset, limit, name) => getLists({
+    offset, limit, name, mutation: 'list',
   }),
 
-  addItem: async (bucketlist, item) => sendRequest({
-    method: 'post',
-    url: `${bucketlistUrl + bucketlist.id.toString()}/items/`,
-    data: {
-      name: item.name,
-    },
+  getAllBucketlists: async (offset, limit, name) => getLists({
+    offset, limit, name, mutation: 'listAll',
   }),
 
-  deleteBucketlist: async bucketlist => sendRequest({
-    method: 'delete',
-    url: `${bucketlistUrl + bucketlist.id.toString()}`,
+  getOtherBucketlists: async (offset, limit, name, id) => getLists({
+    offset, limit, name, id, mutation: 'listOther',
   }),
 
-  getBucketlist: async id => sendRequest({
-    method: 'get',
-    url: `${bucketlistUrl}${id}`,
+  explore: async (offset, limit, name) => getLists({
+    offset, limit, name, mutation: 'explore',
   }),
 
-  getBucketlists: async (offset, limit, name) => sendRequest({
-    method: 'get',
-    url: `${bucketlistUrl}?offset=${offset}&limit=${limit}&q=${name}`,
-  }),
+  updateBucketlist: async ({
+    comments, likes, items, updatedAt, createdAt, user, userPictureUrl, userId, ...bucketlist
+  }) => {
+    const queryData = {
+      args: bucketlist,
+      mutation: 'updateBucketlist',
+      fields: bucketlistFields,
+    };
 
-  getAllBucketlists: async (offset, limit, name) => sendRequest({
-    method: 'get',
-    url: `${bucketlistUrl}all?offset=${offset}&limit=${limit}&q=${name}`,
-  }),
+    const query = generateQuery(queryData);
 
-  getOtherBucketlists: async (offset, limit, name, id) => sendRequest({
-    method: 'get',
-    url: `${bucketlistUrl}other/${id}?offset=${offset}&limit=${limit}&q=${name}`,
-  }),
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 
-  explore: async (offset, limit, name) => sendRequest({
-    method: 'get',
-    url: `${bucketlistUrl}explore?offset=${offset}&limit=${limit}&q=${name}`,
-  }),
+  addItem: async (bucketlist, item) => {
+    const queryData = {
+      args: { ...item, bucketlistId: bucketlist.id },
+      mutation: 'createItem',
+      fields: itemFields,
+    };
 
-  updateBucketlist: async bucketlist => sendRequest({
-    method: 'put',
-    url: `${bucketlistUrl + bucketlist.id.toString()}`,
-    data: bucketlist,
-  }),
+    const query = generateQuery(queryData);
 
-  updateItem: async (bucketlist, item) => sendRequest({
-    method: 'put',
-    url: `${bucketlistUrl + bucketlist.id}/items/${item.id}`,
-    data: {
-      name: item.name,
-      done: item.done,
-    },
-  }),
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 
-  deleteItem: async (bucketlist, item) => sendRequest({
-    method: 'delete',
-    url: `${bucketlistUrl + bucketlist.id}/items/${item.id}`,
-  }),
+  updateItem: async (bucketlist, item) => {
+    const queryData = {
+      args: {
+        id: item.id,
+        name: item.name,
+        done: item.done,
+        bucketlistId: bucketlist.id,
+      },
+      mutation: 'updateItem',
+      fields: itemFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  deleteItem: async (bucketlist, item) => {
+    const queryData = {
+      args: {
+        id: item.id,
+        bucketlistId: bucketlist.id,
+      },
+      mutation: 'deleteItem',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 };
 
 export default BucketlistService;

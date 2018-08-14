@@ -78,13 +78,13 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     displayName: PropTypes.string,
     pictureUrl: PropTypes.string,
     friends: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
   notifications: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     read: PropTypes.bool,
     user: PropTypes.string,
     userPictureUrl: PropTypes.string,

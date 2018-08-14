@@ -120,10 +120,10 @@ class EditProfile extends Component {
 
 EditProfile.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     displayName: PropTypes.string,
     friends: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   actions: PropTypes.shape({

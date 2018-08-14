@@ -47,6 +47,10 @@ export default async ({ method, url, data }) => {
       return handleError(response.error);
     }
 
+    if (response.data.errors) {
+      return handleError(response.data.errors[0]);
+    }
+
     return response.data;
   } catch (error) {
     return handleError(error);

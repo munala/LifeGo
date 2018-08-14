@@ -83,7 +83,7 @@ class Profile extends Component {
 Profile.propTypes = {
   profile: PropTypes.shape({
     friends: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   actions: PropTypes.shape({

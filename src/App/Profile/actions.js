@@ -30,7 +30,7 @@ export const addFriendSuccess = ({ message, friend }) => ({
   screen: 'others',
 });
 
-export const removeFriendSuccess = ({ message }, friend) => ({
+export const removeFriendSuccess = ({ message, friend }) => ({
   type: types.REMOVE_FRIEND,
   message,
   friend,
@@ -63,7 +63,7 @@ export const getProfile = () => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dispatch(getProfileSuccess({
-      profile: response,
+      profile: response.data.getProfile,
       screen: 'profile',
     }));
 
@@ -87,7 +87,7 @@ export const getOtherProfile = id => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dispatch(getOtherProfileSuccess({
-      profile: response,
+      profile: response.data.getOtherProfile,
       screen: 'profile',
     }));
 
@@ -110,7 +110,7 @@ export const updateProfile = (profile, screen) => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(updateProfileSuccess({ profile: response.profile, screen }));
+    dispatch(updateProfileSuccess({ profile: response.data.updateProfile, screen }));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -131,7 +131,7 @@ export const addFriend = user => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(addFriendSuccess(response, 'others'));
+    dispatch(addFriendSuccess({ ...response.data.addFriend, friend: user }));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -152,7 +152,7 @@ export const removeFriend = user => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(removeFriendSuccess(response, user, 'others'));
+    dispatch(removeFriendSuccess({ ...response.data.removeFriend, friend: user }));
 
     dispatch(apiCallActions.resetMessage());
   }

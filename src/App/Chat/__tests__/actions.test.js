@@ -8,13 +8,12 @@ import * as commonConstants from '../../Common/constants';
 const types = { ...commonConstants, ...chatConstants };
 
 jest.mock('../api', (() => ({
-  sendMessage: () => Promise.resolve('dfknefenfiefnef'),
-  startConversation: () => Promise.resolve('dfknefenfiefnef'),
-  updateMessage: () => Promise.resolve('dfknefenfiefnef'),
-  markAsRead: () => Promise.resolve('dfknefenfiefnef'),
-  deleteMessage: () => Promise.resolve('dfknefenfiefnef'),
-  getConversations: () => Promise.resolve('dfknefenfiefnef'),
-  deleteConversation: () => Promise.resolve('dfknefenfiefnef'),
+  sendMessage: () => Promise.resolve({ data: { createMessage: {} } }),
+  startConversation: () => Promise.resolve({ data: { startConversation: {} } }),
+  updateMessage: () => Promise.resolve({ data: { updateMessage: {} } }),
+  deleteMessage: () => Promise.resolve({ data: { deleteMessage: {} } }),
+  getConversations: () => Promise.resolve({ data: { getConversations: {} } }),
+  deleteConversation: () => Promise.resolve({ data: { deleteConversation: {} } }),
 })));
 
 describe('Chat action creators', () => {

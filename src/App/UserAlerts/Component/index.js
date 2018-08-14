@@ -68,13 +68,13 @@ class UserAlerts extends Component {
 
 UserAlerts.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     displayName: PropTypes.string,
     pictureUrl: PropTypes.string,
     friends: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
   alerts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     read: PropTypes.bool,
     user: PropTypes.string,
     userPictureUrl: PropTypes.string,

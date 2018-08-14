@@ -41,7 +41,7 @@ export const getNotifications = () => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dispatch(getNotificationsSuccess({
-      ...response,
+      notifications: response.data.getNotifications,
       screen: 'notifications',
     }));
 
@@ -62,10 +62,7 @@ export const markNotificationAsRead = notification => async (dispatch) => {
       screen: 'others',
     }));
   } else {
-    dispatch(markAsReadSuccess({
-      ...notification,
-      ...response,
-    }));
+    dispatch(markAsReadSuccess(response.data.markNotificationAsRead));
   }
 
   return response;

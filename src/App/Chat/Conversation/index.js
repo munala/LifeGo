@@ -23,6 +23,14 @@ class Conversation extends BaseClass {
     submitting: false,
   }
 
+  componentDidMount = () => {
+    this.props.conversation.messages.forEach((message) => {
+      if (!message.read) {
+        this.props.actions.markAsRead(message);
+      }
+    });
+  }
+
   renderMessages = messages => messages.map((message, i) => {
     const { profile } = this.props;
 

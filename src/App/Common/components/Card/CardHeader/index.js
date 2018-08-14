@@ -60,7 +60,7 @@ class CardHeader extends Component {
               onClick={() => goToProfile({ id: bucketlist.userId })}
               className="left-user left-header-content"
             >
-              {`${bucketlist.userDisplayName}\n`}
+              {`${bucketlist.user}\n`}
             </div>
             <div className="bucketlist-time" >
               {`${createdAt}${time}`}
@@ -100,14 +100,14 @@ class CardHeader extends Component {
 CardHeader.propTypes = {
   bucketlist: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   createdAt: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   time: PropTypes.string.isRequired,
   modal: PropTypes.bool.isRequired,

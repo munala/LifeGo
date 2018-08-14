@@ -51,20 +51,22 @@ class BaseClass extends Component {
 
     titleCase = (name) => {
       if (name) {
-        let [first, middle, last] = name.trim().split(' ');
+        const [first, middle, last] = name.trim().split(' ');
+        let displayName = '';
+
         if (first) {
-          first = `${first.charAt(0).toUpperCase()}${first.substr(1, first.length - 1)}`;
+          displayName = `${first.charAt(0).toUpperCase()}${first.substr(1, first.length - 1)}`;
         }
 
         if (middle) {
-          middle = `${middle.charAt(0).toUpperCase()}${middle.substr(1, middle.length - 1)}`;
+          displayName = `${displayName} ${middle.charAt(0).toUpperCase()}${middle.substr(1, middle.length - 1)}`;
         }
 
         if (last) {
-          last = `${last.charAt(0).toUpperCase()}${last.substr(1, last.length - 1)}`;
+          displayName = `${displayName} ${last.charAt(0).toUpperCase()}${last.substr(1, last.length - 1)}`;
         }
 
-        return `${first || ''} ${last || ''} ${middle || ''}`;
+        return displayName;
       }
 
       return name;
@@ -85,18 +87,20 @@ class BaseClass extends Component {
         const response = await register(user);
         const { error } = response;
         if (!error) {
-          errorResponse = error;
           await login(user);
         }
+        errorResponse = error;
       }
 
       if (errorResponse) {
         this.setState({ submitting: false });
         if (errorResponse.includes('404') || errorResponse.includes('401')) {
-          errorResponse = 'wrong username or password';
+          errorResponse = 'Wrong username or password';
         }
         this.popSnackBar(errorResponse, false);
       }
+
+      this.setState({ submitting: false });
     }
 
     resetPassword = async () => {
