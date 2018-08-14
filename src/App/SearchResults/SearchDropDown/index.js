@@ -46,7 +46,7 @@ SearchDropDwon.propTypes = {
   searchText: PropTypes.string.isRequired,
   viewAll: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
   })).isRequired,
 };

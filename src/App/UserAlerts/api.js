@@ -1,25 +1,61 @@
 import sendRequest from '../../utils/api';
+import { generateQuery } from '../../utils';
+import {
+  userNotificationFields,
+  responseMessageFields,
+} from '../Common/fields';
 
-const userAlertsUrl = `${process.env.REACT_APP_API_HOST}/api/user_notifications/`;
+const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export default {
-  getAlerts: async () => sendRequest({
-    method: 'get',
-    url: userAlertsUrl,
-  }),
+  getAlerts: async () => {
+    const queryData = {
+      mutation: 'getUserNotifications',
+      fields: userNotificationFields,
+    };
 
-  updateAlert: async alert => sendRequest({
-    method: 'put',
-    url: `${userAlertsUrl}${alert.id.toString()}`,
-  }),
+    const query = generateQuery(queryData);
 
-  markAsRead: async alert => sendRequest({
-    method: 'put',
-    url: `${userAlertsUrl}${alert.id.toString()}`,
-  }),
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 
-  deleteAlert: async alert => sendRequest({
-    method: 'delete',
-    url: `${userAlertsUrl}${alert.id.toString()}`,
-  }),
+  markAsRead: async (notification) => {
+    const args = { id: notification.id };
+
+    const queryData = {
+      args,
+      mutation: 'markUserNotificationAsRead',
+      fields: userNotificationFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  deleteAlert: async (notification) => {
+    const args = { id: notification.id };
+
+    const queryData = {
+      args,
+      mutation: 'deleteUserNotification',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 };

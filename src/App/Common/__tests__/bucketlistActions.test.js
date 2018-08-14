@@ -6,45 +6,63 @@ import * as types from '../constants';
 
 jest.mock('../api/bucketlistApi', (() => ({
   saveBucketlist: bucketlist => Promise.resolve({
-    ...bucketlist,
-    id: '1111e2e',
-    description: '',
-    createdAt: 'eevevee',
-    updatedAt: 'dfefefe',
+    data: {
+      createBucketlist: {
+        ...bucketlist,
+        id: '1111e2e',
+        description: '',
+        createdAt: 'eevevee',
+        updatedAt: 'dfefefe',
+      },
+    },
   }),
   updateBucketlist: bucketlist => Promise.resolve({
-    ...bucketlist,
-    id: '1111e2e',
-    description: '',
-    createdAt: 'eevevee',
-    updatedAt: 'dfefefe',
+    data: {
+      updateBucketlist: {
+        ...bucketlist,
+        id: '1111e2e',
+        description: '',
+        createdAt: 'eevevee',
+        updatedAt: 'dfefefe',
+      },
+    },
   }),
-  deleteBucketlist: bucketlist => Promise.resolve(bucketlist),
+  deleteBucketlist: bucketlist => Promise.resolve({ data: { message: 'Success' } }),
   addItem: (bucketlist, item) => Promise.resolve({
-    ...item,
-    id: '1111e2e',
-    done: false,
-    createdAt: 'eevevee',
-    updatedAt: 'dfefefe',
+    data: {
+      createItem: {
+        ...item,
+        id: '1111e2e',
+        done: false,
+        createdAt: 'eevevee',
+        updatedAt: 'dfefefe',
+      },
+    },
   }),
   updateItem: (bucketlist, item) => Promise.resolve({
-    ...item,
-    id: '1111e2e',
-    done: true,
-    createdAt: 'eevevee',
-    updatedAt: 'dfefefe',
+    data: {
+      updateItem: {
+        ...item,
+        id: '1111e2e',
+        done: true,
+        createdAt: 'eevevee',
+        updatedAt: 'dfefefe',
+      },
+    },
   }),
   deleteItem: (bucketlist, item) => Promise.resolve({ bucketlist, item }),
   getBucketlists: () => Promise.resolve({
-    bucketlists: [{
-      name: 'oliver',
-      description: '',
-      createdAt: 'eevevee',
-      updatedAt: 'dfefefe',
-      items: [],
-    }],
-    nextUrl: '',
-    previousUrl: '',
+    data: {
+      bucketlists: [{
+        name: 'oliver',
+        description: '',
+        createdAt: 'eevevee',
+        updatedAt: 'dfefefe',
+        items: [],
+      }],
+      nextOffset: '',
+      prevOffset: '',
+    },
   }),
 })));
 

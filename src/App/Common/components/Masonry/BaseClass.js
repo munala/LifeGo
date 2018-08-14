@@ -21,6 +21,13 @@ class BaseClass extends Component {
     });
   }
 
+  closeSnackBar = () => {
+    this.setState({
+      snackOpen: false,
+      message: {},
+    });
+  }
+
   deleteBucketlist = (bucketlist) => {
     const { actions: { deleteBucketlist } } = this.props;
     this.setState(
@@ -29,7 +36,14 @@ class BaseClass extends Component {
         deleting: true,
       },
       () => {
-        this.setState({ snackOpen: true });
+        this.setState({
+          snackOpen: true,
+          message: {
+            content: `You have deleted ${this.state.bucketlist && this.state.bucketlist.name}`,
+            success: true,
+            undo: 'undo',
+          },
+        });
         this.selectBucketlist(bucketlist);
         this.timeout = setTimeout(async () => {
           await deleteBucketlist(bucketlist);
@@ -60,14 +74,14 @@ class BaseClass extends Component {
   }
 
   save = async (buck) => {
+    const { actions: { updateBucketlist, saveBucketlist } } = this.props;
+    const { bucketlist: bucketList } = this.state;
     const bucketlist = {
       ...buck,
       dueDate: buck.dueDate || null,
     };
 
     this.setState({ saving: true });
-
-    const { actions: { updateBucketlist, saveBucketlist } } = this.props;
 
     const action = this.state.bucketlist.id ? updateBucketlist : saveBucketlist;
 
@@ -77,6 +91,21 @@ class BaseClass extends Component {
 
     if (!error) {
       this.closeModal();
+      this.setState({
+        snackOpen: true,
+        message: {
+          content: `You have deleted ${bucketList && bucketList.name}`,
+          success: true,
+        },
+      });
+    } else {
+      this.setState({
+        snackOpen: true,
+        message: {
+          content: error,
+          success: false,
+        },
+      });
     }
   }
 

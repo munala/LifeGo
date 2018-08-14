@@ -9,7 +9,7 @@ export default {
     push: PropTypes.func.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     pictureUrl: PropTypes.string,
   }).isRequired,
   actions: PropTypes.shape({

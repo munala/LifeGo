@@ -41,7 +41,7 @@ export const getAlerts = () => async (dispatch) => {
     }));
   } else {
     dispatch(getAlertsSuccess({
-      ...response,
+      alerts: response.data.getUserNotifications,
       screen: 'userAlerts',
     }));
   }
@@ -62,7 +62,7 @@ export const markAlertAsRead = alert => async (dispatch) => {
   } else {
     dispatch(markAsReadSuccess({
       ...alert,
-      ...response,
+      ...response.data.markUserNotificationAsRead,
     }));
   }
 

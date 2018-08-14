@@ -49,12 +49,10 @@ describe('Profile reducer', () => {
   });
 
   it('should removeFriend', () => {
-    const action = actions.removeFriendSuccess(
-      {
-        message: 'none',
-      },
-      { name: 'friemd', id: 1 },
-    );
+    const action = actions.removeFriendSuccess({
+      message: 'none',
+      friend: { name: 'friemd', id: 1 },
+    });
     const newState = profileReducer({
       ...initialState,
       friends: [{ name: 'friemd', id: 1 }],

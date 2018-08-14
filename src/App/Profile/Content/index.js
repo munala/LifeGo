@@ -79,12 +79,12 @@ class SideBar extends Component {
 SideBar.propTypes = {
   profile: PropTypes.shape({
     friends: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   data: PropTypes.shape({
     bucketlists: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   otherProfile: PropTypes.shape({}).isRequired,

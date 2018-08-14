@@ -108,12 +108,12 @@ const ConversationRow = ({
 
 ConversationRow.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
   }).isRequired,
   getUnreadCount: PropTypes.func.isRequired,
   conversation: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   setPictureUrl: PropTypes.func.isRequired,
   hoverConversation: PropTypes.func.isRequired,

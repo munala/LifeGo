@@ -4,7 +4,7 @@ export default {
   data: PropTypes.shape({
     bucketlists: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   actions: PropTypes.shape({
@@ -13,7 +13,7 @@ export default {
     saveBucketlist: PropTypes.func.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,

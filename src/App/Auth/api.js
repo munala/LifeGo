@@ -1,7 +1,7 @@
 import { removeEmptyFields } from '../../utils';
 import sendRequest from '../../utils/api';
 
-const userUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
+const userUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
 
 export default {
   loginUser: async (uSer) => {

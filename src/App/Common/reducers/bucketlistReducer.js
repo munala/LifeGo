@@ -110,6 +110,7 @@ export default (state = initialState, action) => {
                 ? action.bucketlist
                 : {
                   ...bucketlist,
+                  likes: bucketlist.likes || [],
                   items: bucketlist.items || [],
                   comments: bucketlist.comments || [],
                 })),

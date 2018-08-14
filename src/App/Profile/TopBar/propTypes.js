@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export default {
   profile: PropTypes.shape({
     friends: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   otherProfile: PropTypes.shape({}).isRequired,

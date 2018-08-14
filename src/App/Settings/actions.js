@@ -54,7 +54,7 @@ export const getProfile = () => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dispatch(getProfileSuccess({
-      profile: response,
+      profile: response.data.getProfile,
       screen: 'settings',
     }));
 
@@ -146,7 +146,7 @@ export const updateProfile = user => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(updateProfileSuccess({ ...response, screen: 'settings' }));
+    dispatch(updateProfileSuccess({ profile: response.data.updateProfile, screen: 'settings' }));
 
     dispatch(apiCallActions.resetMessage());
   }
@@ -167,7 +167,7 @@ export const deleteAccount = user => async (dispatch) => {
 
     dispatch(apiCallActions.resetError());
   } else {
-    dispatch(deleteAccountSuccess(response.message, 'settings'));
+    dispatch(deleteAccountSuccess(response.data.deleteAccount.message, 'settings'));
 
     dispatch(apiCallActions.resetMessage());
   }

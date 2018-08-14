@@ -75,11 +75,11 @@ const ButtonRow = ({
 ButtonRow.propTypes = {
   bucketlist: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   mode: PropTypes.string.isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   like: PropTypes.func.isRequired,
   toggleItems: PropTypes.func.isRequired,

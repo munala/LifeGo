@@ -118,16 +118,16 @@ NewConversation.propTypes = {
   onClose: PropTypes.func.isRequired,
   closeNewConversation: PropTypes.func.isRequired,
   conversations: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   })).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     displayName: PropTypes.string,
     pictureUrl: PropTypes.string,
     username: PropTypes.string,
   }).isRequired,
   searchResults: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     displayName: PropTypes.string,
     pictureUrl: PropTypes.string,
   }).isRequired).isRequired,

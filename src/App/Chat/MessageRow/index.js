@@ -53,7 +53,7 @@ const MessageRow = ({
           {message.content}
         </div>
         <Avatar
-          src={message.pictureUrl || avatar}
+          src={message.userPictureUrl || avatar}
           style={styles.messageAvatar}
         />
       </div>
@@ -73,10 +73,10 @@ const MessageRow = ({
 
 MessageRow.propTypes = {
   message: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     displayName: PropTypes.string.isRequired,
   }).isRequired,
   hoverMessage: PropTypes.func.isRequired,

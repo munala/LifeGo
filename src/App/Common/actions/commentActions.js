@@ -45,7 +45,7 @@ export const addComment = (bucketlist, comment) => async (dispatch) => {
     dispatch(apiCallActions.resetError());
   } else {
     dataTypes.forEach((dataType) => {
-      dispatch(addCommentSuccess(bucketlist, response, dataType));
+      dispatch(addCommentSuccess(bucketlist, response.data.createComment, dataType));
     });
 
     dispatch(apiCallActions.resetMessage());
@@ -68,7 +68,7 @@ export const updateComment = (bucketlist, comment) => async (dispatch) => {
     }));
   } else {
     dataTypes.forEach((dataType) => {
-      dispatch(editCommentSuccess(bucketlist, response, dataType));
+      dispatch(editCommentSuccess(bucketlist, response.data.updateComment, dataType));
     });
 
     dispatch(apiCallActions.resetMessage());
@@ -78,7 +78,7 @@ export const updateComment = (bucketlist, comment) => async (dispatch) => {
 };
 
 export const deleteComment = (bucketlist, comment) => async (dispatch) => {
-  const response = await commentService.deleteComment(comment);
+  const response = await commentService.deleteComment(bucketlist, comment);
 
   dispatch(apiCallActions.beginApiCall({ screen: 'others' }));
 

@@ -1,43 +1,116 @@
 import sendRequest from '../../utils/api';
-import { removeEmptyFields } from '../../utils';
+import { removeEmptyFields, generateQuery } from '../../utils';
+import { profileFields, responseMessageFields, userFields } from '../Common/fields';
 
-const userUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
+const url = `${process.env.REACT_APP_API_HOST}/api/graphql`;
 
 export default {
-  getProfile: async () => sendRequest({
-    method: 'get',
-    url: `${userUrl}get_profile`,
-  }),
+  getProfile: async () => {
+    const queryData = {
+      mutation: 'getProfile',
+      fields: profileFields,
+    };
 
-  getOtherProfile: async id => sendRequest({
-    method: 'get',
-    url: `${userUrl}get_other_profile/${id}`,
-  }),
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  getOtherProfile: async (id) => {
+    const args = { id };
+
+    const queryData = {
+      args,
+      mutation: 'getOtherProfile',
+      fields: profileFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 
   updateProfile: async ({
-    friends,
-    searchUsers,
-    followers,
-    ...profile
-  }) => sendRequest({
-    method: 'post',
-    url: `${userUrl}update_profile`,
-    data: removeEmptyFields(profile),
-  }),
+    displayName,
+    pictureUrl,
+    privacy,
+    reminders,
+  }) => {
+    const args = removeEmptyFields({
+      displayName,
+      pictureUrl,
+      privacy,
+      reminders,
+    });
 
-  searchUsers: async name => sendRequest({
-    method: 'get',
-    url: `${userUrl}users?name=${name}`,
-  }),
+    const queryData = {
+      args,
+      mutation: 'updateProfile',
+      fields: profileFields,
+    };
 
-  addFriend: async friend => sendRequest({
-    method: 'post',
-    url: `${userUrl}add_friend`,
-    data: friend,
-  }),
+    const query = generateQuery(queryData);
 
-  removeFriend: async friend => sendRequest({
-    method: 'delete',
-    url: `${userUrl}remove_friend/${friend.id}`,
-  }),
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  addFriend: async (friend) => {
+    const queryData = {
+      args: { id: friend.id },
+      mutation: 'addFriend',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  removeFriend: async (friend) => {
+    const queryData = {
+      args: { id: friend.id },
+      mutation: 'removeFriend',
+      fields: responseMessageFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
+
+  searchUsers: async (name) => {
+    const queryData = {
+      args: { name },
+      mutation: 'searchUsers',
+      fields: userFields,
+    };
+
+    const query = generateQuery(queryData);
+
+    return sendRequest({
+      method: 'post',
+      url,
+      data: { query },
+    });
+  },
 };

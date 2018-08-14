@@ -63,19 +63,19 @@ const NotificationThumbnail = ({
 
 NotificationThumbnail.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     friends: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
   notification: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     read: PropTypes.bool,
     user: PropTypes.string,
     userPictureUrl: PropTypes.string,
   }).isRequired,
   person: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   goToBucketlist: PropTypes.func.isRequired,
   markNotificationAsRead: PropTypes.func.isRequired,

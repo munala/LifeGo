@@ -37,7 +37,7 @@ class Card extends Component {
           return userLiked;
         });
         if (liked) {
-          await this.props.actions.unlike(singleLike);
+          await this.props.actions.unlike(bucketlist, singleLike);
         }
         this.setState(() => ({ liking: false }));
       }
@@ -170,7 +170,7 @@ Card.propTypes = {
   selectBucketlist: PropTypes.func.isRequired,
   bucketlist: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
   modal: PropTypes.bool.isRequired,
   mode: PropTypes.string.isRequired,
@@ -181,7 +181,7 @@ Card.propTypes = {
     deleteBucketlist: PropTypes.func.isRequired,
   }).isRequired,
   profile: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

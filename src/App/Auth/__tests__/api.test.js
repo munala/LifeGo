@@ -9,7 +9,7 @@ const user = {
 };
 
 jest.mock('axios', () => {
-  const authUrl = `${process.env.REACT_APP_API_HOST}/api/user/`;
+  const authUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
   return ({
     create: () => ({
       defaults: { headers: { common: { 'Content-Type': '', 'Access-Control-Allow-Origin': '' } } },
