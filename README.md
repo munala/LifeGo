@@ -1,4 +1,6 @@
 [![CircleCI](https://circleci.com/gh/munala/LifeGo.svg?style=svg)](https://circleci.com/gh/munala/LifeGo)
+[![Coverage Status](https://coveralls.io/repos/github/munala/LifeGo/badge.svg?branch=master)](https://coveralls.io/github/munala/LifeGo?branch=master)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
