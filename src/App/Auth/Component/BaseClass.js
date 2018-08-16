@@ -118,7 +118,7 @@ class BaseClass extends Component {
         this.popSnackBar(message, true);
       }
 
-      this.setState({ submitting: false });
+      this.setState({ submitting: false, resetMode: false });
       return true;
     }
 

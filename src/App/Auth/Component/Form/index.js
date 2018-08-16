@@ -55,12 +55,15 @@ const Form = ({
           style={styles.fullWidth}
           label={resetLabel || (loginMode ? 'login' : 'register')}
         />
-        <FlatButton
-          onClick={toggleMode}
-          disabled={submitting}
-          style={styles.fullWidth}
-          label={loginMode ? 'register' : 'login'}
-        />
+        {
+          !resetMode &&
+          <FlatButton
+            onClick={toggleMode}
+            disabled={submitting}
+            style={styles.fullWidth}
+            label={loginMode ? 'register' : 'login'}
+          />
+        }
         {
           loginMode &&
           <FlatButton
