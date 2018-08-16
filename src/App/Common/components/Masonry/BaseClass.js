@@ -58,7 +58,7 @@ class BaseClass extends Component {
               }, 1000);
             },
           );
-        }, 10000);
+        }, 5000);
       },
     );
   }
@@ -75,7 +75,6 @@ class BaseClass extends Component {
 
   save = async (buck) => {
     const { actions: { updateBucketlist, saveBucketlist } } = this.props;
-    const { bucketlist: bucketList } = this.state;
     const bucketlist = {
       ...buck,
       dueDate: buck.dueDate || null,
@@ -91,13 +90,6 @@ class BaseClass extends Component {
 
     if (!error) {
       this.closeModal();
-      this.setState({
-        snackOpen: true,
-        message: {
-          content: `You have deleted ${bucketList && bucketList.name}`,
-          success: true,
-        },
-      });
     } else {
       this.setState({
         snackOpen: true,

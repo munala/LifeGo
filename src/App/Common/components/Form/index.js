@@ -46,6 +46,8 @@ class Form extends BaseClass {
 
     bucketlist.privacy = bucketlist.privacy || profile.privacy;
 
+    const defaultValue = bucketlist.dueDate ? this.formatDate(bucketlist.dueDate) : '';
+
     return (
       <Modal
         open={open}
@@ -79,7 +81,7 @@ class Form extends BaseClass {
             <DatePicker
               label="due date"
               onChange={({ target: { value } }) => this.onChange({ value, type: 'dueDate' })}
-              defaultValue={bucketlist.dueDate || ''}
+              defaultValue={defaultValue}
             />
             <TextField
               name="category"

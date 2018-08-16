@@ -83,6 +83,17 @@ class BaseClass extends Component {
       }
     };
   });
+
+  formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    let month = date.getMonth();
+    const year = date.getFullYear();
+
+    month = month < 10 ? `0${month}` : month;
+
+    return `${year}-${month}-${day}`;
+  }
 }
 
 BaseClass.propTypes = propTypes;
