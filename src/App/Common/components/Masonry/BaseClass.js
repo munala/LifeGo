@@ -4,6 +4,43 @@ import { Component } from 'react';
 import propTypes from './propTypes';
 
 class BaseClass extends Component {
+  state = {
+    bucketlists: [],
+    bucketlist: {},
+    selectedBucketlist: {},
+    mode: '',
+    showAddModal: false,
+    snackOpen: false,
+    deleting: false,
+    saving: false,
+    message: {},
+  }
+
+  onScroll = ({ target }) => {
+    const bottomReached = (target.scrollHeight - target.scrollTop) === target.clientHeight;
+
+    if (bottomReached) {
+      const {
+        data: { nextUrl, bucketlists: { length } },
+        actions: { loadMoreBucketlists },
+        location: { pathname },
+      } = this.props;
+
+      const dataTypes = {
+        '/': 'allData',
+        '/home': 'allData',
+        '/mylists': 'myData',
+      };
+
+      const dataType = dataTypes[pathname];
+
+      if (nextUrl && dataType) {
+        const offset = Math.ceil(length / 50) * 50;
+        loadMoreBucketlists(dataType, offset);
+      }
+    }
+  }
+
   openModal = (bucketlist) => {
     this.setState(
       { bucketlist },

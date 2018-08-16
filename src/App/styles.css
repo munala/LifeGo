@@ -33,6 +33,8 @@
   flex-direction: column;
   flex-grow:1;
   align-items: flex-start;
+  background-color: #f4f4f4;
+
 }
 
 .App-logo {
