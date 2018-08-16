@@ -4,6 +4,43 @@ import { Component } from 'react';
 import propTypes from './propTypes';
 
 class BaseClass extends Component {
+  state = {
+    bucketlists: [],
+    bucketlist: {},
+    selectedBucketlist: {},
+    mode: '',
+    showAddModal: false,
+    snackOpen: false,
+    deleting: false,
+    saving: false,
+    message: {},
+  }
+
+  onScroll = ({ target }) => {
+    const bottomReached = (target.scrollHeight - target.scrollTop) === target.clientHeight;
+
+    if (bottomReached) {
+      const {
+        data: { nextUrl, bucketlists: { length } },
+        actions: { loadMoreBucketlists },
+        location: { pathname },
+      } = this.props;
+
+      const dataTypes = {
+        '/': 'allData',
+        '/home': 'allData',
+        '/mylists': 'myData',
+      };
+
+      const dataType = dataTypes[pathname];
+
+      if (nextUrl && dataType) {
+        const offset = Math.ceil(length / 50) * 50;
+        loadMoreBucketlists(dataType, offset);
+      }
+    }
+  }
+
   openModal = (bucketlist) => {
     this.setState(
       { bucketlist },
@@ -58,7 +95,7 @@ class BaseClass extends Component {
               }, 1000);
             },
           );
-        }, 10000);
+        }, 5000);
       },
     );
   }
@@ -75,7 +112,6 @@ class BaseClass extends Component {
 
   save = async (buck) => {
     const { actions: { updateBucketlist, saveBucketlist } } = this.props;
-    const { bucketlist: bucketList } = this.state;
     const bucketlist = {
       ...buck,
       dueDate: buck.dueDate || null,
@@ -91,13 +127,6 @@ class BaseClass extends Component {
 
     if (!error) {
       this.closeModal();
-      this.setState({
-        snackOpen: true,
-        message: {
-          content: `You have deleted ${bucketList && bucketList.name}`,
-          success: true,
-        },
-      });
     } else {
       this.setState({
         snackOpen: true,

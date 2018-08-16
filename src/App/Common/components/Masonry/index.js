@@ -15,18 +15,6 @@ import propTypes from './propTypes';
 import './styles.css';
 
 class Masonry extends BaseClass {
-  state = {
-    bucketlists: [],
-    bucketlist: {},
-    selectedBucketlist: {},
-    mode: '',
-    showAddModal: false,
-    snackOpen: false,
-    deleting: false,
-    saving: false,
-    message: {},
-  }
-
   static getDerivedStateFromProps = ({
     data: { bucketlists },
   }, state) => {
@@ -65,31 +53,6 @@ class Masonry extends BaseClass {
       }
       if (pathname.includes('/home')) {
         loadAllBucketlists();
-      }
-    }
-  }
-
-  onScroll = ({ target }) => {
-    const bottomReached = (target.scrollHeight - target.scrollTop) === target.clientHeight;
-
-    if (bottomReached) {
-      const {
-        data: { nextUrl, bucketlists: { length } },
-        actions: { loadMoreBucketlists },
-        location: { pathname },
-      } = this.props;
-
-      const dataTypes = {
-        '/': 'allData',
-        '/home': 'allData',
-        '/mylists': 'myData',
-      };
-
-      const dataType = dataTypes[pathname];
-
-      if (nextUrl && dataType) {
-        const offset = Math.ceil(length / 50) * 50;
-        loadMoreBucketlists(dataType, offset);
       }
     }
   }
@@ -134,7 +97,14 @@ class Masonry extends BaseClass {
 
   render() {
     const {
-      selectedBucketlist, mode, showAddModal, bucketlist: buck, snackOpen, saving, message,
+      selectedBucketlist,
+      mode,
+      showAddModal,
+      bucketlist: buck,
+      snackOpen,
+      saving,
+      message,
+      bucketlists: stateBucketlists,
     } = this.state;
 
     const {
@@ -211,7 +181,10 @@ class Masonry extends BaseClass {
           onClose={this.closeModal}
           save={this.save}
         />
-        {currentApiCalls === 0 && bucketlists.length === 0 && !fromProfile && <EmptyState />}
+        {
+          currentApiCalls === 0 && stateBucketlists.length === 0 && !fromProfile &&
+          <EmptyState loggedIn={!!profile.id} pathname={pathname} openModal={this.openModal} />
+        }
         {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}
         <SnackBarComponent
           open={snackOpen}
@@ -219,7 +192,7 @@ class Masonry extends BaseClass {
           closeSnackBar={message.undo ? this.cancel : this.closeSnackBar}
           undo={message.undo}
         />
-        {pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
+        {!!profile.id && pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
       </div>
     );
   }
