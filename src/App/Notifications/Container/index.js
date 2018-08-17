@@ -15,7 +15,7 @@ const mapStateToProps = ({
   profile,
   notifications: notifications.map(({ read, ...notification }) => ({
     ...notification,
-    read: typeof notification === 'boolean' ? read : read === 'true',
+    read: typeof notification === 'string' ? read === 'true' : read,
   })),
   currentApiCalls,
   ...ownProps,
