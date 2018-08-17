@@ -67,6 +67,7 @@ describe('Chat action creators', () => {
     const data = {
       notification: {
         content: 'oliver',
+        read: false,
       },
     };
     const expectedAction = {
