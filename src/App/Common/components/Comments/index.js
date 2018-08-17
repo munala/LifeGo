@@ -36,6 +36,7 @@ class Comments extends BaseClass {
   renderComments = ({ comments, mode, goToProfile }) => comments
     .filter(comment => comment.id !== this.state.deletedComment.id)
     .slice(this.state.page * 8, (this.state.page * 8) + 8)
+    .reverse()
     .map((comment) => {
       const { bucketlist, profile } = this.props;
       const menuItems = comment.senderId === profile.id ? ['Edit', 'Delete'] : ['Delete'];
@@ -131,18 +132,18 @@ class Comments extends BaseClass {
       <div className="comments-container">
         <div className="comments">
           {
-            length > 0 && page > 0 &&
-            <div className="nav-link" onClick={() => this.navigatePage('previous')}>
-              <a href="#">more comments</a>
+            length > 0 && page < lastPage &&
+            <div className="nav-link" onClick={() => this.navigatePage('next')}>
+              <a href="#">previous comments</a>
             </div>
           }
 
           {this.renderComments({ comments, goToProfile, mode })}
 
           {
-            length > 0 && page < lastPage &&
-            <div className="nav-link" onClick={() => this.navigatePage('next')}>
-              <a href="#">previous comments</a>
+            length > 0 && page > 0 &&
+            <div className="nav-link" onClick={() => this.navigatePage('previous')}>
+              <a href="#">more comments</a>
             </div>
           }
         </div>
