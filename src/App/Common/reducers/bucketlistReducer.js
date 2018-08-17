@@ -2,8 +2,8 @@ import * as types from '../constants';
 
 const initialData = {
   bucketlists: [],
-  nextUrl: '',
-  previousUrl: '',
+  nextOffset: null,
+  prevOffset: null,
   newBucketlists: [],
   count: 0,
   bucketlist: {
@@ -64,8 +64,8 @@ export default (state = initialState, action) => {
           ...state,
           [action.dataType]: {
             ...state[action.dataType],
-            nextUrl: action.data.nextUrl,
-            previousUrl: action.data.previousUrl,
+            nextOffset: action.data.nextOffset,
+            prevOffset: action.data.prevOffset,
             bucketlists: [
               ...new Set([...state[action.dataType].bucketlists, ...action.data.bucketlists]),
             ],

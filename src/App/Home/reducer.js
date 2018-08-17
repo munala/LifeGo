@@ -2,8 +2,8 @@ import * as types from '../Common/constants';
 
 const initialState = {
   bucketlists: [],
-  nextUrl: '',
-  previousUrl: '',
+  nextOffset: null,
+  prevOffset: null,
   newBucketlists: [],
   count: 0,
 };
@@ -27,8 +27,8 @@ export default (state = initialState, action) => {
     case types.LOAD_MORE_ALL_BUCKETLISTS:
       return {
         ...state,
-        nextUrl: action.data.nextUrl,
-        previousUrl: action.data.previousUrl,
+        nextOffset: action.data.nextOffset,
+        prevOffset: action.data.prevOffset,
         bucketlists: [
           ...new Set([...state.bucketlists, ...action.data.bucketlists]),
         ],

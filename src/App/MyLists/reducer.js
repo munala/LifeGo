@@ -4,8 +4,8 @@ let bucketList;
 
 const initialState = {
   bucketlists: [],
-  nextUrl: '',
-  previousUrl: '',
+  nextOffset: null,
+  prevOffset: null,
   newBucketlists: [],
   count: 0,
 };
@@ -20,8 +20,8 @@ export default function bucketlistReducer(state = initialState, action) {
     case types.LOAD_MORE_BUCKETLISTS:
       return {
         ...state,
-        nextUrl: action.data.nextUrl,
-        previousUrl: action.data.previousUrl,
+        nextOffset: action.data.nextOffset,
+        prevOffset: action.data.prevOffset,
         bucketlists: [
           ...new Set([
             ...new Set(state.bucketlists),
