@@ -7,8 +7,8 @@ const initialState = {
       { id: 1, name: 'oliver', items: [] },
       { id: 2, name: 'munala', items: [{ id: 1, name: 'oliver' }, { id: 2, name: 'derp' }] },
     ],
-    nextUrl: '',
-    previousUrl: '',
+    nextOffset: null,
+    prevOffset: null,
     newBucketlists: [],
     bucketlist: {},
   },
@@ -33,7 +33,7 @@ describe('Bucketlist reducer', () => {
   });
 
   it('should load bucketlists when passed LOAD_BUCKETLISTS_SUCCESS', () => {
-    const newBucketlists = { bucketlists: [{ id: 3, name: 'ngoitsi' }], nextUrl: '', previousUrl: '' };
+    const newBucketlists = { bucketlists: [{ id: 3, name: 'ngoitsi' }], nextOffset: null, prevOffset: null };
     const action = actions.loadBucketlistsSuccess({
       data: newBucketlists,
       dataType,

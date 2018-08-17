@@ -21,7 +21,7 @@ class BaseClass extends Component {
 
     if (bottomReached) {
       const {
-        data: { nextUrl, bucketlists: { length } },
+        data: { nextOffset, bucketlists: { length } },
         actions: { loadMoreBucketlists },
         location: { pathname },
       } = this.props;
@@ -34,7 +34,7 @@ class BaseClass extends Component {
 
       const dataType = dataTypes[pathname];
 
-      if (nextUrl && dataType) {
+      if (nextOffset && dataType) {
         const offset = Math.ceil(length / 50) * 50;
         loadMoreBucketlists(dataType, offset);
       }
