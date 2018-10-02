@@ -10,7 +10,7 @@ const initialState = {
   count: 0,
 };
 
-export default function bucketlistReducer(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_BUCKETLISTS_SUCCESS:
       return {
@@ -220,4 +220,4 @@ export default function bucketlistReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};

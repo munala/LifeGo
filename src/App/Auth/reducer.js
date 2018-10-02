@@ -1,6 +1,6 @@
 import * as types from './constants';
 
-export default function userReducer(state = false, action) {
+export default (state = false, action) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
       return true;
@@ -14,4 +14,4 @@ export default function userReducer(state = false, action) {
     default:
       return state;
   }
-}
+};

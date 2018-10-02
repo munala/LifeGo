@@ -1,6 +1,6 @@
 import * as types from '../constants';
 
-export default function errorReducer(state = '', action) {
+export default (state = '', action) => {
   switch (action.type) {
     case types.API_CALL_ERROR:
       return action.error === state ? state : action.error;
@@ -14,4 +14,4 @@ export default function errorReducer(state = '', action) {
     default:
       return state;
   }
-}
+};
