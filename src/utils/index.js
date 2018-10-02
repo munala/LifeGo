@@ -28,19 +28,14 @@ export const setTime = (item) => {
   return { createdAt, time };
 };
 
-export const setLikeColor = ({ likes }, { id }) => {
-  let liked = false;
-
-  if (likes) {
-    likes.forEach((like) => {
-      if (like.likerId === id) {
-        liked = true;
-      }
-    });
+export const setLikeColor = ({ likes }, { id }) => likes.some((like) => {
+  if (like.likerId === id) {
+    return true;
   }
 
-  return liked ? '#00bcd4' : 'grey';
-};
+  return false;
+});
+
 
 export const getTags = (bucketlist) => {
   if (bucketlist.tags) {
@@ -58,18 +53,17 @@ export const getTags = (bucketlist) => {
   return [];
 };
 
-export const filterExpired = bucketlists =>
-  bucketlists.filter((bucketlist) => {
-    if (bucketlist.dueDate) {
-      const dueDate = new Date(bucketlist.dueDate);
-      const now = new Date();
-      const difference = dueDate.getTime() - now.getTime();
+export const filterExpired = bucketlists => bucketlists.filter((bucketlist) => {
+  if (bucketlist.dueDate) {
+    const dueDate = new Date(bucketlist.dueDate);
+    const now = new Date();
+    const difference = dueDate.getTime() - now.getTime();
 
-      return difference >= 0;
-    }
+    return difference >= 0;
+  }
 
-    return true;
-  });
+  return true;
+});
 
 export const stripHtml = text =>
   text
