@@ -13,7 +13,10 @@ class BaseClass extends Component {
     snackOpen: false,
     deleting: false,
     saving: false,
-    message: {},
+    message: {
+      content: '',
+      success: true,
+    },
   }
 
   onScroll = ({ target }) => {

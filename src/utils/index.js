@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export const setTime = (item) => {
   let time = 'm';
-  const difference = moment.duration(moment(Date.now()).diff(moment(item.createdAt)));
+  const difference = moment.duration(moment().diff(moment(item.createdAt)));
 
   let createdAt = Math.floor(difference.asMinutes()) + 1;
 
