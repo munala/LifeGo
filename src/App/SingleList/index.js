@@ -24,6 +24,11 @@ class SingleList extends Component {
 
     if (!bucketlist.id || bucketlist.id !== id) {
       const { error } = await this.props.actions.getBucketlist(id);
+
+      if (error === 'Bucketlist not found') {
+        this.props.history.push('/not_found');
+      }
+
       this.setState({ error: error || '' });
     }
   }
@@ -163,7 +168,9 @@ SingleList.propTypes = {
     getBucketlist: PropTypes.func.isRequired,
   }).isRequired,
   bucketlist: PropTypes.shape({}).isRequired,
-  history: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   profile: PropTypes.shape({}).isRequired,
 };
 

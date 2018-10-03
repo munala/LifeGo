@@ -35,7 +35,12 @@ class Profile extends Component {
     const { match: { params: { id } } } = this.props;
     if (id) {
       this.props.actions.loadOtherBucketlists(id);
-      await this.props.actions.getOtherProfile(id);
+
+      const res = await this.props.actions.getOtherProfile(id);
+
+      if (res.error === 'User not found') {
+        this.props.history.push('/not_found');
+      }
     } else {
       this.props.actions.loadBucketlists();
     }
@@ -86,6 +91,9 @@ Profile.propTypes = {
       id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
+  history: PropTypes.arrayOf(PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })).isRequired,
   actions: PropTypes.shape({
     loadOtherBucketlists: PropTypes.func.isRequired,
     getOtherProfile: PropTypes.func.isRequired,

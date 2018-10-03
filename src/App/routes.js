@@ -68,6 +68,7 @@ class Routes extends Component {
                 <ProtectedRoute path="/profile/:id" component={Profile} />
                 <ProtectedRoute path="/settings" component={Settings} />
                 <ProtectedRoute path="/search" component={SearchResults} />
+                <Route path="/not_found" component={NotFound} />
                 <Route component={NotFound} />
               </Switch>
             </div>
