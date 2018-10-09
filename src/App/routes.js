@@ -13,37 +13,16 @@ import Settings from './Settings/Container';
 import SingleList from './SingleList/container';
 import SearchResults from './SearchResults/Container';
 import NotFound from './Common/components/NotFound';
+import ProtectedRoute from './ProtectedRoute';
 import icon from '../assets/icons/icon.png';
 import './styles.css';
 
-const ProtectedRoute = ({
-  loggedIn,
-  props,
-  Component: Comp,
-}) => (
-  loggedIn ?
-    <Comp {...props} /> :
-    <Redirect to={{
-      pathname: '/login',
-      state: { login: true },
-    }}
-    />
-);
-
-ProtectedRoute.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
-  Component: PropTypes.func.isRequired,
-  props: PropTypes.shape({}),
-};
-
-ProtectedRoute.defaultProps = {
-  props: {},
-};
 
 class Routes extends Component {
   state = {
     showMenu: false,
   }
+
   componentDidMount = () => {
     window.addEventListener('resize', this.updateDimensions);
     window.dispatchEvent(new Event('resize'));
@@ -83,12 +62,13 @@ class Routes extends Component {
                 <Route exact path="/" render={() => <Redirect from="/" to={loggedIn ? '/home' : '/explore'} />} />
                 <Route path="/login" component={Auth} />
                 <Route path="/explore" component={Explore} />
-                <Route exact path="/home" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Home} />} />
-                <Route path="/lists/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SingleList} />} />
-                <Route exact path="/profile" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
-                <Route path="/profile/:id" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Profile} />} />
-                <Route path="/settings" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={Settings} />} />
-                <Route path="/search" component={props => <ProtectedRoute loggedIn={loggedIn} {...props} Component={SearchResults} />} />
+                <ProtectedRoute exact path="/home" component={Home} />
+                <ProtectedRoute path="/lists/:id" component={SingleList} />
+                <ProtectedRoute exact path="/profile" component={Profile} />
+                <ProtectedRoute path="/profile/:id" component={Profile} />
+                <ProtectedRoute path="/settings" component={Settings} />
+                <ProtectedRoute path="/search" component={SearchResults} />
+                <Route path="/not_found" component={NotFound} />
                 <Route component={NotFound} />
               </Switch>
             </div>

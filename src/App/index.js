@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 
 import configureStore from '../store/configureStore';
 import { loginSuccess } from './Auth/actions';
+import { getProfileSuccess } from './Profile/actions';
 import socket from '../socket';
 import Routes from './routes';
 
@@ -21,11 +22,18 @@ const store = configureStore();
 
 const token = localStorage.getItem('token');
 
-if (token && jwtDecode(token).exp >= Date.now() / 1000) {
-  store.dispatch(loginSuccess({ loggedIn: true }));
-  socket(store);
-}
+if (token) {
+  const {
+    exp, iat, password, ...profile
+  } = jwtDecode(token);
 
+  if (exp >= Date.now() / 1000) {
+    store.dispatch(loginSuccess({ loggedIn: true }));
+    store.dispatch(getProfileSuccess({ profile, screen: '' }));
+
+    socket(store);
+  }
+}
 export default () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
