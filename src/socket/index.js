@@ -50,15 +50,15 @@ export default (store) => {
 
   socket.on('notifications', (data) => {
     const storeData = store.getState();
-    let notify;
 
-    dataTypes.forEach((dataType) => {
-      storeData.data[dataType].bucketlists.forEach((bucketlist) => {
+    const notify = dataTypes.some(dataType => storeData.data[dataType].bucketlists
+      .some((bucketlist) => {
         if (bucketlist.id === data.notification.bucketlistId) {
-          notify = true;
+          return true;
         }
-      });
-    });
+
+        return false;
+      }));
 
     if (
       data.type === 'new' &&
