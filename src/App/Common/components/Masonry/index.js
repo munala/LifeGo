@@ -3,6 +3,7 @@ import React from 'react';
 import MediaQuery from 'react-responsive';
 import Modal from '@material-ui/core/Modal';
 import { withRouter } from 'react-router-dom';
+import DocumentTitle from 'react-document-title';
 
 import BaseClass from './BaseClass';
 import SnackBarComponent from '../SnackBarComponent';
@@ -114,6 +115,7 @@ class Masonry extends BaseClass {
       data: { bucketlists, newBucketlists: { length: totalNew } },
       currentApiCalls,
       fromProfile,
+      documentTitle,
     } = this.props;
 
     const bucketList = {
@@ -124,76 +126,78 @@ class Masonry extends BaseClass {
     const [bucketlist] = bucketlists.filter(list => list.id === selectedBucketlist.id);
 
     return (
-      <div className="stack-grid">
-        {
-          totalNew > 0 &&
-          <div
-            className="load-more-indicator"
-            onClick={actions.loadMore}
+      <DocumentTitle title={fromProfile ? documentTitle : `${pathname.substr(1, 1).toUpperCase()}${pathname.substr(2, pathname.length)}`}>
+        <div className="stack-grid">
+          {
+            totalNew > 0 &&
+            <div
+              className="load-more-indicator"
+              onClick={actions.loadMore}
+            >
+              {`${totalNew > 9 ? `${totalNew}+` : totalNew} new post${totalNew === 1 ? '' : 's'}`}
+            </div>
+          }
+          <MediaQuery query="(min-width: 1825px)">
+            {this.renderCards({ columnCount: 5, currentApiCalls })}
+          </MediaQuery>
+          <MediaQuery query="(max-width: 1824px)">
+            <MediaQuery query="(min-width: 1225px)">
+              {this.renderCards({ columnCount: 4, currentApiCalls })}
+            </MediaQuery>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 1224px)">
+            <MediaQuery query="(min-width: 1025px)">
+              {this.renderCards({ columnCount: 3, currentApiCalls })}
+            </MediaQuery>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 1024px)">
+            <MediaQuery query="(min-width: 481px)">
+              {this.renderCards({ columnCount: 2, currentApiCalls })}
+            </MediaQuery>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 480px)">
+            {this.renderCards({ columnCount: 1, currentApiCalls })}
+          </MediaQuery>
+          <Modal
+            open={!!selectedBucketlist.id}
+            onClose={() => this.selectBucketlist(selectedBucketlist)}
           >
-            {`${totalNew > 9 ? `${totalNew}+` : totalNew} new post${totalNew === 1 ? '' : 's'}`}
-          </div>
-        }
-        <MediaQuery query="(min-width: 1825px)">
-          {this.renderCards({ columnCount: 5, currentApiCalls })}
-        </MediaQuery>
-        <MediaQuery query="(max-width: 1824px)">
-          <MediaQuery query="(min-width: 1225px)">
-            {this.renderCards({ columnCount: 4, currentApiCalls })}
-          </MediaQuery>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 1224px)">
-          <MediaQuery query="(min-width: 1025px)">
-            {this.renderCards({ columnCount: 3, currentApiCalls })}
-          </MediaQuery>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 1024px)">
-          <MediaQuery query="(min-width: 481px)">
-            {this.renderCards({ columnCount: 2, currentApiCalls })}
-          </MediaQuery>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 480px)">
-          {this.renderCards({ columnCount: 1, currentApiCalls })}
-        </MediaQuery>
-        <Modal
-          open={!!selectedBucketlist.id}
-          onClose={() => this.selectBucketlist(selectedBucketlist)}
-        >
-          <div className="selected-bucketlist">
-            <Card
-              profile={profile}
-              bucketlist={bucketlist}
-              selected
-              modal
-              mode={mode}
-              actions={actions}
-              openModal={this.openModal}
-              selectBucketlist={this.selectBucketlist}
-              deleteBucketlist={this.deleteBucketlist}
-            />
-          </div>
-        </Modal>
-        <Form
-          bucketlist={bucketList}
-          profile={profile}
-          saving={saving}
-          open={showAddModal}
-          onClose={this.closeModal}
-          save={this.save}
-        />
-        {
+            <div className="selected-bucketlist">
+              <Card
+                profile={profile}
+                bucketlist={bucketlist}
+                selected
+                modal
+                mode={mode}
+                actions={actions}
+                openModal={this.openModal}
+                selectBucketlist={this.selectBucketlist}
+                deleteBucketlist={this.deleteBucketlist}
+              />
+            </div>
+          </Modal>
+          <Form
+            bucketlist={bucketList}
+            profile={profile}
+            saving={saving}
+            open={showAddModal}
+            onClose={this.closeModal}
+            save={this.save}
+          />
+          {
           currentApiCalls === 0 && stateBucketlists.length === 0 && !fromProfile &&
           <EmptyState loggedIn={!!profile.id} pathname={pathname} openModal={this.openModal} />
         }
-        {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}
-        <SnackBarComponent
-          open={snackOpen}
-          message={message}
-          closeSnackBar={message.undo ? this.cancel : this.closeSnackBar}
-          undo={message.undo}
-        />
-        {!!profile.id && pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
-      </div>
+          {currentApiCalls === 0 && bucketlists.length === 0 && fromProfile && <div />}
+          <SnackBarComponent
+            open={snackOpen}
+            message={message}
+            closeSnackBar={message.undo ? this.cancel : this.closeSnackBar}
+            undo={message.undo}
+          />
+          {!!profile.id && pathname !== '/explore' && !fromProfile && <Fab onClick={this.openModal} />}
+        </div>
+      </DocumentTitle>
     );
   }
 }

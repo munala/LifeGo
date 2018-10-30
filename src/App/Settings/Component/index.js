@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import DocumentTitle from 'react-document-title';
 
 import BaseClass, { userSettings } from './BaseClass';
 import RaisedButton from '../../Common/components/RaisedButton';
@@ -97,64 +98,66 @@ class Settings extends BaseClass {
     } = this.state;
 
     return (
-      <div className="settings-container">
-        <div className="settings-reminder">
-          <div className="settings-input-label">Email reminders</div>
-          <Switch
-            checked={profile.reminders === true}
-            onChange={this.toggleReminders}
+      <DocumentTitle title="Settings">
+        <div className="settings-container">
+          <div className="settings-reminder">
+            <div className="settings-input-label">Email reminders</div>
+            <Switch
+              checked={profile.reminders === true}
+              onChange={this.toggleReminders}
+            />
+          </div>
+          <TextField
+            name="privacy"
+            value={profile.privacy || ''}
+            select
+            label="Who can see your lists?"
+            onChange={({ target: { value } }) => this.togglePrivacy(value)}
+            style={styles.privacyStyle}
+          >
+            {['everyone', 'friends', 'no one'].map(setting => (
+              <MenuItem key={setting} value={setting}>
+                {setting}
+              </MenuItem>
+            ))}
+          </TextField>
+          <ChangeEmailField
+            emailMode={emailMode}
+            renderInputs={this.renderInputs}
+            renderSaveButtons={this.renderSaveButtons}
+            toggleMode={this.toggleMode}
           />
-        </div>
-        <TextField
-          name="privacy"
-          value={profile.privacy || ''}
-          select
-          label="Who can see your lists?"
-          onChange={({ target: { value } }) => this.togglePrivacy(value)}
-          style={styles.privacyStyle}
-        >
-          {['everyone', 'friends', 'no one'].map(setting => (
-            <MenuItem key={setting} value={setting}>
-              {setting}
-            </MenuItem>
-          ))}
-        </TextField>
-        <ChangeEmailField
-          emailMode={emailMode}
-          renderInputs={this.renderInputs}
-          renderSaveButtons={this.renderSaveButtons}
-          toggleMode={this.toggleMode}
-        />
-        <ChangePasswordField
-          passwordMode={passwordMode}
-          renderInputs={this.renderInputs}
-          renderSaveButtons={this.renderSaveButtons}
-          toggleMode={this.toggleMode}
-        />
-        <DeleteAccountField
-          deleteMode={deleteMode}
-          renderInputs={this.renderInputs}
-          renderSaveButtons={this.renderSaveButtons}
-          toggleMode={this.toggleMode}
-        />
-        {
-          showDialog &&
-          <Dialog
-            type="conversation"
-            message="Are you sure you want to delete your account? This action cannot be undone."
-            onConfirm={this.delete}
-            onCancel={this.closeDialog}
+          <ChangePasswordField
+            passwordMode={passwordMode}
+            renderInputs={this.renderInputs}
+            renderSaveButtons={this.renderSaveButtons}
+            toggleMode={this.toggleMode}
           />
-        }
-        <SnackBarComponent
-          open={open}
-          message={{
+          <DeleteAccountField
+            deleteMode={deleteMode}
+            renderInputs={this.renderInputs}
+            renderSaveButtons={this.renderSaveButtons}
+            toggleMode={this.toggleMode}
+          />
+          {
+            showDialog &&
+            <Dialog
+              type="conversation"
+              message="Are you sure you want to delete your account? This action cannot be undone."
+              onConfirm={this.delete}
+              onCancel={this.closeDialog}
+            />
+          }
+          <SnackBarComponent
+            open={open}
+            message={{
             content: error,
             success: false,
           }}
-          closeSnackBar={this.closeSnackBar}
-        />
-      </div>
+            closeSnackBar={this.closeSnackBar}
+          />
+        </div>
+      </DocumentTitle>
     );
   }
 }

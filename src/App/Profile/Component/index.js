@@ -91,9 +91,9 @@ Profile.propTypes = {
       id: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
-  history: PropTypes.arrayOf(PropTypes.shape({
+  history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  })).isRequired,
+  }).isRequired,
   actions: PropTypes.shape({
     loadOtherBucketlists: PropTypes.func.isRequired,
     getOtherProfile: PropTypes.func.isRequired,

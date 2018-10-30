@@ -67,7 +67,7 @@ class SideBar extends Component {
                 bucketlists.length === 0 && currentApiCalls === 0 &&
                 <div className="no-stat">{`No ${stat}`}</div>
               }
-              <MyLists fromProfile />
+              <MyLists fromProfile documentTitle={selectedProfile.displayName} />
             </div>
           }
         </div>
