@@ -1,4 +1,5 @@
 import React from 'react';
+import DocumentTitle from 'react-document-title';
 
 import BaseClass from './BaseClass';
 import Form from './Form';
@@ -72,37 +73,39 @@ class AuthComponent extends BaseClass {
     const user = login ? loginUser : registerUser;
 
     return (
-      <div className="auth-container">
-        {
-          currentApiCalls > 0 &&
-          <div className="progress">
-            <LinearProgress color="error" />
-          </div>
-        }
+      <DocumentTitle title={login ? 'Login' : 'Register'}>
+        <div className="auth-container">
+          {
+            currentApiCalls > 0 &&
+            <div className="progress">
+              <LinearProgress color="error" />
+            </div>
+          }
 
-        <Form
-          loginMode={!!login}
-          resetMode={resetMode}
-          user={user}
-          touched={touched}
-          invalid={invalid}
-          submitting={submitting}
-          error={error}
-          resetEmail={resetEmail}
-          onChange={this.onChange}
-          action={this.action}
-          socialLogin={this.socialLogin}
-          toggleReset={this.toggleReset}
-          toggleMode={this.toggleMode}
-          onEmailChange={this.onEmailChange}
-        />
+          <Form
+            loginMode={!!login}
+            resetMode={resetMode}
+            user={user}
+            touched={touched}
+            invalid={invalid}
+            submitting={submitting}
+            error={error}
+            resetEmail={resetEmail}
+            onChange={this.onChange}
+            action={this.action}
+            socialLogin={this.socialLogin}
+            toggleReset={this.toggleReset}
+            toggleMode={this.toggleMode}
+            onEmailChange={this.onEmailChange}
+          />
 
-        <SnackBarComponent
-          open={open}
-          message={message}
-          closeSnackBar={this.closeSnackBar}
-        />
-      </div>
+          <SnackBarComponent
+            open={open}
+            message={message}
+            closeSnackBar={this.closeSnackBar}
+          />
+        </div>
+      </DocumentTitle>
     );
   }
 }

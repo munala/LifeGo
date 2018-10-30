@@ -1,9 +1,7 @@
 import sendRequest, { sendGraphQLRequest } from '../../utils/api';
 import profileActions from '../Profile/api';
 import { removeEmptyFields } from '../../utils';
-import {
-  responseMessageFields,
-} from '../Common/fields';
+import { responseMessageFields } from '../Common/fields';
 
 const userUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
 

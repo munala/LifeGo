@@ -17,7 +17,6 @@ import ProtectedRoute from './ProtectedRoute';
 import icon from '../assets/icons/icon.png';
 import './styles.css';
 
-
 class Routes extends Component {
   state = {
     showMenu: false,

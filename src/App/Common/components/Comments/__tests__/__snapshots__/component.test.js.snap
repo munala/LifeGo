@@ -51,7 +51,7 @@ exports[`Comments tests renders without crashing 1`] = `
         <div
           className="time"
         >
-          Just nowm
+          1m
         </div>
       </div>
     </div>
