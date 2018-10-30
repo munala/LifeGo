@@ -1,8 +1,25 @@
 import moment from 'moment';
 
+const convertToValidDate = (date) => {
+  const dateString = `${date.substr(0, date.length - 15)} Z`;
+
+  const dayString = dateString.substr(0, 4);
+
+  const monthString = dateString.substr(4, 3);
+
+  const dayNumberString = dateString.substr(8, 3);
+
+  const rest = dateString.substr(10);
+
+  return `${dayString}${dayNumberString}${monthString}${rest}`;
+};
+
 export const setTime = (item) => {
   let time = 'm';
-  const difference = moment.duration(moment().diff(moment(item.createdAt)));
+
+  const dateString = convertToValidDate(item.createdAt);
+
+  const difference = moment.duration(moment().diff(moment(dateString)));
 
   let createdAt = Math.floor(difference.asMinutes()) + 1;
 
@@ -18,9 +35,9 @@ export const setTime = (item) => {
       createdAt = Math.floor(difference.asDays());
 
       if (createdAt > 365) {
-        createdAt = moment(item.createdAt).format('MMMM Do YYYY');
+        createdAt = moment(dateString).format('MMMM Do YYYY');
       } else {
-        createdAt = moment(item.createdAt).format('MMMM Do');
+        createdAt = moment(dateString).format('MMMM Do');
       }
     }
   }

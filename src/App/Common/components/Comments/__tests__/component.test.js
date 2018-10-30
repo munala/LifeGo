@@ -7,7 +7,15 @@ describe('Comments tests', () => {
   const addComment = jest.fn().mockReturnValue({});
   const deleteComment = jest.fn().mockReturnValue({});
   const goToProfile = jest.fn();
-  const bucketlist = { id: 1, comments: [{ id: 1, content: 'comment' }] };
+  const bucketlist = {
+    id: 1,
+    comments: [{
+      id: 1,
+      content: 'comment',
+      createdAt: 'Fri Aug 17 2018 17:35:31 GMT+0000 (UTC)',
+    }],
+    createdAt: 'Fri Aug 17 2018 17:35:31 GMT+0000 (UTC)',
+  };
   const openDialog = jest.fn();
 
   beforeAll(() => {
