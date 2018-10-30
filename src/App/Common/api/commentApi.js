@@ -5,7 +5,7 @@ import {
 } from '../fields';
 
 export default {
-  addComment: async (bucketlist, comment) => {
+  addComment: async (bucketlist, { id, ...comment }) => {
     const queryData = {
       args: { ...comment, bucketlistId: bucketlist.id },
       mutation: 'createComment',
