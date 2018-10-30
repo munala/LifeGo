@@ -97,7 +97,7 @@ class Items extends BaseClass {
         <div className="items-nav-buttons">
           {
             bucketlist.items.length > 0 && page > 0 &&
-            <a href="#" className="link" onClick={() => this.navigatePage('previous')}>previous</a>
+            <div className="link" onClick={() => this.navigatePage('previous')}>previous</div>
           }
         </div>
 
@@ -106,7 +106,7 @@ class Items extends BaseClass {
         <div className="items-nav-buttons">
           {
             length > 0 && length > ((page + 1) * 5) &&
-            <a href="#" className="link" onClick={() => this.navigatePage('next')}>next</a>
+            <div className="link" onClick={() => this.navigatePage('next')}>next</div>
           }
         </div>
 

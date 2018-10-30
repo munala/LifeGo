@@ -134,7 +134,7 @@ class Comments extends BaseClass {
           {
             length > 0 && page < lastPage &&
             <div className="nav-link" onClick={() => this.navigatePage('next')}>
-              <a href="#">previous comments</a>
+              previous comments
             </div>
           }
 
@@ -143,7 +143,7 @@ class Comments extends BaseClass {
           {
             length > 0 && page > 0 &&
             <div className="nav-link" onClick={() => this.navigatePage('previous')}>
-              <a href="#">more comments</a>
+              more comments
             </div>
           }
         </div>

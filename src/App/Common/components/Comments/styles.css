@@ -60,7 +60,10 @@
 }
 
 .nav-link {
-  margin: 5px;
+  cursor: pointer;
+  color: #777;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 .nav-link:hover {
   text-decoration: underline;
