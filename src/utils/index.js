@@ -45,13 +45,17 @@ export const setTime = (item) => {
   return { createdAt, time };
 };
 
-export const setLikeColor = ({ likes }, { id }) => likes.some((like) => {
-  if (like.likerId === id) {
-    return true;
-  }
+export const setLikeColor = ({ likes }, { id }) => {
+  const liked = likes.some((like) => {
+    if (like.likerId === id) {
+      return true;
+    }
 
-  return false;
-});
+    return false;
+  });
+  
+  return liked ? ' #00bcd4' : 'grey';
+}
 
 
 export const getTags = (bucketlist) => {
