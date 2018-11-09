@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import DocumentTitle from 'react-document-title';
 
 import ProfileThumbnail from '../../Common/components/ProfileThumbnail';
 import Masonry from '../../Common/components/Masonry';
@@ -141,10 +142,11 @@ class SearchResults extends Component {
 
 
     return (
-      <div className="search-results-container">
-        <div className="search-text">{searchText || 'Type a name on the search bar to see results'}</div>
-        <div className="search-options">{this.renderOptions()}</div>
-        {
+      <DocumentTitle title={`Search: ${searchText}`}>
+        <div className="search-results-container">
+          <div className="search-text">{searchText || 'Type a name on the search bar to see results'}</div>
+          <div className="search-options">{this.renderOptions()}</div>
+          {
            showEmptyState ?
              <div className="no-results">
                No results for {searchText}
@@ -170,7 +172,8 @@ class SearchResults extends Component {
               )
             )
         }
-      </div>
+        </div>
+      </DocumentTitle>
     );
   }
 }
