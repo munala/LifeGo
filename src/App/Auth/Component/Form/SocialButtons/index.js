@@ -14,7 +14,7 @@ const SocialButtons = ({ loginOrRegister }) => (
   <div className="social-buttons">
     <SocialLogin
       provider="facebook"
-      appId="531895450608613"
+      appId={process.env.REACT_APP_FACEBOOK_APP_ID}
       onLoginSuccess={data => loginOrRegister(data)}
       onLoginFailure={data => loginOrRegister(data)}
       className="social-button"
@@ -27,7 +27,7 @@ const SocialButtons = ({ loginOrRegister }) => (
     </SocialLogin>
     <SocialLogin
       provider="google"
-      appId="536401764654-oermjhtubp76ffhekt23f8mcr093eoql.apps.googleusercontent.com"
+      appId={process.env.REACT_APP_GOOGLE_APP_ID}
       onLoginSuccess={data => loginOrRegister(data)}
       onLoginFailure={data => loginOrRegister(data)}
       className="social-button"
