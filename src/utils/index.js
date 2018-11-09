@@ -53,9 +53,9 @@ export const setLikeColor = ({ likes }, { id }) => {
 
     return false;
   });
-  
+
   return liked ? ' #00bcd4' : 'grey';
-}
+};
 
 
 export const getTags = (bucketlist) => {

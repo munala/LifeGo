@@ -14,7 +14,7 @@ const SocialButtons = ({ loginOrRegister }) => (
   <div className="social-buttons">
     <SocialLogin
       provider="facebook"
-      appId="2100213809994603"
+      appId="531895450608613"
       onLoginSuccess={data => loginOrRegister(data)}
       onLoginFailure={data => loginOrRegister(data)}
       className="social-button"
