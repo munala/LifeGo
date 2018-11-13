@@ -86,11 +86,10 @@ export const filterExpired = bucketlists => bucketlists.filter((bucketlist) => {
   return true;
 });
 
-export const stripHtml = text =>
-  text
-    .replace('<b>', '')
-    .replace('</b>', '')
-    .replace('<br/>', ' ');
+export const stripHtml = text => text
+  .replace('<b>', '')
+  .replace('</b>', '')
+  .replace('<br/>', ' ');
 
 export const removeEmptyFields = (object) => {
   const newObject = {};
