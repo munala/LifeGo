@@ -1,13 +1,5 @@
 import authService from '../api';
 
-const user = {
-  displayName: 'dd',
-  username: 'dd',
-  password: 'dd',
-  email: 'dd',
-  confirm: 'dd',
-};
-
 jest.mock('axios', () => {
   const authUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
   return ({
@@ -46,17 +38,6 @@ jest.mock('axios', () => {
 });
 
 describe('Auth API tests', () => {
-  it('should return success response', async () => {
-    const loginResponse = await authService.loginUser(user);
-    expect(loginResponse).toEqual({ token: 'oliver' });
-
-    const socialLoginResponse = await authService.socialLogin(user);
-    expect(socialLoginResponse).toEqual({ token: 'oliver' });
-
-    const registerResponse = await authService.registerUser(user);
-    expect(registerResponse).toEqual({ message: 'oliver' });
-  });
-
   it('should return error response', async () => {
     let loginResponse = await authService.loginUser({});
     expect(loginResponse.error).toEqual('derp');

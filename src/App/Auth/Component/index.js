@@ -30,6 +30,7 @@ class AuthComponent extends BaseClass {
     touched: false,
     invalid: false,
     open: false,
+    pictureUrl: null,
   }
 
   static getDerivedStateFromProps = ({
@@ -40,6 +41,34 @@ class AuthComponent extends BaseClass {
     }
 
     return state;
+  }
+
+  componentDidMount = () => {
+    if (this.props.location.search) {
+      if (this.props.location.search.includes('user')) {
+        const [, userString] = this.props.location.search.match(/user=([^#]+)/);
+        const user = JSON.parse(decodeURI(userString));
+        this.setRegisterUser(user);
+      } if (this.props.location.search.includes('token')) {
+        const [, token] = this.props.location.search.match(/token=([^#]+)/);
+        localStorage.setItem('token', token);
+        this.props.actions.socialLogin(token);
+      }
+    }
+  }
+
+  setRegisterUser = ({ displayName, email, pictureUrl }) => {
+    const { registerUser } = this.state;
+
+    this.setState({
+      registerUser: {
+        ...registerUser,
+        'display name': displayName,
+        email,
+      },
+      pictureUrl,
+      login: false,
+    });
   }
 
   componentDidUpdate = ({ location }) => {
