@@ -11,13 +11,13 @@ const SocialButtons = () => (
     <FacebookLoginButton
       text="Connect with Facebook"
       onClick={() => {
-        window.location.href = 'http://localhost:3002/auth/facebook';
+        window.location.href = `${process.env.REACT_APP_API_HOST}/auth/facebook`;
       }}
     />
     <GoogleLoginButton
       text="Connect with Google&nbsp;&nbsp;&nbsp;&nbsp;"
       onClick={() => {
-        window.location.href = 'http://localhost:3002/auth/google';
+        window.location.href = `${process.env.REACT_APP_API_HOST}/auth/google`;
       }}
     />
   </div>
