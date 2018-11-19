@@ -1,7 +1,8 @@
 import { removeEmptyFields } from '../../utils';
 import sendRequest from '../../utils/api';
 
-const userUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
+// const userUrl = `${process.env.REACT_APP_API_HOST}/api/auth/`;
+const userUrl = 'http://localhost:3002/';
 
 export default {
   loginUser: async (uSer) => {
@@ -9,26 +10,20 @@ export default {
 
     return sendRequest({
       method: 'post',
-      url: `${userUrl}login`,
+      url: `${userUrl}api/auth/login`,
       data: removeEmptyFields(user),
     });
   },
 
-  socialLogin: async user => sendRequest({
-    method: 'post',
-    url: `${userUrl}social_login`,
-    data: removeEmptyFields(user),
-  }),
-
   registerUser: async user => sendRequest({
     method: 'post',
-    url: `${userUrl}register`,
+    url: `${userUrl}api/auth/register`,
     data: removeEmptyFields(user),
   }),
 
   resetPassword: async email => sendRequest({
     method: 'post',
-    url: `${userUrl}reset_password`,
+    url: `${userUrl}api/auth/reset_password`,
     data: { email },
   }),
 };

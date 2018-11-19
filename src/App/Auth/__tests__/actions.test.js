@@ -36,7 +36,7 @@ describe('Auth actions', () => {
       type: types.LOGIN_SUCCESS,
     };
 
-    const action = authActions.loginSuccess((data));
+    const action = authActions.loginSuccess(data);
 
     expect(action).toEqual(expectedAction);
   });
@@ -105,7 +105,7 @@ describe('Async calls', () => {
 
   it(
     'LOGIN_SUCCESS when logging in from social',
-    (done) => {
+    () => {
       const expectedActions = [
         { type: types.BEGIN_API_CALL },
         {
@@ -115,12 +115,10 @@ describe('Async calls', () => {
       ];
 
       const store = mockStore({ loggedIn: true, user, expectedActions });
-      store.dispatch(authActions.socialLogin(user)).then(() => {
-        const actions = store.getActions();
-        expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
-        expect(actions[1].type).toEqual(types.LOGIN_SUCCESS);
-        done();
-      });
+      store.dispatch(authActions.socialLogin('oliver'));
+      const actions = store.getActions();
+      expect(actions[0].type).toEqual(types.BEGIN_API_CALL);
+      expect(actions[1].type).toEqual(types.LOGIN_SUCCESS);
     },
   );
 

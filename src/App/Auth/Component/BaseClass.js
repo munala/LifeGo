@@ -26,7 +26,7 @@ class BaseClass extends Component {
 
     action = async () => {
       const {
-        registerUser, loginUser, login: loginMode, resetMode,
+        registerUser, loginUser, login: loginMode, resetMode, pictureUrl,
       } = this.state;
 
       if (resetMode) {
@@ -42,6 +42,7 @@ class BaseClass extends Component {
         const submittedUser = { ...user };
         delete submittedUser['display name'];
         submittedUser.displayName = this.titleCase(user['display name']);
+        submittedUser.pictureUrl = pictureUrl;
 
         if (valid) {
           this.sendRequest(submittedUser);
@@ -120,29 +121,6 @@ class BaseClass extends Component {
 
       this.setState({ submitting: false, resetMode: false });
       return true;
-    }
-
-    socialLogin = async (data) => {
-      if (data._profile) { // eslint-disable-line no-underscore-dangle
-        const {
-          email,
-          name: displayName,
-          id: confirm,
-          id: password,
-          profilePicURL: pictureUrl,
-        } = data._profile; // eslint-disable-line no-underscore-dangle
-
-        const user = {
-          email,
-          password,
-          confirm,
-          displayName,
-          pictureUrl,
-          social: true,
-        };
-
-        this.props.actions.socialLogin(user);
-      }
     }
 
     popSnackBar = (message, success) => {

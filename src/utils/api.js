@@ -7,7 +7,8 @@ const instance = axios.create();
 instance.defaults.headers.common['Content-Type'] = 'application/json';
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-const graphqlUrl = `${process.env.REACT_APP_API_HOST}/api/graphql`;
+// const graphqlUrl = `${process.env.REACT_APP_API_HOST}/api/graphql`;
+const graphqlUrl = 'http://localhost:3002/api/graphql';
 
 export const handleError = (error) => {
   if (error.response && error.response.data.message) {

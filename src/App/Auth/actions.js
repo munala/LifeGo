@@ -26,10 +26,10 @@ export const logoutUser = () => ({
   type: types.LOGOUT,
 });
 
-const loginUser = (user, serviceCall) => async (dispatch) => {
+export const login = user => async (dispatch) => {
   dispatch(apiCallActions.beginApiCall({ screen: 'user' }));
 
-  const response = await serviceCall(user);
+  const response = await userService.loginUser(user);
 
   if (response.error) {
     dispatch(apiCallActions.apiCallError({
@@ -53,9 +53,14 @@ const loginUser = (user, serviceCall) => async (dispatch) => {
   return response;
 };
 
-export const login = user => loginUser(user, userService.loginUser);
 
-export const socialLogin = user => loginUser(user, userService.socialLogin);
+export const socialLogin = token => (dispatch) => {
+  dispatch(apiCallActions.beginApiCall({ screen: 'user' }));
+  dispatch(loginSuccess({
+    token,
+    screen: 'user',
+  }));
+};
 
 export const logout = () => async (dispatch) => {
   localStorage.removeItem('token');

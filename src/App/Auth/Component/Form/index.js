@@ -13,7 +13,6 @@ const Form = ({
   action,
   user,
   onChange,
-  socialLogin,
   touched,
   invalid,
   submitting,
@@ -78,7 +77,7 @@ const Form = ({
         !resetMode &&
         <div>
           <p className="form-divider">- or -</p>
-          <SocialButtons loginOrRegister={socialLogin} />
+          <SocialButtons />
         </div>
       }
     </div>
@@ -98,7 +97,6 @@ Form.propTypes = {
   invalid: PropTypes.bool.isRequired,
   loginMode: PropTypes.bool.isRequired,
   action: PropTypes.func.isRequired,
-  socialLogin: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   toggleReset: PropTypes.func.isRequired,
   toggleMode: PropTypes.func.isRequired,

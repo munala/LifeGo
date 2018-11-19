@@ -1,5 +1,4 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
@@ -7,41 +6,21 @@ import {
 
 import '../../../styles.css';
 
-import SocialLogin from './socialButton';
-
-
-const SocialButtons = ({ loginOrRegister }) => (
+const SocialButtons = () => (
   <div className="social-buttons">
-    <SocialLogin
-      provider="facebook"
-      appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-      onLoginSuccess={data => loginOrRegister(data)}
-      onLoginFailure={data => loginOrRegister(data)}
-      className="social-button"
-    >
-      <FacebookLoginButton
-        className="social-button-text"
-        text="Connect with Facebook"
-        onClick={() => {}}
-      />
-    </SocialLogin>
-    <SocialLogin
-      provider="google"
-      appId={process.env.REACT_APP_GOOGLE_APP_ID}
-      onLoginSuccess={data => loginOrRegister(data)}
-      onLoginFailure={data => loginOrRegister(data)}
-      className="social-button"
-    >
-      <GoogleLoginButton
-        text="Connect with Google"
-        onClick={() => {}}
-      />
-    </SocialLogin>
+    <FacebookLoginButton
+      text="Connect with Facebook"
+      onClick={() => {
+        window.location.href = 'http://localhost:3002/auth/facebook';
+      }}
+    />
+    <GoogleLoginButton
+      text="Connect with Google&nbsp;&nbsp;&nbsp;&nbsp;"
+      onClick={() => {
+        window.location.href = 'http://localhost:3002/auth/google';
+      }}
+    />
   </div>
 );
-
-SocialButtons.propTypes = {
-  loginOrRegister: PropTypes.func.isRequired,
-};
 
 export default SocialButtons;
