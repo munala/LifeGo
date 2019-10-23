@@ -51,7 +51,7 @@ exports[`Comments tests renders without crashing 1`] = `
         <div
           className="time"
         >
-          August 17th
+          August 17th 2018
         </div>
       </div>
     </div>
