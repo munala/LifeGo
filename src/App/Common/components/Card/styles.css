@@ -25,6 +25,14 @@
   margin-top: 0px;
   max-height: 300px;
   overflow: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.bottom-section::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none;
 }
 
 .card {
@@ -161,7 +169,7 @@
   position: absolute;
   left: 0px;
   right: 0px;
-  top:0px;
+  top: 0px;
   bottom: 0px;
   justify-content: center;
   align-items: stretch;
@@ -305,7 +313,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding:10% 30%;
+  padding: 10% 30%;
   vertical-align: middle;
 }
 .empty-logo {
@@ -327,4 +335,16 @@
 .add-icon {
   font-size: 30px;
   color: #00bcd4;
+}
+
+.selected-bucketlist::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.selected-bucketlist {
+  overflow: -moz-scrollbars-none;
+}
+
+.selected-bucketlist {
+  -ms-overflow-style: none;
 }

@@ -1,17 +1,17 @@
 .App {
   text-align: center;
-  flex-grow:1;
+  flex-grow: 1;
 }
 
 .app-container {
-  position:fixed;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: 0;
   display: flex;
-  flex-grow:1;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
@@ -31,10 +31,9 @@
 .app-content {
   display: flex;
   flex-direction: column;
-  flex-grow:1;
+  flex-grow: 1;
   align-items: flex-start;
   background-color: #f4f4f4;
-
 }
 
 .App-logo {
@@ -70,4 +69,9 @@
   .app-content {
     margin-bottom: 48px;
   }
+}
+
+::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
 }

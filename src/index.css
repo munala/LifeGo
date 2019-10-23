@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  position:fixed;
+  position: fixed;
   margin: 0;
   right: 0;
   bottom: 0;
@@ -19,10 +19,15 @@ body {
 }
 
 #root {
-  position:fixed;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
 }

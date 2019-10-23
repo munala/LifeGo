@@ -34,6 +34,13 @@
   margin-top: 0px;
   max-height: 300px;
   overflow: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+.bottom-section::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .card {
@@ -167,7 +174,7 @@
   position: absolute;
   left: 0px;
   right: 0px;
-  top:0px;
+  top: 0px;
   bottom: 0px;
   flex-direction: column;
   justify-content: center;
@@ -220,7 +227,7 @@
 .loading-item {
   display: flex;
   margin: 10px;
-  padding:10px;
+  padding: 10px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
@@ -345,7 +352,7 @@
   font-weight: bold;
 }
 
-.empty-state-text-small{
+.empty-state-text-small {
   font-size: 16px;
   font-weight: normal;
 }
