@@ -5,7 +5,7 @@
   padding: 20px;
   padding-top: 0px;
   overflow: scroll;
-  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -27,7 +27,7 @@
   margin: 16px;
   margin-top: 0px;
   font-size: 14px;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 .bottom-section {
@@ -37,11 +37,23 @@
   overflow: scroll;
 }
 
+.bottom-section::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.bottom-section {
+  overflow: -moz-scrollbars-none;
+}
+
+.bottom-section {
+  -ms-overflow-style: none;
+}
+
 .card {
   font-size: 14px;
   background-color: #fff;
-  margin:5px;
-  margin-bottom:20px;
+  margin: 5px;
+  margin-bottom: 20px;
   padding-top: 16px;
   display: flex;
   flex-direction: column;
@@ -49,7 +61,7 @@
   align-items: stretch;
   border-radius: 4px;
   break-inside: avoid;
-  box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   cursor: pointer;
 }

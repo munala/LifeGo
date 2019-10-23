@@ -7,8 +7,8 @@
   max-height: 64px;
   min-height: 64px;
   align-items: center;
-  box-shadow: 0 0 3px 3px rgba(0,0,0,0.2);
-  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
   background-color: #fff;
 }
 
@@ -60,7 +60,7 @@
   margin-right: 24px;
   display: 'flex';
   height: 32px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 0.5px;
 }
 
@@ -68,7 +68,7 @@
   margin-right: 24px;
   display: 'flex';
   height: 32px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   width: 0.5px;
 }
 
@@ -102,7 +102,6 @@
   align-items: stretch;
   max-height: 48;
   align-self: stretch;
-  padding: 10px 20px;
   flex-shrink: 0;
 }
 
@@ -139,7 +138,7 @@
     height: 64px;
     background-color: #fff;
     z-index: 10;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
     margin-right: 0px;
   }
 }
